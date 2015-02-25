@@ -4,7 +4,7 @@
 #   Filename        : rm_tmp_files.sh
 #   Description     : Remove ~, .pyc recursively 
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Wed 25 Feb 2015 07:51:50 AM CST
+#   Last Modified   : Wed 25 Feb 2015 08:02:08 AM CST
 #
 ##################################################
 
@@ -31,4 +31,3 @@ function rm_tmp_files(){
 
 }
 
-rm_tmp_files $1 $2
