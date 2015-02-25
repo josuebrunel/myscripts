@@ -11,6 +11,9 @@ complete -cf sudo
 #MY PYTHON ENVIRONMENT
 export PYTHONSTARTUP=$HOME/.pythonenv.py
 
+#VARIABLES
+export HOME_SCRIPTS=$HOME/.scripts/
+
 ## COMMON LS
 alias ll='ls -lht'
 alias la='ls -lhAt'
@@ -34,7 +37,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 ## LOADS SCRIPTS
-source $HOME/.scripts/*.sh
+source $HOME/.scripts/exit_f.sh
+source $HOME/.scripts/push_ssh_key.sh
+source $HOME/.scripts/rm_tmp_files.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
