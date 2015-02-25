@@ -4,19 +4,19 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 00:52:52 2015
+#   Last Modified   : Thu Feb 26 00:56:49 2015
 #
 ##################################################
 
 function _log(){
-    priority=$1
+    level=$1
     message=$2
     output=$3
 
     if [ -z $output ]; then
-        logger -s -p "local7.${priority}" "${message}" 2>&1
+        logger -s -p "local7.${level}" "${message}" 2>&1
     else
-        logger -s -p "local7.${priority}" "${message}" 2>> $output 
+        logger -s -p "local7.${level}" "${message}" 2>> $output 
     fi
 
 }
