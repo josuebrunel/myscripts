@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 00:50:23 2015
+#   Last Modified   : Thu Feb 26 00:52:52 2015
 #
 ##################################################
 
@@ -31,5 +31,9 @@ function _info(){
 
 function _warning(){
     _log "warning" $1 $LOG_OUTPUT
+}
+
+function _error(){
+    _log "error" $1 $LOG_OUTPUT
 }
 
