@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 00:56:49 2015
+#   Last Modified   : Thu Feb 26 01:04:55 2015
 #
 ##################################################
 
@@ -22,18 +22,34 @@ function _log(){
 }
 
 function _debug(){
-    _log "debug" $1 $LOG_OUTPUT
+    if [ ! -z $1 ]; then
+        _log "debug" $1 $LOG_OUTPUT
+    else
+        echo -e "A message must be provided i.e _debug 'my message'"
+    fi
 }
 
 function _info(){
-    _log "info" $1 $LOG_OUTPUT
+    if [ ! -z $1 ]; then
+        _log "info" $1 $LOG_OUTPUT
+    else
+        echo -e "A message must be provided i.e _info 'my message'"
+    fi
 }
 
 function _warning(){
-    _log "warning" $1 $LOG_OUTPUT
+    if [ ! -z $1 ]; then
+        _log "warning" $1 $LOG_OUTPUT
+    else
+        echo -e "A message must be provided i.e :  _warning 'my message'"
+    fi
 }
 
 function _error(){
-    _log "error" $1 $LOG_OUTPUT
+    if [ ! -z $1 ]; then
+        _log "error" $1 $LOG_OUTPUT
+    else
+        echo -e "A message must be provided i.e : _error 'my message'"
+    fi
 }
 
