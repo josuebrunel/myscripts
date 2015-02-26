@@ -4,13 +4,13 @@
 #   Filename        : push_ssh_key.sh
 #   Description     : Copy a ssh key to a remote host
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Thu 26 Feb 2015 04:55:01 AM CST
+#   Last Modified   : Thu 26 Feb 2015 10:08:59 AM CST
 #
 ##################################################
 
-export LOG_OUTPUT=$HOME_SCRIPTS/logs/push_ssh_key.log
 
 function push_ssh_key(){
+    LOG_OUTPUT=$HOME_SCRIPTS/logs/push_ssh_key.log
     _debug "START push_ssh_key"
     pub_key="$HOME/.ssh/id_rsa.pub"
     if [ ! -f $pub_key ]; then

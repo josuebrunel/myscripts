@@ -4,7 +4,7 @@
 #   Filename        : rm_tmp_files.sh
 #   Description     : Remove ~, .pyc recursively 
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Thu 26 Feb 2015 04:59:55 AM CST
+#   Last Modified   : Thu 26 Feb 2015 07:29:56 AM CST
 #
 ##################################################
 
@@ -28,6 +28,7 @@ function rm_tmp_files(){
         type=$1
     elif [ $# -gt 2 ];then
         echo -e "Don't be a fool. There's no such thing as a third argument"
+        return 1
     else
         echo -e "A type in required though"
         help
@@ -35,8 +36,7 @@ function rm_tmp_files(){
     fi
 
     #echo "find $dir -name $type | xargs ls -l"
-    #find $dir -name $type | xargs ls -l
+    find $dir -name $type | xargs ls -l
 }
 
-#rm_tmp_files $1 $2
 
