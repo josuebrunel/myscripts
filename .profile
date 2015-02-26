@@ -42,6 +42,7 @@ source $HOME/.scripts/push_ssh_key.sh
 source $HOME/.scripts/rm_tmp_files.sh
 source $HOME/.scripts/archive.sh
 source $HOME/.scripts/mylogger.sh
+source $HOME/.scripts/fix_ntfs_partition.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
