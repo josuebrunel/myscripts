@@ -4,7 +4,7 @@
 #   Filename        : fix_ntfs_partition.sh
 #   Description     : fixes ntfs partition
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 09:34:25 2015
+#   Last Modified   : Thu 26 Feb 2015 04:44:34 AM CST
 #
 ##################################################
 
@@ -20,7 +20,8 @@ function fix_ntfs_partition(){
 
     if [ ! -f $1 ]; then
         echo -e "${1} is not a valid partition"
-        exit_f
+        _error "${1} is not a valid partition"
+        return 1
     fi
 
     sudo fsck_ufsd_NTFS -n $1
