@@ -10,7 +10,7 @@ Couples of scripts loaded when logging in.
 
 #### LOGS
 
-All logs can be found in $HOME_SCRIPTS/logs/
+All logs can be found in **$HOME_SCRIPTS/logs/**
 
 #### The Custom Logger
 This is the module used in other script to simulate a logger
