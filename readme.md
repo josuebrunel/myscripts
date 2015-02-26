@@ -22,6 +22,11 @@ redirected to *STDOUT*.
 john@doe:$ _info "This is an info message"
 ```
 
+* **_notice**
+```shell
+john@doe:$ _notice "This is an notice message"
+```
+
 * **_debug**
 ```shell
 john@doe:$ _debug "This is a debug message"
