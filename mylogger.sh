@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 09:27:22 2015
+#   Last Modified   : Thu 26 Feb 2015 04:41:07 AM CST
 #
 ##################################################
 
@@ -21,39 +21,31 @@ function _log(){
     else
         logger -s -p "local7.${level}" "${message}" 2>> $output 
     fi
-
 }
 
-function _debug(){
-    if [ ! -z $1 ]; then
-        _log "debug" $1 $LOG_OUTPUT
+function _process(){
+    level=$1
+    message=$2
+
+    if [ ! "${message}" == "" ]; then
+        _log "${level}" "${message}" $LOG_OUTPUT
     else
-        echo -e "A message must be provided i.e _debug 'my message'"
+        echo -e "A message must be provided i.e : _${level} 'your message'"
     fi
 }
 
 function _info(){
-    message=$1
-    if [ ! "${message}" == "" ]; then
-        _log "info" "${message} " $LOG_OUTPUT
-    else
-        echo -e "A message must be provided i.e _info 'my message'"
-    fi
+    _process "info" "$1"
+}
+
+function _debug(){
+    _process "debug" "$1"
 }
 
 function _warning(){
-    if [ ! -z $1 ]; then
-        _log "warning" $1 $LOG_OUTPUT
-    else
-        echo -e "A message must be provided i.e :  _warning 'my message'"
-    fi
+    _process "warning" "$1"
 }
 
 function _error(){
-    if [ ! -z $1 ]; then
-        _log "error" $1 $LOG_OUTPUT
-    else
-        echo -e "A message must be provided i.e : _error 'my message'"
-    fi
+    _process "error" "$1"
 }
-
