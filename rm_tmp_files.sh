@@ -4,13 +4,13 @@
 #   Filename        : rm_tmp_files.sh
 #   Description     : Remove ~, .pyc recursively 
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Wed 25 Feb 2015 10:26:06 AM CST
+#   Last Modified   : Thu 26 Feb 2015 04:59:55 AM CST
 #
 ##################################################
 
 function help(){
     echo -e  "help: \n \t john@doe$> rm_tmp_files /home/john/projects/ *.pyc"
-    exit_f
+    return 1
 }
 
 function rm_tmp_files(){
@@ -31,7 +31,7 @@ function rm_tmp_files(){
     else
         echo -e "A type in required though"
         help
-        exit_f
+        return 1
     fi
 
     #echo "find $dir -name $type | xargs ls -l"
