@@ -2,6 +2,8 @@
 
 #Script to backup or restore my workspace
 
+export LOG_OUTPUT=$HOME_SCRIPTS/logs/archives.log
+
 function backup(){
 	name=$1
 	archive_name=$2
