@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 01:12:09 2015
+#   Last Modified   : Thu Feb 26 09:27:22 2015
 #
 ##################################################
 
@@ -33,8 +33,9 @@ function _debug(){
 }
 
 function _info(){
-    if [ ! -z $1 ]; then
-        _log "info" $1 $LOG_OUTPUT
+    message=$1
+    if [ ! "${message}" == "" ]; then
+        _log "info" "${message} " $LOG_OUTPUT
     else
         echo -e "A message must be provided i.e _info 'my message'"
     fi
