@@ -42,7 +42,6 @@ source $HOME/.scripts/push_ssh_key.sh
 source $HOME/.scripts/rm_tmp_files.sh
 source $HOME/.scripts/archive.sh
 source $HOME/.scripts/mylogger.sh
-source $HOME/.scripts/fix_ntfs_partition.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
@@ -62,6 +61,9 @@ if [ `uname -s` == "Darwin" ]; then
     #MYSQL CONFIG
     export PATH=$PATH:/usr/local/mysql/bin
     export DYLD_LIBRARY_PATH=/usr/local/mysql/lib
+
+    #LOAD SCRIPTS
+    source $HOME/.scripts/fix_ntfs_partition.sh
     
     ##
     # Your previous /Users/josue/.profile file was backed up as /Users/josue/.profile.macports-saved_2014-11-08_at_12:21:31
