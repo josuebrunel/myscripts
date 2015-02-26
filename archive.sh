@@ -33,7 +33,7 @@ function archive(){
 
     if [ $# -lt 1 ]; then
         echo -e "Help:  \n \t $0 --backup input [destination path] \n \t $0 --restore {archive} [destination path]"
-        exit_f 1
+        return 1
     fi
 
     export GZIP=-9
@@ -46,7 +46,7 @@ function archive(){
         "--backup" )
             if [ -z $2 ]; then
                 echo -e "An input file is required"
-                exit_f 1
+                return 1
             fi
 
             input=$2 
@@ -54,7 +54,7 @@ function archive(){
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
                     echo -e "$3 is an invalid path"
-                    exit_f 1
+                    return 1
                 fi
                 path=$3
             fi
@@ -65,13 +65,13 @@ function archive(){
         "--restore" )
             if [ -z $2 ]; then
                 echo -e "An archive file must be provided"
-                exit_f 1
+                return 1
             else 
                 archive_name=$2
 
                 if [ ! -f $archive_name ]; then
                     echo -e "Can't find $archive_name"
-                    exit_f 1
+                    return 1
                 fi
             fi
 
