@@ -4,9 +4,12 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Feb 26 01:04:55 2015
+#   Last Modified   : Thu Feb 26 01:12:09 2015
 #
 ##################################################
+
+## If a LOG_OUTPUT variable is define,
+## the logger will write to a file pointed to by the variable
 
 function _log(){
     level=$1
