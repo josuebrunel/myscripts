@@ -12,7 +12,7 @@ complete -cf sudo
 export PYTHONSTARTUP=$HOME/.pythonenv.py
 
 #VARIABLES
-export HOME_SCRIPTS=$HOME/.scripts/
+export HOME_SCRIPTS=$HOME/.scripts
 
 ## COMMON LS
 alias ll='ls -lht'
@@ -37,11 +37,11 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 ## LOADS SCRIPTS
-source $HOME/.scripts/exit_f.sh
-source $HOME/.scripts/push_ssh_key.sh
-source $HOME/.scripts/rm_tmp_files.sh
-source $HOME/.scripts/archive.sh
-source $HOME/.scripts/mylogger.sh
+source $HOME_SCRIPTS/exit_f.sh
+source $HOME_SCRIPTS/push_ssh_key.sh
+source $HOME_SCRIPTS/rm_tmp_files.sh
+source $HOME_SCRIPTS/archive.sh
+source $HOME_SCRIPTS/mylogger.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
@@ -63,7 +63,7 @@ if [ `uname -s` == "Darwin" ]; then
     export DYLD_LIBRARY_PATH=/usr/local/mysql/lib
 
     #LOAD SCRIPTS
-    source $HOME/.scripts/fix_ntfs_partition.sh
+    source $HOME_SCRIPTS/fix_ntfs_partition.sh
     
     ##
     # Your previous /Users/josue/.profile file was backed up as /Users/josue/.profile.macports-saved_2014-11-08_at_12:21:31
