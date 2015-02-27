@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri 27 Feb 2015 07:10:31 AM CST
+#   Last Modified   : Fri 27 Feb 2015 07:38:21 AM CST
 #
 ##################################################
 
@@ -17,9 +17,9 @@ function _log(){
     output=$3
 
     if [ -z $output ]; then
-        logger -s -p "user.${level}" "${message}" 2>&1
+        logger -s -i -t "[`date +'%y-%m-%d'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>&1
     else
-        logger -s -p "user.${level}" "${message}" 2>> $output 
+        logger -s -i -t "[`date +'%y-%m-%d'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>> $output
     fi
 }
 
