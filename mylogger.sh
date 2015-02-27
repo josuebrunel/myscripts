@@ -4,12 +4,12 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri 27 Feb 2015 08:12:10 AM CST
+#   Last Modified   : Fri Feb 27 21:53:16 2015
 #
 ##################################################
 
-## If a LOG_OUTPUT variable is defined, the logger will write
-## to the file the variable is pointing to.
+## If a LOG_OUTPUT variable is define,
+## the logger will write to a file pointed to by the variable
 
 function _log(){
     level=$1
@@ -17,9 +17,17 @@ function _log(){
     output=$3
 
     if [ -z $output ]; then
-        logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>&1
-    else
-        logger -s -i -t "[`date +'%y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>> $output
+        if [ `uname -s` != "Darwin" ]; then
+            logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>&1
+        else
+            logger -s -p "user.${level}" "${message}" 2>&1
+        fi
+     else
+         if [ `uname -s` != "Darwin" ]; then
+            logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>> $output
+        else
+            logger -s -p "user.${level}" "${message}" 2>> $output
+        fi
     fi
 }
 
@@ -30,7 +38,7 @@ function _process(){
     if [ ! "${message}" == "" ]; then
         _log "${level}" "${message}" $LOG_OUTPUT
     else
-        echo -e "A message is required i.e : _${level} 'I am not that smart after all :p'"
+        echo -e "A message must be provided i.e : _${level} 'your message'"
     fi
 }
 
