@@ -4,12 +4,12 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri 27 Feb 2015 07:52:15 AM CST
+#   Last Modified   : Fri 27 Feb 2015 08:12:10 AM CST
 #
 ##################################################
 
-## If a LOG_OUTPUT variable is define,
-## the logger will write to a file pointed to by the variable
+## If a LOG_OUTPUT variable is defined, the logger will write
+## to the file the variable is pointing to.
 
 function _log(){
     level=$1
@@ -30,7 +30,7 @@ function _process(){
     if [ ! "${message}" == "" ]; then
         _log "${level}" "${message}" $LOG_OUTPUT
     else
-        echo -e "A message must be provided i.e : _${level} 'your message'"
+        echo -e "A message is required i.e : _${level} 'I am not that smart after all :p'"
     fi
 }
 
