@@ -4,7 +4,7 @@
 #   Filename        : fix_ntfs_partition.sh
 #   Description     : fixes ntfs partition
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu 26 Feb 2015 04:44:34 AM CST
+#   Last Modified   : Fri 27 Feb 2015 06:44:25 AM CST
 #
 ##################################################
 
@@ -26,3 +26,5 @@ function fix_ntfs_partition(){
 
     sudo fsck_ufsd_NTFS -n $1
 }
+
+export -f fixt_ntfs_partition
