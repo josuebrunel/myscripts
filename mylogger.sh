@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri 27 Feb 2015 07:52:15 AM CST
+#   Last Modified   : Fri Feb 27 21:53:16 2015
 #
 ##################################################
 
@@ -17,9 +17,17 @@ function _log(){
     output=$3
 
     if [ -z $output ]; then
-        logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>&1
-    else
-        logger -s -i -t "[`date +'%y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>> $output
+        if [ `uname -s` != "Darwin" ]; then
+            logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>&1
+        else
+            logger -s -p "user.${level}" "${message}" 2>&1
+        fi
+     else
+         if [ `uname -s` != "Darwin" ]; then
+            logger -s -i -t "[`date +'%Y-%m-%d %H:%M:%S'` ${HOSTNAME} ${USER}][`echo ${level} | tr '[:lower:]' '[:upper:]'`]" -p "user.${level}" "${message}" 2>> $output
+        else
+            logger -s -p "user.${level}" "${message}" 2>> $output
+        fi
     fi
 }
 
