@@ -1,3 +1,6 @@
+#Fix terminal in Vi mode
+set -o emacs
+
 #Colored Terminal
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
