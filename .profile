@@ -1,6 +1,3 @@
-#Fix terminal in Vi mode
-set -o emacs
-
 #Colored Terminal
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -48,6 +45,9 @@ source $HOME_SCRIPTS/mylogger.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
+    #Fix terminal in Vi mode
+    set -o emacs
+
     #MY ALIASES
     alias umount_toshiba='sudo umount /VOLUMES/TOSHIBA/'
     alias goto_toshiba='cd /Volumes/TOSHIBA/'
