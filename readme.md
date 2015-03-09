@@ -15,6 +15,15 @@ john@doe:$ source .profile
 john@doe:$ reload # which loads the session with the new scripts
 ```
 
+***NB*** 
+========
+Don't hesitate to change the *reload* alias to meet your needs if necessary. If *.bashrc* is the script you want bash
+to loads when it is launched interactively you can do something like this :
+
+```shell
+alias reload='source .bashrc'
+```
+
 ## Documentation
 
 #### The Custom Logger
