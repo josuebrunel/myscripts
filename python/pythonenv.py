@@ -22,6 +22,12 @@ def get_joined_path(a, b):
     """
     return os.path.join(a,b)
 
+def get_file_content(filename):
+    """Returns content of a given file
+    """
+    with open(filename) as f :
+        return f.read()
+
 ##GENERIC DATABASE  CLASS
 
 class Database(object):
