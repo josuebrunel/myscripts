@@ -6,13 +6,14 @@
 function __backup__(){
 	name=$1
 	archive_name=$2
+    path=$3
 
     if [ ! -z $3 ]; then
     	path="$3/${archive_name}"
     else
         path="${archive_name}"
     fi
-	
+
 	if tar czvfh  $path --exclude='*.log' --exclude='*log/*' $name ; then
 		_info "$name is archived as $path"
 		return 0
@@ -57,7 +58,7 @@ function archive(){
             fi
 
             input=$2 
-            archive_name="${input}-${now}.tar.gz"
+            archive_name="${2%/}-${now}.tar.gz"
             
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
