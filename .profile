@@ -8,9 +8,6 @@ PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$'
 # SUDO AUTOCOMPLETE
 complete -cf sudo
 
-#MY PYTHON ENVIRONMENT
-export PYTHONSTARTUP=$HOME/.pythonenv.py
-
 #VARIABLES
 export HOME_SCRIPTS=$HOME/.scripts
 
@@ -35,6 +32,9 @@ export XZ_OPT=-9
 #LOCALES
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+#MY PYTHON ENVIRONMENT
+export PYTHONSTARTUP=$HOME_SCRIPTS/.pythonenv.py
 
 ## LOADS SCRIPTS
 source $HOME_SCRIPTS/exit_f.sh
