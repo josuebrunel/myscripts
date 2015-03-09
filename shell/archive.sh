@@ -13,10 +13,10 @@ function __backup__(){
     fi
 	
 	if tar czvfh  $path --exclude='*.log' --exclude='*log/*' $name ; then
-		echo -e "$name is archived as $path"
+		_info -e "$name is archived as $path"
 		return 0
 	else
-		echo -e "Something went wrong"
+		_error -e "Something went wrong"
 		return 1
 	fi
 }
@@ -26,10 +26,10 @@ function __restore__(){
 	location=$2
 	
 	if  tar xzvf $archive_name -C $location ; then
-		echo -e "$archive_name restored to $location"
+		_info "$archive_name restored to $location"
 		return 0
 	else
-		echo -e "Something went wrong"
+		_error -e "Something went wrong"
 		return 1
 	fi
 }
@@ -39,7 +39,7 @@ function archive(){
     LOG_OUTPUT=$HOME_SCRIPTS/logs/archives.log
 
     if [ $# -lt 1 ]; then
-        echo -e "Help:  \n \t archive --backup input [destination path] \n \t archive --restore {archive} [destination path]"
+        echo -e "Help:  \n \t archive --backup|-b input [destination path] \n \t archive --restore|-r {archive} [destination path]"
         return 1
     fi
 
@@ -49,7 +49,7 @@ function archive(){
     path=""
 
     case $action in
-        "--backup" )
+        "--backup" | "-b" )
             if [ -z $2 ]; then
                 echo -e "An input file is required"
                 return 1
@@ -66,10 +66,10 @@ function archive(){
                 path=$3
             fi
             
-            echo -e "Backing up workspace ..."
+            echo -e "Backing up ${input} ..."
             __backup__ $input $archive_name $path
             ;;
-        "--restore" )
+        "--restore" | "-r" )
             if [ -z $2 ]; then
                 echo -e "An archive file must be provided"
                 return 1
