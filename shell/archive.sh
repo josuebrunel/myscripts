@@ -58,7 +58,7 @@ function archive(){
             fi
 
             input=$2 
-            archive_name="${2%/}-${now}.tar.gz"
+            archive_name="${2%/}-${now}.tar.gz" # %/ remove trailing slash if dir
             
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
