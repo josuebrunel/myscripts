@@ -1,12 +1,17 @@
-### Scripts
+### MyScripts
 
-Couples of scripts loaded when logging in.
+Bunch of scripts i used. 
 
-* push_ssh_key
-* rm_tmp_files
-* archive
-* mylogger
+### Installation
 
+```shell
+john@doe:$ cd
+john@doe:$ git clone git@github.com:josuebrunel/myscripts.git
+john@doe:$ mv myscripts .scripts
+john@doe:$ ln -s .scripts/.profile .profile # .bashrc if you want
+john@doe:$ source .profile
+john@doe:$ reload # which load the session with the new scripts
+```
 
 #### LOGS
 
