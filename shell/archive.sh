@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#Script to backup or restore my workspace
+#Script to __backup__ or __restore__ my workspace
 
 
-function backup(){
+function __backup__(){
 	name=$1
 	archive_name=$2
 	path=$3
@@ -17,12 +17,12 @@ function backup(){
 	fi
 }
 
-function restore(){
+function __restore__(){
 	archive_name=$1
 	location=$2
 	
 	if  tar xzvf $archive_name -C $location ; then
-		echo -e "$archive_name restored to $location"
+		echo -e "$archive_name __restore__d to $location"
 		return 0
 	else
 		echo -e "Something went wrong"
@@ -35,7 +35,7 @@ function archive(){
     LOG_OUTPUT=$HOME_SCRIPTS/logs/archives.log
 
     if [ $# -lt 1 ]; then
-        echo -e "Help:  \n \t $0 --backup input [destination path] \n \t $0 --restore {archive} [destination path]"
+        echo -e "Help:  \n \t $0 --__backup__ input [destination path] \n \t $0 --__restore__ {archive} [destination path]"
         return 1
     fi
 
@@ -63,7 +63,7 @@ function archive(){
             fi
             
             echo -e "Backing up workspace ..."
-            backup $input $archive_name $path
+            __backup__ $input $archive_name $path
             ;;
         "--restore" )
             if [ -z $2 ]; then
@@ -83,7 +83,7 @@ function archive(){
             fi
 
             echo -e "Restoring workspace ..."
-            restore $archive_name $path 
+            __restore__ $archive_name $path 
             ;;
     esac
 }

@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Mon 09 Mar 2015 11:53:08 AM CDT
+#   Last Modified   : Mon 09 Mar 2015 11:56:07 AM CDT
 #
 ##################################################
 
