@@ -66,7 +66,7 @@ if [ `uname -s` == "Darwin" ]; then
     export DYLD_LIBRARY_PATH=/usr/local/mysql/lib
 
     #LOAD SCRIPTS
-    source $HOME_SCRIPTS/fix_ntfs_partition.sh
+    source $HOME_SCRIPTS/shell/fix_ntfs_partition.sh
     
     ##
     # Your previous /Users/josue/.profile file was backed up as /Users/josue/.profile.macports-saved_2014-11-08_at_12:21:31
