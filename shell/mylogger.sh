@@ -4,14 +4,14 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri Feb 27 21:53:16 2015
+#   Last Modified   : Mon 09 Mar 2015 11:53:08 AM CDT
 #
 ##################################################
 
 ## If a LOG_OUTPUT variable is define,
 ## the logger will write to a file pointed to by the variable
 
-function _log(){
+function __log__(){
     level=$1
     message=$2
     output=$3
@@ -31,39 +31,39 @@ function _log(){
     fi
 }
 
-function _process(){
+function __process__(){
     level=$1
     message=$2
 
     if [ ! "${message}" == "" ]; then
-        _log "${level}" "${message}" $LOG_OUTPUT
+        __log__ "${level}" "${message}" $LOG_OUTPUT
     else
         echo -e "A message must be provided i.e : _${level} 'your message'"
     fi
 }
 
 function _info(){
-    _process "info" "$1"
+    __process__ "info" "$1"
 }
 
 function _debug(){
-    _process "debug" "$1"
+    __process__ "debug" "$1"
 }
 
 function _warning(){
-    _process "warning" "$1"
+    __process__ "warning" "$1"
 }
 
 function _error(){
-    _process "error" "$1"
+    __process__ "error" "$1"
 }
 
 function _notice(){
-    _process "notice" "$1"
+    __process__ "notice" "$1"
 }
 
-export -f _log
-export -f _process
+export -f __log__
+export -f __process__
 export -f _info
 export -f _debug
 export -f _warning
