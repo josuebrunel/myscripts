@@ -34,14 +34,14 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 #MY PYTHON ENVIRONMENT
-export PYTHONSTARTUP=$HOME_SCRIPTS/.pythonenv.py
+export PYTHONSTARTUP=$HOME_SCRIPTS/python/pythonenv.py
 
 ## LOADS SCRIPTS
-source $HOME_SCRIPTS/exit_f.sh
-source $HOME_SCRIPTS/push_ssh_key.sh
-source $HOME_SCRIPTS/rm_tmp_files.sh
-source $HOME_SCRIPTS/archive.sh
-source $HOME_SCRIPTS/mylogger.sh
+source $HOME_SCRIPTS/shell/exit_f.sh
+source $HOME_SCRIPTS/shell/push_ssh_key.sh
+source $HOME_SCRIPTS/shell/rm_tmp_files.sh
+source $HOME_SCRIPTS/shell/archive.sh
+source $HOME_SCRIPTS/shell/mylogger.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
