@@ -1,8 +1,10 @@
-### MyScripts
+## MyScripts
 
-Bunch of scripts i used. 
+Bunch of scripts i use on a daily basis.
+* shell ( some modules for my environement and my shell scripts )
+* python ( most feature for the python shell )
 
-### Installation
+## Installation
 
 ```shell
 john@doe:$ cd
@@ -10,12 +12,10 @@ john@doe:$ git clone git@github.com:josuebrunel/myscripts.git
 john@doe:$ mv myscripts .scripts
 john@doe:$ ln -s .scripts/.profile .profile # .bashrc if you want
 john@doe:$ source .profile
-john@doe:$ reload # which load the session with the new scripts
+john@doe:$ reload # which loads the session with the new scripts
 ```
 
-#### LOGS
-
-All logs can be found in **$HOME_SCRIPTS/logs/**
+## Documentation
 
 #### The Custom Logger
 This is the module used in other script to simulate a logger
