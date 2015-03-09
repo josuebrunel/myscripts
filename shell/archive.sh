@@ -6,6 +6,7 @@
 function __backup__(){
 	name=$1
 	archive_name=$2
+
     if [ ! -z $3 ]; then
     	path="$3/${archive_name}"
     else
@@ -13,10 +14,10 @@ function __backup__(){
     fi
 	
 	if tar czvfh  $path --exclude='*.log' --exclude='*log/*' $name ; then
-		_info -e "$name is archived as $path"
+		_info "$name is archived as $path"
 		return 0
 	else
-		_error -e "Something went wrong"
+		_error "Something went wrong"
 		return 1
 	fi
 }
@@ -29,7 +30,7 @@ function __restore__(){
 		_info "$archive_name restored to $location"
 		return 0
 	else
-		_error -e "Something went wrong"
+		_error "Something went wrong"
 		return 1
 	fi
 }
@@ -57,7 +58,7 @@ function archive(){
 
             input=$2 
             archive_name="${input}-${now}.tar.gz"
-
+            
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
                     echo -e "$3 is an invalid path"
