@@ -34,7 +34,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 #MY PYTHON ENVIRONMENT
-export PYTHONSTARTUP=$HOME_SCRIPTS/python/pythonenv.py
+export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
 ## LOADS SCRIPTS
 source $HOME_SCRIPTS/shell/exit_f.sh
