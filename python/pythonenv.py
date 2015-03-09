@@ -1,8 +1,13 @@
 import os
+import imp
 import abc
+import pdb
 import datetime
 import logging
 import sqlite3
+
+# Import local modules
+db = imp.load_source('db', os.path.join(os.environ['HOME_SCRIPTS'],'python/db.py'))
 
 from db import *
 
