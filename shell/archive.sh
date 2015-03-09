@@ -39,11 +39,10 @@ function archive(){
         return 1
     fi
 
-    export GZIP=-9
-    export now=$(date +"%d-%m-%y_%H-%M")
-    export archive_name="workspace-$now.tar.gz"
-    export action=$1
-    export path="./"
+    GZIP=-9
+    now=$(date +"%d-%m-%y_%H-%M")
+    action=$1
+    path="./"
 
     case $action in
         "--backup" )
@@ -53,6 +52,7 @@ function archive(){
             fi
 
             input=$2 
+            archive_name="${input}-${now}.tar.gz"
 
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
@@ -85,5 +85,7 @@ function archive(){
             echo -e "Restoring workspace ..."
             __restore__ $archive_name $path 
             ;;
+        *)
+            echo -e "Action not recognized. Only --backup or --restore are allowed"
     esac
 }
