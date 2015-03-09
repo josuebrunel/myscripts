@@ -4,20 +4,25 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 09 Mar 2015 06:08:57 AM CDT
+#   Last Modified   : Mon 09 Mar 2015 11:06:29 AM CDT
 #
 ##################################################
 
 import os
 import imp
 
-def myimport(name, path):
+def myimport(name, path=None):
     """Handles module import according to a given path
     """
-    home_scripts_python = os.path.join(os.environ['HOME_SCRIPTS'],'python')
+    if not path:
+        home_scripts_python = os.path.join(os.environ['HOME_SCRIPTS'],'python')
+        path = os.path.join(home_scripts_python,name+'.py')
+        if not os.path.isfile(path):
+            raise ImportError("No such file in {0}".format(home_scripts_python))
+
     return imp.load_source(name,os.path.join(home_scripts_python,path))
 
-db = myimport('db','db.py')
+db = myimport('db')
 
 ##AUTO COMPLETION
 import readline, rlcompleter
