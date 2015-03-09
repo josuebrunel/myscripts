@@ -6,10 +6,14 @@
 function __backup__(){
 	name=$1
 	archive_name=$2
-	path=$3
+    if [ ! -z $3 ]; then
+    	path="$3/${archive_name}"
+    else
+        path="${archive_name}"
+    fi
 	
-	if tar czvfh  $path/$archive_name --exclude='*.log' --exclude='*log/*' $name ; then
-		echo -e "$name is archived as $path/$archive_name  "
+	if tar czvfh  $path --exclude='*.log' --exclude='*log/*' $name ; then
+		echo -e "$name is archived as $path"
 		return 0
 	else
 		echo -e "Something went wrong"
@@ -42,7 +46,7 @@ function archive(){
     GZIP=-9
     now=$(date +"%d-%m-%y_%H-%M")
     action=$1
-    path="./"
+    path=""
 
     case $action in
         "--backup" )
