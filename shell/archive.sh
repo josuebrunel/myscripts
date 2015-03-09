@@ -22,7 +22,7 @@ function __restore__(){
 	location=$2
 	
 	if  tar xzvf $archive_name -C $location ; then
-		echo -e "$archive_name __restore__d to $location"
+		echo -e "$archive_name restored to $location"
 		return 0
 	else
 		echo -e "Something went wrong"
@@ -35,7 +35,7 @@ function archive(){
     LOG_OUTPUT=$HOME_SCRIPTS/logs/archives.log
 
     if [ $# -lt 1 ]; then
-        echo -e "Help:  \n \t $0 --__backup__ input [destination path] \n \t $0 --__restore__ {archive} [destination path]"
+        echo -e "Help:  \n \t archive --backup input [destination path] \n \t archive --restore {archive} [destination path]"
         return 1
     fi
 
