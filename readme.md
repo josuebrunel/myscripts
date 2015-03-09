@@ -26,7 +26,7 @@ alias reload='source .bashrc'
 
 ## Documentation
 
-#### The Custom Logger
+#### The Custom Shell Logger
 This is the module used in other script to simulate a logger
 If the variable ***LOG_OUTPUT*** is not defined, logs are 
 redirected to *STDOUT*.
@@ -68,5 +68,20 @@ This command copy a ssh public key to a remote host
 ```shell
 john@doe:$ push_ssh_key huey@newtown
 ```
+
+#### Archiving
+
+This function help you backup/restore a file 
+
+
+```shell
+john@doe:$ archive
+Help:  
+         archive --backup|-b input [destination path] 
+         archive --restore|-r {archive} [destination path]
+john@doe:$ archive -b myfoler/ 
+john@doe:$ archive -r myfoler.tar.gz
+```
+
 
 
