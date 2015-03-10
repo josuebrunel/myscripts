@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 09 Mar 2015 11:06:29 AM CDT
+#   Last Modified   : Tue 10 Mar 2015 11:39:20 AM CDT
 #
 ##################################################
 
@@ -20,7 +20,7 @@ def myimport(name, path=None):
         if not os.path.isfile(path):
             raise ImportError("No such file in {0}".format(home_scripts_python))
 
-    return imp.load_source(name,os.path.join(home_scripts_python,path))
+    return imp.load_source(name,path)
 
 db = myimport('db')
 
