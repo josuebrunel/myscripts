@@ -1,16 +1,28 @@
 ##################################################
 #
 #   Author          : josue
-#   Filename        : fix_ntfs_partition.sh
-#   Description     : fixes ntfs partition
+#   Filename        : myfixers.sh
+#   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri Feb 27 20:03:51 2015
+#   Last Modified   : Thu Mar 12 09:24:47 2015
 #
 ##################################################
 
+
+LOG_OUTPUT=$HOME_SCRIPTS/logs/myfixers.log
+
+function fix_item_is_used_by_osx(){
+    if [ -z $1 ] || [ ! -d $1 ]; then
+        echo -e "A directoy is required"
+        _info "A directory or file is required"
+        return 1
+    fi
+    
+    
+}
+
 function fix_ntfs_partition(){
     
-    LOG_OUTPUT=$HOME_SCRIPTS/logs/fix_ntfs_partition.log
 
     if [ -z $1 ]; then
         echo -e 'At least a partition must be provided'
@@ -24,7 +36,21 @@ function fix_ntfs_partition(){
         return 1
     fi
 
-    sudo fsck_ufsd_NTFS -n $1
+    sudo fsck_ufsd_NTFS -y $1
 }
 
-export -f fix_ntfs_partition
+function _help(){
+    echo -e "Help \n \t --ntfs/-n /dev/diskname i.e disks3s1  \n \t --brokM/b dirname" 
+    return 1
+}
+
+function myfixers(){
+    
+    if [ -z $1 ]; then
+        _help
+        return 1
+    fi
+
+    
+
+}
