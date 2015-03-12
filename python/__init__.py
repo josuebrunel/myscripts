@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Wed 11 Mar 2015 04:56:08 AM CDT
+#   Last Modified   : Thu 12 Mar 2015 05:58:51 AM CDT
 #
 ##################################################
 
@@ -18,8 +18,9 @@ def myimport(name, path=None):
     if not path:
         home_scripts_python = os.path.join(os.environ['HOME_SCRIPTS'],'python')
         path = os.path.join(home_scripts_python,name+'.py')
-        if not os.path.isfile(path):
-            raise ImportError("No such file in {0}".format(home_scripts_python))
+
+    if not os.path.isfile(path):
+        raise ImportError("No such file : {0}".format(path))
 
     return imp.load_source(name,path)
 
