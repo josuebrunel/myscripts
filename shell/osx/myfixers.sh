@@ -4,14 +4,14 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Mar 12 09:43:12 2015
+#   Last Modified   : Thu 12 Mar 2015 05:50:26 AM CDT
 #
 ##################################################
 
 
 LOG_OUTPUT=$HOME_SCRIPTS/logs/myfixers.log
 
-function fix_item_is_used_by_osx(){
+function __fix_item_is_used_by_osx__(){
     if [ -z $1 ] || [ ! -d $1 ]; then
         echo -e "A directoy is required"
         _info "A directory or file is required"
@@ -20,7 +20,7 @@ function fix_item_is_used_by_osx(){
     
 }
 
-function fix_ntfs_partition(){
+function __fix_ntfs_partition__(){
     
 
     if [ -z $1 ]; then
@@ -55,7 +55,14 @@ function myfixers(){
         return 1
     fi
 
-   i#case in $1
-    #  "" 
+    case in $1
+        "--ntfs" | "-n")
+            __fix_ntfs_partition__
+        ;;
+        "--brokM" | "-b")
+            __fix_item_is_used_by_osx__
+        ;;
+        *) 
+            _help
 
 }
