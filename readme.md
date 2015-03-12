@@ -27,7 +27,7 @@ alias reload='source .bashrc'
 ## Documentation
 
 #### The Custom Shell Logger
-This is the module used in other script to simulate a logger
+This is the module used in other script to simulate a logger.
 If the variable ***LOG_OUTPUT*** is not defined, logs are 
 redirected to *STDOUT*.
 
@@ -82,6 +82,4 @@ Help:
 john@doe:$ archive -b myfoler/ 
 john@doe:$ archive -r myfoler.tar.gz
 ```
-
-
 
