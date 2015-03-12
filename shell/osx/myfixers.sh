@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Mar 12 09:24:47 2015
+#   Last Modified   : Thu Mar 12 09:43:12 2015
 #
 ##################################################
 
@@ -17,7 +17,6 @@ function fix_item_is_used_by_osx(){
         _info "A directory or file is required"
         return 1
     fi
-    
     
 }
 
@@ -40,6 +39,11 @@ function fix_ntfs_partition(){
 }
 
 function _help(){
+    message=$1
+
+    if [ ! -z $message ]; then
+        echo -e "${message}"
+    fi
     echo -e "Help \n \t --ntfs/-n /dev/diskname i.e disks3s1  \n \t --brokM/b dirname" 
     return 1
 }
@@ -51,6 +55,7 @@ function myfixers(){
         return 1
     fi
 
-    
+   i#case in $1
+    #  "" 
 
 }
