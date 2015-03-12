@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu 12 Mar 2015 05:50:26 AM CDT
+#   Last Modified   : Thu Mar 12 12:47:34 2015
 #
 ##################################################
 
@@ -55,7 +55,7 @@ function myfixers(){
         return 1
     fi
 
-    case in $1
+    case $1 in
         "--ntfs" | "-n")
             __fix_ntfs_partition__
         ;;
@@ -64,5 +64,5 @@ function myfixers(){
         ;;
         *) 
             _help
-
+    esac
 }
