@@ -18,7 +18,7 @@ john@doe:$ reload # which loads the session with the new scripts
 ***NB***
 
 Don't hesitate to change the *reload* alias to meet your needs if necessary. If *.bashrc* is the script you want bash
-to loads when it is launched interactively you can do something like this :
+to load you can do something like this :
 
 ```shell
 alias reload='source .bashrc'
@@ -61,9 +61,9 @@ john@doe:$ _error "This is an error message"
 Feb 26 17:28:44 LokingMac.local josue[811] <Error>: hello josh
 ```
 
-#### push_ssh_key
+#### Push ssh key to remote host
 
-This command copy a ssh public key to a remote host
+This command copies a ssh public key to a remote host
 
 ```shell
 john@doe:$ push_ssh_key huey@newtown
