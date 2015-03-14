@@ -39,7 +39,7 @@ export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 ## LOADS SCRIPTS
 source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/push_ssh_key.sh
-source $HOME_SCRIPTS/shell/rm_tmp_files.sh
+#source $HOME_SCRIPTS/shell/rm_tmp_files.sh
 source $HOME_SCRIPTS/shell/archive.sh
 source $HOME_SCRIPTS/shell/mylogger.sh
 
