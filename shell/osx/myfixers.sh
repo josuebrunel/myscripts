@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Sat Mar 14 13:20:14 2015
+#   Last Modified   : Sat Mar 14 13:56:52 2015
 #
 ##################################################
 
@@ -27,11 +27,11 @@ function __fix_ntfs_partition__(){
         return 1
     fi    
 
-    if [ ! -f $1 ]; then
-        echo -e "${1} is not a valid partition"
-        _error "${1} is not a valid partition"
-        return 1
-    fi
+#    if [ ! -f $1 ]; then
+#        echo -e "${1} is not a valid partition"
+#        _error "${1} is not a valid partition"
+#        return 1
+#    fi
 
     sudo fsck_ufsd_NTFS -y $1
 }
