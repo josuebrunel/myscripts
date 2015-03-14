@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Thu Mar 12 12:47:34 2015
+#   Last Modified   : Sat Mar 14 13:20:14 2015
 #
 ##################################################
 
@@ -17,15 +17,13 @@ function __fix_item_is_used_by_osx__(){
         _info "A directory or file is required"
         return 1
     fi
-    
 }
 
 function __fix_ntfs_partition__(){
-    
 
     if [ -z $1 ]; then
-        echo -e 'At least a partition must be provided'
-        _info 'At least a partition must be provided'
+        echo -e 'A volume or disk is required'
+        _info 'A volume or disk is required'
         return 1
     fi    
 
@@ -56,11 +54,14 @@ function myfixers(){
     fi
 
     case $1 in
+        "--help" | "-h")
+            _help
+        ;;
         "--ntfs" | "-n")
-            __fix_ntfs_partition__
+            __fix_ntfs_partition__ $2
         ;;
         "--brokM" | "-b")
-            __fix_item_is_used_by_osx__
+            __fix_item_is_used_by_osx__ $2
         ;;
         *) 
             _help
