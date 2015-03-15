@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Sun Mar 15 15:29:28 2015
+#   Last Modified   : Sun Mar 15 16:46:05 2015
 #
 ##################################################
 
@@ -52,7 +52,7 @@ function _help(){
     return 1
 }
 
-function myfixers(){
+function osx_fixers(){
     
     if [ -z $1 ]; then
         _help
