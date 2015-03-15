@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Sun Mar 15 15:20:28 2015
+#   Last Modified   : Sun Mar 15 15:29:28 2015
 #
 ##################################################
 
@@ -20,6 +20,8 @@ function __fix_item_is_used_by_osx__(){
     dir=$1
     for file in `find $dir -type f`; do
         echo $file
+        SetFile -c "" -t "" $file
+        _info "$file is fixed"
     done
 }
 
