@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Sat Mar 14 13:56:52 2015
+#   Last Modified   : Sun Mar 15 15:20:28 2015
 #
 ##################################################
 
@@ -17,6 +17,10 @@ function __fix_item_is_used_by_osx__(){
         _info "A directory or file is required"
         return 1
     fi
+    dir=$1
+    for file in `find $dir -type f`; do
+        echo $file
+    done
 }
 
 function __fix_ntfs_partition__(){
