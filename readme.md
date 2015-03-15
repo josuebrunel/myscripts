@@ -83,3 +83,16 @@ john@doe:$ archive -b myfoler/
 john@doe:$ archive -r myfoler.tar.gz
 ```
 
+### OSX Fixers
+
+* --ntfs/n : Fixes issues related to NTFS Corrupted disk. Equivalent to _check and repair_ on windows
+* --brokM/b : Fixes issues related to file being _used by OSX_ while they're not. This happens for files on a NTFS Device
+
+```shell
+john@doe:$ fixers -h
+Help
+    --ntfs/-n /dev/diskname i.e disks3s1
+    --brokM/b dirname
+```
+
+
