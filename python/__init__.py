@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Thu 12 Mar 2015 05:58:51 AM CDT
+#   Last Modified   : Tue 17 Mar 2015 03:32:18 AM CDT
 #
 ##################################################
 
@@ -12,7 +12,15 @@ import os
 import imp
 import pdb
 
-def myimport(name, path=None):
+##AUTO COMPLETION
+import readline, rlcompleter
+if 'libedit' in readline.__doc__:
+    readline.parse_and_bind("bind ^I rl_complete")
+else:
+    readline.parse_and_bind("tab: complete")
+
+
+def _myimport_(name, path=None):
     """Handles module import according to a given path
     """
     if not path:
@@ -24,14 +32,7 @@ def myimport(name, path=None):
 
     return imp.load_source(name,path)
 
-db = myimport('db')
-
-##AUTO COMPLETION
-import readline, rlcompleter
-if 'libedit' in readline.__doc__:
-    readline.parse_and_bind("bind ^I rl_complete")
-else:
-    readline.parse_and_bind("tab: complete")
+db = _myimport_('db')
 
 #USEFUL METHOD
 def get_real_path(f):
