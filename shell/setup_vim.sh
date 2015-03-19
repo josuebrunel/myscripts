@@ -4,12 +4,13 @@
 #   Filename        : setup_vim.sh
 #   Description     : setup vim config
 #   Creation Date   : 19-03-2015
-#   Last Modified   : Thu 19 Mar 2015 04:33:29 PM CDT
+#   Last Modified   : Thu 19 Mar 2015 04:48:11 PM CDT
 #
 ##################################################
 
 function setup_vim(){
-    LOG_OUTPUT=$HOME_SCRIPTS/logs/setup_vim.log
+    today=$(now +'%d-%m-%Y')
+    LOG_OUTPUT=$HOME_SCRIPTS/logs/setup_vim-$today.log
     REPOSITORY=https://github.com/josuebrunel/myvim.git
 
     _debug "===START==="
