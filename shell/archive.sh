@@ -38,15 +38,15 @@ function __restore__(){
 
 function archive(){
 
-    LOG_OUTPUT=$HOME_SCRIPTS/logs/archives.log
-
+    now=$(date +"%d-%m-%y_%H-%M")
+    LOG_OUTPUT=$HOME_SCRIPTS/logs/archives-$now.log
+    _debug "START"
     if [ $# -lt 1 ]; then
         echo -e "Help:  \n \t archive --backup|-b input [destination path] \n \t archive --restore|-r {archive} [destination path]"
         return 1
     fi
 
     GZIP=-9
-    now=$(date +"%d-%m-%y_%H-%M")
     action=$1
     path=""
 
@@ -94,4 +94,6 @@ function archive(){
         *)
             echo -e "Action not recognized. Only --backup or --restore are allowed"
     esac
+    _debug "END"
+    echo -e "LOGS ===>> ${LOG_OUTPUT}"
 }
