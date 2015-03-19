@@ -4,7 +4,7 @@
 #   Filename        : push_ssh_key.sh
 #   Description     : Copy a ssh key to a remote host
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Thu 26 Feb 2015 10:08:59 AM CST
+#   Last Modified   : Thu 19 Mar 2015 09:30:37 AM CDT
 #
 ##################################################
 
@@ -29,5 +29,7 @@ function push_ssh_key(){
         return 1
     fi
     _debug "END push_ssh_key"
+    echo -e "LOGS ===> ${LOG_OUTPUT}"
     return 0
+
 }
