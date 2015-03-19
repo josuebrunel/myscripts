@@ -38,7 +38,7 @@ function __restore__(){
 
 function archive(){
 
-    now=$(date +"%d-%m-%y_%H-%M")
+    now=$(date +"%d-%m-%y")
     LOG_OUTPUT=$HOME_SCRIPTS/logs/archives-$now.log
     _debug "START"
     if [ $# -lt 1 ]; then
