@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Mon 09 Mar 2015 12:29:41 PM CDT
+#   Last Modified   : Thu 19 Mar 2015 03:55:03 PM CDT
 #
 ##################################################
 
@@ -34,6 +34,11 @@ function __log__(){
 function __process__(){
     level=$1
     message=$2
+    
+    #Creating LOG folder when it doesn't exist
+    if [ ! -d $LOG_OUTPUT ]; then
+        mkdir -p $HOME_SCRIPTS/logs
+    fi
 
     if [ ! "${message}" == "" ]; then
         __log__ "${level}" "${message}" $LOG_OUTPUT
