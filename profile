@@ -41,7 +41,7 @@ source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/push_ssh_key.sh
 source $HOME_SCRIPTS/shell/archive.sh
 source $HOME_SCRIPTS/shell/mylogger.sh
-source $HOME_SCRIPTS/shell/setup_editor.sh
+source $HOME_SCRIPTS/shell/setup_editors.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
