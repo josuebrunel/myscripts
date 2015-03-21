@@ -4,7 +4,7 @@
 #   Filename        : mylogger.sh
 #   Description     : custom logger for my shell scripts
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Fri 20 Mar 2015 08:09:30 AM CDT
+#   Last Modified   : Sat Mar 21 20:54:25 2015
 #
 ##################################################
 
@@ -42,7 +42,7 @@ function __process__(){
 
     if [ ! "${message}" == "" ]; then
         __log__ "${level}" "${message}" $LOG_OUTPUT
-        unset LOG_OUTPUT # Unsetting variable
+        #unset LOG_OUTPUT # Unsetting variable
     else
         echo -e "A message must be provided i.e : _${level} 'your message'"
     fi
