@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Sat Mar 21 15:30:04 2015
+#   Last Modified   : Sat Mar 21 15:36:09 2015
 #
 ##################################################
 
@@ -69,7 +69,7 @@ function _help(){
 
 function fixers(){
     
-LOG_OUTPUT=$HOME_SCRIPTS/logs/myfixers-$(date +'%Y-%m-%d').log
+    LOG_OUTPUT=$HOME_SCRIPTS/logs/myfixers-$(date +'%Y-%m-%d').log
 
     _info "START"
     if [ -z $1 ]; then
