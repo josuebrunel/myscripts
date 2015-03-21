@@ -4,7 +4,7 @@
 #   Filename        : myfixers.sh
 #   Description     : fixes OSX issues
 #   Creation Date   : 26-02-2015
-#   Last Modified   : Wed Mar 18 20:55:13 2015
+#   Last Modified   : Sat Mar 21 15:30:04 2015
 #
 ##################################################
 
@@ -29,13 +29,28 @@ function __fix_item_is_used_by_osx__(){
     done
 }
 
+function __is_mounted__(){
+    _debug "Is disk $1 mounted ?"
+    if diskutil info $1 | grep 'Mount Point' ; then
+        _debug "Yes"
+        return 0
+    fi
+    _debug "Nope"
+    return 1
+}
+
 function __fix_ntfs_partition__(){
-    _debug "${0}"
     if [ -z $1 ]; then
         echo -e 'A volume or disk is required'
         _info 'A volume or disk is required'
         return 1
-    fi    
+    fi   
+
+    if  __is_mounted__ $1 ; then
+        _debug "Unmounting $1"
+        sudo diskutil unmount $1
+    fi
+
     _debug "Fixing $1"
     sudo fsck_ufsd_NTFS -y $1
     _debug "Done fixing $1"
