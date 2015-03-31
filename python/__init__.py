@@ -4,13 +4,15 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Tue 17 Mar 2015 03:32:18 AM CDT
+#   Last Modified   : Tue Mar 31 18:20:54 2015
 #
 ##################################################
 
 import os
 import imp
 import pdb
+import time, datetime
+from functools import wraps
 
 ##AUTO COMPLETION
 import readline, rlcompleter
@@ -50,4 +52,15 @@ def get_file_content(filename):
     """
     with open(filename) as f :
         return f.read()
+
+# MY DECORATORS
+def timethis(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("{0} executed in {1}".format(func.__name__, end - start))
+        return result
+    return wrapper
 
