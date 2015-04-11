@@ -71,7 +71,7 @@ john@doe:$ push_ssh_key huey@newtown
 
 #### Ssh Connect To Remote host by name
 
-In $HOME\_SCRIPTS/cfg/ssh.txt , assign a names to your remote hosts as follow:
+In ***$HOME\_SCRIPTS/cfg/ssh.txt*** , assign a names to your remote hosts as follow:
 
 ```text
 jenkins jenkins@192.168.1.3
