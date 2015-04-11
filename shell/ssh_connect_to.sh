@@ -4,12 +4,12 @@
 #   Filename        : ssh_connect_to.sh
 #   Description     :
 #   Creation Date   : 11-04-2015
-#   Last Modified   : Sat Apr 11 05:58:16 2015
+#   Last Modified   : Sat Apr 11 16:11:05 2015
 #
 ##################################################
 
 
-function ssh-connect-to(){
+function ssh_connect_to(){
     host=$1
     unset r_host
     while read -r line || [[ -n $line ]]; do
@@ -29,4 +29,4 @@ function ssh-connect-to(){
     bash -c "ssh ${r_host}"
 }
 
-export -f ssh-connect-to
+export -f ssh_connect_to
