@@ -69,6 +69,21 @@ This command copies a ssh public key to a remote host
 john@doe:$ push_ssh_key huey@newtown
 ```
 
+#### Ssh Connect To Remote host by name
+
+In $HOME\_SCRIPTS/cfg/ssh.txt , assign a names to your remote hosts as follow:
+
+```text
+jenkins jenkins@192.168.1.3
+debian  josue@192.168.1.2
+raspberry pi@192.168.1.7
+```
+then to connect to _debian_ just run:
+
+```shell
+$ ssh-connect-to debian
+```
+
 #### Archiving
 
 This function help you backup/restore a file 
