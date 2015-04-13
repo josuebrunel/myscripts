@@ -4,7 +4,7 @@
 #   Filename        : setup_vim.sh
 #   Description     : setup vim config
 #   Creation Date   : 19-03-2015
-#   Last Modified   : Mon 13 Apr 2015 04:01:01 PM CEST
+#   Last Modified   : Mon 13 Apr 2015 04:05:28 PM CEST
 #
 ##################################################
 
