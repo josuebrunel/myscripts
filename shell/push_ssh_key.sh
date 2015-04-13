@@ -4,7 +4,7 @@
 #   Filename        : push_ssh_key.sh
 #   Description     : Copy a ssh key to a remote host
 #   Creation Date   : 25-02-2015
-#   Last Modified   : Thu 19 Mar 2015 04:46:53 PM CDT
+#   Last Modified   : Mon 13 Apr 2015 03:55:13 PM CEST
 #
 ##################################################
 
@@ -27,8 +27,8 @@ function push_ssh_key(){
             _info "id_rsa.pub copied on ${1}"
         fi
     else
-        echo "You must provided a remote host i.e john@doe"
-        _info "You must provided a remote host i.e john@doe"
+        echo "You must provide a remote host i.e john@doe"
+        _info "You must provide a remote host i.e john@doe"
         return 1
     fi
     _debug "END push_ssh_key"
