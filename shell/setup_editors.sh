@@ -4,7 +4,7 @@
 #   Filename        : setup_vim.sh
 #   Description     : setup vim config
 #   Creation Date   : 19-03-2015
-#   Last Modified   : Fri 20 Mar 2015 08:16:53 AM CDT
+#   Last Modified   : Mon 13 Apr 2015 04:01:01 PM CEST
 #
 ##################################################
 
@@ -35,6 +35,18 @@ function setup_editor(){
     else
         dir='.vim/'
         file='.vimrc'
+    fi
+
+    if [ -f $HOME/$file ]; then
+        _warning "File ${file} already exists"
+        echo -e "File ${file} already exists"
+        return 1
+    fi
+
+    if [ -f $HOME/$dir ]; then
+        _warning "Directory ${dir} already exists"
+        echo -e "Directory ${dir} already exists"
+        return 1
     fi
 
     _debug "Editor ${editor} will be set up in ${dir}"
