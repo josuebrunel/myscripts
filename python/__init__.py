@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 20 Apr 2015 03:44:35 PM CEST
+#   Last Modified   : Mon 20 Apr 2015 03:46:03 PM CEST
 #
 ##################################################
 
@@ -67,10 +67,10 @@ def timethis(func):
 
 # JSON TOOL
 
-def get_json_data(json_file) as f:
+def get_json_data(json_file):
     """Returns a json data
     """
-    with open(json_file):
+    with open(json_file) as f:
         json_data = json.load(f)
 
     return json_data
