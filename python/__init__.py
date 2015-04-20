@@ -4,13 +4,14 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Tue Mar 31 18:20:54 2015
+#   Last Modified   : Mon 20 Apr 2015 03:44:35 PM CEST
 #
 ##################################################
 
 import os
 import imp
 import pdb
+import json
 import time, datetime
 from functools import wraps
 
@@ -64,3 +65,12 @@ def timethis(func):
         return result
     return wrapper
 
+# JSON TOOL
+
+def get_json_data(json_file) as f:
+    """Returns a json data
+    """
+    with open(json_file):
+        json_data = json.load(f)
+
+    return json_data
