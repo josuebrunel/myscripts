@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 20 Apr 2015 03:50:30 PM CEST
+#   Last Modified   : Mon 20 Apr 2015 04:00:43 PM CEST
 #
 ##################################################
 
@@ -75,10 +75,10 @@ def json_get_data(json_file):
 
     return json_data
 
-def json_write_data(output, json_data):
+def json_write_data(json_data, output):
     """Write data into a json file
     """
     with open(output, 'w') as f:
-        json.dump(json_data, f)
+        json.dump(json_data, f, indent= 4, encoding= 'utf-8', sort_keys=True)
         return True
     return False
