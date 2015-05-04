@@ -43,6 +43,7 @@ source $HOME_SCRIPTS/shell/archive.sh
 source $HOME_SCRIPTS/shell/mylogger.sh
 source $HOME_SCRIPTS/shell/setup_editors.sh
 source $HOME_SCRIPTS/shell/ssh_connect_to.sh
+source $HOME_SCRIPTS/shell/pypi.sh
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
