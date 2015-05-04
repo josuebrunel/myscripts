@@ -4,7 +4,7 @@
 #   Filename        : pypi.sh
 #   Description     :
 #   Creation Date   : 03-05-2015
-#   Last Modified   : Mon 04 May 2015 12:13:16 PM CEST
+#   Last Modified   : Mon 04 May 2015 12:53:15 PM CEST
 #
 ##################################################
 
@@ -50,8 +50,13 @@ function pypi(){
             _select_server_ $2
             _upload_ $server
         ;;
+        "--all"|"-a")
+            _select_server_ $2
+            _register_ $server
+            _upload_ $server
+        ;;
         *)
-            echo -e "Help:  \n \t pypi --register|-r [server]\n \t pypi --publish|-p [server]"
+            echo -e "Help:  \n \t pypi --register|-r [server]\n \t pypi --publish|-p [server]\n \t pypi --all|-a [server]"
         ;;
     esac 
 }
