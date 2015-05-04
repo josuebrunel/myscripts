@@ -114,7 +114,7 @@ repository: https://pypi.python.org/pypi
 username: josuebrunel
 
 [pypitest]
-repository: https://pypi.python.org/pypi
+repository: https://testpypi.python.org/pypi
 username: josuebrunel
 
 ```
