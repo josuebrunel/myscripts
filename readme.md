@@ -16,7 +16,7 @@ john@doe:$ reload # which loads the session with the new scripts
 Or you can use the **bootstrap**
 
 ```shell
-$ wget https://github.com/josuebrunel/myscripts/blob/master/bootstrap.sh
+$ wget https://github.com/josuebrunel/myscripts/raw/master/bootstrap.sh
 $ chmod +x bootstrap.sh
 $ ./bootstrap.sh
 ```
