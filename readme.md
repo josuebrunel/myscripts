@@ -8,11 +8,17 @@ Bunch of scripts i use on a daily basis.
 
 ```shell
 john@doe:$ cd
-john@doe:$ git clone git@github.com:josuebrunel/myscripts.git
-john@doe:$ mv myscripts .scripts
+john@doe:$ git clone https://github.com/josuebrunel/myscripts.git .scripts/
 john@doe:$ ln -s .scripts/profile .profile # .bashrc if you want
 john@doe:$ source .profile
 john@doe:$ reload # which loads the session with the new scripts
+```
+Or you can use the **bootstrap**
+
+```shell
+$ wget https://github.com/josuebrunel/myscripts/blob/master/bootstrap.sh
+$ chmod +x bootstrap.sh
+$ ./bootstrap.sh
 ```
 
 ***NB***
