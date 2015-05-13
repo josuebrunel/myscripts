@@ -87,7 +87,7 @@ raspberry pi@192.168.1.7
 then to connect to _debian_ just run:
 
 ```shell
-$ ssh-connect-to debian
+$ ssh_connect_to debian
 ```
 
 #### Archiving
