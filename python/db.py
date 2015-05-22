@@ -27,7 +27,7 @@ class Database(object):
         """Creates a table
         """
         query = "CREATE TABLE {} ".format(args[0])
-        print query
+        print(query)
 
     def executeQuery(self, query):
         """Executes a SQL query
@@ -35,7 +35,7 @@ class Database(object):
         try:
             self.cr.execute(query)
             return self.cr
-        except Exception, e:
+        except (Exception,) as e:
             print(e)
             
         return False
@@ -46,7 +46,7 @@ class Database(object):
         try:
             self.con.commit()
             self.last_id()
-        except Exception, e:
+        except (Exception,) as e:
             print(e)
 
     def last_id(self,):
@@ -74,7 +74,7 @@ class MySqlite(Database):
             self.con = sqlite3.connect(self.dbfile)
             self.cr = self.con.cursor()
             return self.con
-        except Exception, e:
+        except (Exception,) as e:
             print(e)
 
         return None

@@ -4,11 +4,12 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 20 Apr 2015 04:00:43 PM CEST
+#   Last Modified   : Fri 22 May 2015 09:30:29 AM CEST
 #
 ##################################################
 
 import os
+import sys
 import imp
 import pdb
 import json
@@ -35,7 +36,8 @@ def _myimport_(name, path=None):
 
     return imp.load_source(name,path)
 
-db = _myimport_('db')
+if sys.version_info > (2.7,):
+    db = _myimport_('db')
 
 #USEFUL METHOD
 def get_real_path(f):
