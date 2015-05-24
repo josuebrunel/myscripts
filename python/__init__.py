@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 22 May 2015 09:30:29 AM CEST
+#   Last Modified   : Sun 24 May 2015 09:41:35 AM CEST
 #
 ##################################################
 
@@ -36,7 +36,7 @@ def _myimport_(name, path=None):
 
     return imp.load_source(name,path)
 
-if sys.version_info > (2.7,):
+if sys.version_info < (3.0,):
     db = _myimport_('db')
 
 #USEFUL METHOD
