@@ -4,7 +4,7 @@
 #   Filename        : pypi.sh
 #   Description     :
 #   Creation Date   : 03-05-2015
-#   Last Modified   : Mon 04 May 2015 12:53:15 PM CEST
+#   Last Modified   : Sun May 31 04:47:48 2015
 #
 ##################################################
 
@@ -14,9 +14,9 @@ function _register_(){
     python setup.py register -r $server
 }
 
-function _upload_(){
+function _publish_(){
     server=$1
-    _info "python setup.py sdist upload -r ${server}"
+    _info "python setup.py sdist publish -r ${server}"
     python setup.py sdist upload -r $server
 }
 
@@ -46,14 +46,14 @@ function pypi(){
             _select_server_ $2
             _register_ $server
         ;;
-        "--upload"|"-u" )
+        "--publish"|"-p" )
             _select_server_ $2
-            _upload_ $server
+            _publish_ $server
         ;;
         "--all"|"-a")
             _select_server_ $2
             _register_ $server
-            _upload_ $server
+            _publish_ $server
         ;;
         *)
             echo -e "Help:  \n \t pypi --register|-r [server]\n \t pypi --publish|-p [server]\n \t pypi --all|-a [server]"
