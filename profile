@@ -1,3 +1,4 @@
+
 #Colored Terminal
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -49,6 +50,9 @@ source $HOME_SCRIPTS/shell/pypi.sh
 if [ `uname -s` == "Darwin" ]; then
     #Fix terminal in Vi mode
     set -o emacs
+
+    ## Vim location
+    alias vim='/usr/bin/vim'
 
     #MY ALIASES
     alias umount_toshiba='sudo umount /VOLUMES/TOSHIBA/'
