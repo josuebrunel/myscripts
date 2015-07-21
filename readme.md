@@ -90,6 +90,11 @@ then to connect to _debian_ just run:
 $ ssh_connect_to debian
 ```
 
+To display list of registered hosts
+```shell
+$ ssh_list_hosts
+```
+
 #### Archiving
 
 This function help you backup/restore a file 
