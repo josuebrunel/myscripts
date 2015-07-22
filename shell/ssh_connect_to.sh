@@ -4,7 +4,7 @@
 #   Filename        : ssh_connect_to.sh
 #   Description     :
 #   Creation Date   : 11-04-2015
-#   Last Modified   : Mon 13 Apr 2015 03:50:58 PM CEST
+#   Last Modified   : Tue Jul 21 20:30:49 2015
 #
 ##################################################
 
@@ -35,4 +35,14 @@ function ssh_connect_to(){
     bash -c "ssh ${r_host}"
 }
 
+function ssh_list_hosts(){
+    ssh_file=$HOME_SCRIPTS/cfg/ssh.txt
+    if [ ! -f  $ssh_file ]; then
+        _info "No ${ssh_file} file found"
+    else
+        cat $ssh_file
+    fi
+}
+
 export -f ssh_connect_to
+export -f ssh_list_hosts
