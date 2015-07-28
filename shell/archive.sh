@@ -86,6 +86,9 @@ function archive(){
 
             if [ ! -z $3 ]; then
                 path=$3
+            else
+                echo -e "No location provided, $PWD will be used"
+                path='.'
             fi
 
             echo -e "Restoring workspace ..."
