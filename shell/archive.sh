@@ -73,7 +73,7 @@ function archive(){
             ;;
         "--restore" | "-r" )
             if [ -z $2 ]; then
-                echo -e "An archive file must be provided"
+                echo -e "An archive file is required"
                 return 1
             else 
                 archive_name=$2
