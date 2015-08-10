@@ -37,6 +37,9 @@ export LANG=en_US.UTF-8
 #MY PYTHON ENVIRONMENT
 export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
+#GOPATH
+export GOPATH=$HOME/workspace/go
+
 ## LOADS SCRIPTS
 source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/push_ssh_key.sh
