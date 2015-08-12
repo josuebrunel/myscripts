@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#Script to __backup__ or __restore__ my workspace
-
+#Script to backup or restore my workspace
 
 function __backup__(){
 	name=$1
