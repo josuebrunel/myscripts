@@ -4,7 +4,7 @@
 #   Filename        : date.sh
 #   Description     :
 #   Creation Date   : 12-08-2015
-#   Last Modified   : Wed 12 Aug 2015 01:56:18 PM CEST
+#   Last Modified   : Wed 12 Aug 2015 02:15:39 PM CEST
 #
 ##################################################
 
@@ -17,17 +17,29 @@ function operation_help(){
 }
 
 function get_date(){
-    today=`date +"%Y-%m-%d"`
+    if [ -z "$1" ]; then
+        today=`date +"%Y-%m-%d"`
+    else
+        today=`date +"${1}"`
+    fi
     echo $today
 }
 
 function get_time(){
-    current_time=`date +"%H:%M:%S"`
+    if [ -z "$1" ]; then
+        current_time=`date +"%H:%M:%S"`
+    else
+        current_time=`date +"${1}"`
+    fi
     echo $current_time
 }
 
 function get_datetime(){
-    datetime=`date +"%Y-%m-%d %H:%M:%S"`
+    if [ -z "$1" ]; then
+        datetime=`date +"%Y-%m-%d %H:%M:%S"`
+    else
+        datetime=`date +"${1}"`
+    fi
     echo $datetime
 }
 

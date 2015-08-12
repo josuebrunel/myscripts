@@ -143,17 +143,17 @@ Help:
 ### Date 
 Just a couple of date shorcuts 
 
-* ___get_date___
+* ___get_date [format]___
 ```shell
 $ get_date
 2015-08-12
 ```
-* ___get_time___
+* ___get_time [format]___
 ```shell
 $ get_time
 14:03:10
 ```
-* ___get_datetime___
+* ___get_datetime [format]___
 ```
 $ get_datetime
 2015-08-12 14:04:14
