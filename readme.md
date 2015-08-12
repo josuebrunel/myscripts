@@ -143,30 +143,38 @@ Help:
 ### Date 
 Just a couple of date shorcuts 
 
-* get_date
+* ___get_date___
 ```shell
 $ get_date
 2015-08-12
 ```
-* get_time
+* ___get_time___
 ```shell
 $ get_time
 14:03:10
 ```
-* get_datetime
+* ___get_datetime___
 ```
 $ get_datetime
 2015-08-12 14:04:14
 ```
-* date_add 
+* ___date_add___ 
 ```shell
 $ date_add '10 years'
 Tue Aug 12 14:04:52 CEST 2025
 ```
-* date_minus
+* ___date_minus___
 ```shell
 $ date_minus '3 weeks'
 Wed Jul 22 14:05:48 CEST 2015
+```
+
+```shell
+USAGE:
+        function '<number> <[minutes,hours,days,weeks,months,years]>'
+Examples:
+        date_add '10 weeks'
+        date_minus '10 days'
 ```
 
 ### OSX Fixers
