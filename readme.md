@@ -147,6 +147,8 @@ Just a couple of date shorcuts
 ```shell
 $ get_date
 2015-08-12
+$ get_data %D
+08/12/15
 ```
 * ___get_time [format]___
 ```shell
