@@ -4,7 +4,7 @@
 #   Filename        : date.sh
 #   Description     :
 #   Creation Date   : 12-08-2015
-#   Last Modified   : Wed 12 Aug 2015 01:52:28 PM CEST
+#   Last Modified   : Wed 12 Aug 2015 01:56:18 PM CEST
 #
 ##################################################
 
@@ -45,7 +45,6 @@ function date_minus(){
         today=`date -d "-${1}"`
     else
         operation_help
-        return 1
     fi
     echo $today
 }
@@ -53,3 +52,5 @@ function date_minus(){
 export -f get_date
 export -f get_time
 export -f get_datetime
+export -f date_plus
+export -f date_minus
