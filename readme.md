@@ -140,6 +140,35 @@ Help:
         pypi --all|-a [server] # Register then Upload the package
 ```
 
+### Date 
+Just a couple of date shorcuts 
+
+* get_date
+```shell
+$ get_date
+2015-08-12
+```
+* get_time
+```shell
+$ get_time
+14:03:10
+```
+* get_datetime
+```
+$ get_datetime
+2015-08-12 14:04:14
+```
+* date_add 
+```shell
+$ date_add '10 years'
+Tue Aug 12 14:04:52 CEST 2025
+```
+* date_minus
+```shell
+$ date_minus '3 weeks'
+Wed Jul 22 14:05:48 CEST 2015
+```
+
 ### OSX Fixers
 
 * --ntfs/n : Fixes issues related to NTFS Corrupted disk. Equivalent to _check and repair_ on windows
