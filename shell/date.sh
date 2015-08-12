@@ -4,9 +4,17 @@
 #   Filename        : date.sh
 #   Description     :
 #   Creation Date   : 12-08-2015
-#   Last Modified   : Wed 12 Aug 2015 12:02:44 PM CEST
+#   Last Modified   : Wed 12 Aug 2015 01:52:28 PM CEST
 #
 ##################################################
+
+function operation_help(){
+    echo -e "USAGE:"
+    echo -e "\tfunction '<number> <[minutes,hours,days,weeks,months,years]>'"
+    echo -e "Examples:"
+    echo -e "\tdate_add '10 weeks'"
+    echo -e "\tdate_minus '10 days'"
+}
 
 function get_date(){
     today=`date +"%Y-%m-%d"`
@@ -21,6 +29,25 @@ function get_time(){
 function get_datetime(){
     datetime=`date +"%Y-%m-%d %H:%M:%S"`
     echo $datetime
+}
+
+function date_plus(){
+    if [ ! -z "$1" ]; then
+        today=`date -d "+${1}"`
+    else
+        operation_help
+    fi
+    echo $today
+}
+
+function date_minus(){
+    if [ ! -z "$1" ]; then
+        today=`date -d "-${1}"`
+    else
+        operation_help
+        return 1
+    fi
+    echo $today
 }
 
 export -f get_date
