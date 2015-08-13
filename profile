@@ -25,6 +25,7 @@ alias xtar='tar xzvf'
 
 alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
+alias goto_scripts='cd $HOME_SCRIPTS'
 
 # GZIP & XZ COMPRESSION LEVEL
 export GZIP=-9
