@@ -72,7 +72,7 @@ Feb 26 17:28:44 LokingMac.local josue[811] <Error>: hello josh
 This command copies a ssh public key to a remote host
 
 ```shell
-john@doe:$ push_ssh_key huey@newtown
+john@doe:$ ssh_push_key huey@newtown
 ```
 
 #### Ssh Connect To Remote host by name
