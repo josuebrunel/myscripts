@@ -4,24 +4,26 @@
 #   Filename        : bootstrap.sh
 #   Description     : env installer
 #   Creation Date   : 13-05-2015
-#   Last Modified   : Thu 28 May 2015 07:40:15 AM CEST
+#   Last Modified   : Fri 04 Sep 2015 11:15:16 AM CEST
 #
 ##################################################
 set -x
 cd ~
 git clone https://github.com/josuebrunel/myscripts.git ~/.scripts
 
-# if .profile already exists
-if [ -f ~/.profile ];then
-    mv ~/.profile ~/.profile.bak
-fi
-ln -s ~/.scripts/profile ~/.profile
+function setup {
+    filename=$1
 
-# if .gitconfig already exists
-if [ -f ~/.profile ];then
-    mv ~/.gitconfig ~/.gitconfig.bak
-fi
-ln -s ~/.scripts/gitconfig ~/.gitconfig 
+    if [ -f ~/.$filename ]; then
+        mv ~/.$filename ~/.$filename.bak
+    fi
+
+    ln -s ~/.scripts/$filename ~/.$filename 
+}
+
+for f in profile pypirc irbrc gitconfig; do
+    setup $f
+done
 
 source .profile
 
