@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Sun 24 May 2015 09:41:35 AM CEST
+#   Last Modified   : Wed Sep 16 18:54:13 2015
 #
 ##################################################
 
@@ -68,7 +68,6 @@ def timethis(func):
     return wrapper
 
 # JSON TOOL
-
 def json_get_data(json_file):
     """Returns a json data
     """
