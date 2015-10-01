@@ -18,6 +18,7 @@
   update-init-all = submodule update --init --recursive
 [credential]
 	helper = osxkeychain
+	helper = cache --timeout=86400
 [filter "media"]
 	required = true
 	clean = git media clean %f
