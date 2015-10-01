@@ -4,7 +4,7 @@
 #   Filename        : setup_vim.sh
 #   Description     : setup vim config
 #   Creation Date   : 19-03-2015
-#   Last Modified   : Mon 13 Apr 2015 04:05:28 PM CEST
+#   Last Modified   : Thu 01 Oct 2015 12:06:53 PM CEST
 #
 ##################################################
 
@@ -59,7 +59,7 @@ function setup_editor(){
     git clone $REPOSITORY $dir
 
     _debug "Installing ${editor} config"
-    ln -s "${dir}/{$vim}" $file
+    ln -s "${dir}/${file}" $file
     cd -
     _debug "===END==="
 }
