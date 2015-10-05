@@ -4,7 +4,7 @@
 #   Filename        : bootstrap.sh
 #   Description     : env installer
 #   Creation Date   : 13-05-2015
-#   Last Modified   : Fri 04 Sep 2015 11:15:16 AM CEST
+#   Last Modified   : Mon 05 Oct 2015 11:39:52 AM CEST
 #
 ##################################################
 set -x
@@ -25,5 +25,5 @@ for f in profile pypirc irbrc gitconfig; do
     setup $f
 done
 
-source .profile
+source $HOME/.profile
 
