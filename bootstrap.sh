@@ -4,7 +4,7 @@
 #   Filename        : bootstrap.sh
 #   Description     : env installer
 #   Creation Date   : 13-05-2015
-#   Last Modified   : Mon 05 Oct 2015 11:39:52 AM CEST
+#   Last Modified   : Mon 05 Oct 2015 11:43:28 AM CEST
 #
 ##################################################
 set -x
@@ -21,7 +21,7 @@ function setup {
     ln -s ~/.scripts/$filename ~/.$filename 
 }
 
-for f in profile pypirc irbrc gitconfig; do
+for f in profile pypirc irbrc gitconfig sqliterc; do
     setup $f
 done
 
