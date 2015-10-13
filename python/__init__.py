@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Wed Sep 16 18:54:13 2015
+#   Last Modified   : Mon 12 Oct 2015 10:14:18 AM CEST
 #
 ##################################################
 
@@ -15,6 +15,7 @@ import pdb
 import json
 import time, datetime
 from functools import wraps
+from xml.dom import minidom
 
 ##AUTO COMPLETION
 import readline, rlcompleter
@@ -83,3 +84,18 @@ def json_write_data(json_data, output):
         json.dump(json_data, f, indent= 4, encoding= 'utf-8', sort_keys=True)
         return True
     return False
+
+# XML TOOL
+def xml_get_data(xml_file):
+    pass
+
+# JSON/XML prettyfier
+
+def json_pretty(data):
+    data = json.loads(data.decode('utf-8'))
+    return json.dumps(data, indent=2, sort_keys=True)
+
+def xml_pretty(data):
+    parsed_string = minidom.parseString(data.decode('utf-8'))
+    return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
+
