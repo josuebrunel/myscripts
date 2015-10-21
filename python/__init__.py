@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 12 Oct 2015 10:14:18 AM CEST
+#   Last Modified   : Wed 21 Oct 2015 02:33:46 PM CEST
 #
 ##################################################
 
@@ -39,6 +39,10 @@ def _myimport_(name, path=None):
 
 if sys.version_info < (3.0,):
     db = _myimport_('db')
+
+django_utils = _myimport_('django_utils')
+
+from django_utils import *
 
 #USEFUL METHOD
 def get_real_path(f):
