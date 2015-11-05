@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Wed 21 Oct 2015 02:33:46 PM CEST
+#   Last Modified   : Thu 05 Nov 2015 04:54:07 PM CET
 #
 ##################################################
 
@@ -13,9 +13,11 @@ import sys
 import imp
 import pdb
 import json
-import time, datetime
+import uuid
+import time, logging, datetime
 from functools import wraps
 from xml.dom import minidom
+from pprint import pprint as pp
 
 ##AUTO COMPLETION
 import readline, rlcompleter
@@ -40,9 +42,12 @@ def _myimport_(name, path=None):
 if sys.version_info < (3.0,):
     db = _myimport_('db')
 
-django_utils = _myimport_('django_utils')
-
-from django_utils import *
+# LAODING DJANGO STUFF
+try:
+    django_utils = _myimport_('django_utils')
+    from django_utils import *
+except ImportError:
+    logging.info("No Django Config Found")
 
 #USEFUL METHOD
 def get_real_path(f):
@@ -94,7 +99,6 @@ def xml_get_data(xml_file):
     pass
 
 # JSON/XML prettyfier
-
 def json_pretty(data):
     data = json.loads(data.decode('utf-8'))
     return json.dumps(data, indent=2, sort_keys=True)
@@ -103,3 +107,6 @@ def xml_pretty(data):
     parsed_string = minidom.parseString(data.decode('utf-8'))
     return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
 
+# UUID 
+def uuidgen():
+    return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
