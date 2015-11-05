@@ -18,6 +18,8 @@ alias la='ls -lhAt'
 alias lt='ls -lht'
 alias ld='du -sh ./*/'
 
+alias www-data_as_new_owner='sudo chown www-data:www-data'
+
 ## FILE COMPRESSION
 alias ltar='tar tzvf'
 alias ctar='tar czvf'
