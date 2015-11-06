@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Thu 05 Nov 2015 04:54:07 PM CET
+#   Last Modified   : Fri 06 Nov 2015 11:22:01 PM CET
 #
 ##################################################
 
@@ -18,13 +18,6 @@ import time, logging, datetime
 from functools import wraps
 from xml.dom import minidom
 from pprint import pprint as pp
-
-##AUTO COMPLETION
-import readline, rlcompleter
-if 'libedit' in readline.__doc__:
-    readline.parse_and_bind("bind ^I rl_complete")
-else:
-    readline.parse_and_bind("tab: complete")
 
 
 def _myimport_(name, path=None):
@@ -110,3 +103,27 @@ def xml_pretty(data):
 # UUID 
 def uuidgen():
     return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
+
+##AUTO COMPLETION
+import readline, rlcompleter
+if 'libedit' in readline.__doc__:
+    readline.parse_and_bind("bind ^I rl_complete")
+else:
+    readline.parse_and_bind("tab: complete")
+
+## SAVING HISTORY TO FILE
+HOME_DIR = os.environ.get('HOME')
+PY_HISTORY_FILE = '.pyhistory'
+PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
+
+try: 
+    logging.info("Loading python shell history")
+    readline.read_history_file(PY_HISTORY_PATH)
+except (IOError,) as e:
+    logging.error(e.text)
+
+else:
+    import atexit
+    atexit.register(readline.write_history_file, PY_HISTORY_PATH)
+
+
