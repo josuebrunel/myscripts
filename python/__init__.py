@@ -1,10 +1,10 @@
 ##################################################
 #
-#   Author          : yosuke
+#   Author          : josuebrunel
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 06 Nov 2015 11:22:01 PM CET
+#   Last Modified   : Mon 09 Nov 2015 10:17:45 AM CET
 #
 ##################################################
 
@@ -117,13 +117,12 @@ PY_HISTORY_FILE = '.pyhistory'
 PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
 
 try: 
-    logging.info("Loading python shell history")
+    logging.info("LOADING PYTHON SHELL HISTORY")
     readline.read_history_file(PY_HISTORY_PATH)
 except (IOError,) as e:
-    logging.error(e.text)
-
+    logging.error("LOADING OF PYTHON SHELL HISTORY FAILED")
+    logging.error(e)
 else:
     import atexit
     atexit.register(readline.write_history_file, PY_HISTORY_PATH)
-
 
