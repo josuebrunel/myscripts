@@ -29,6 +29,9 @@ alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
 
+# JSON
+alias json_pretty='python -m json.tool'
+
 # GZIP & XZ COMPRESSION LEVEL
 export GZIP=-9
 export XZ_OPT=-9
