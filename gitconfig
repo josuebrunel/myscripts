@@ -1,21 +1,22 @@
 [user]
 	name = Josue Kouka
-	email = josuebrunel@gmail.com
+	email = jkouka@entrouvert.com 
 [color]
 	ui = true
 [core]
 	autocrlf = input
 [alias]
-  co = checkout
-  ci = commit
-  st = status
-  br = branch
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  type = cat-file -t
-  dump = cat-file -p
-  pull-all = pull --recurse-submodules 
-  update-all = submodule update --recursive
-  update-init-all = submodule update --init --recursive
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    pull-all = pull --recurse-submodules 
+    update-all = submodule update --recursive
+    update-init-all = submodule update --init --recursive
+    pup = git pull & git submodule init & git submodule update & git submodule status
 [credential]
 	helper = osxkeychain
 	helper = cache --timeout=86400
