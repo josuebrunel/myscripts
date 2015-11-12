@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Thu 12 Nov 2015 07:12:19 PM CET
+#   Last Modified   : Thu 12 Nov 2015 07:19:20 PM CET
 #
 ##################################################
 
@@ -17,7 +17,7 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
     logging.info("LOADING DJANGO UTILS")
 
     from django.contrib.auth import get_user_model
-    from django.core.urlresolvers import reverse as reverse
+    from django.core.urlresolvers import reverse, resolve
     from django.shortcuts import get_object_or_404, render, resolve_url
 
     User = get_user_model()
