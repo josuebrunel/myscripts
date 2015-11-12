@@ -4,19 +4,20 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Tue 10 Nov 2015 06:37:54 PM CET
+#   Last Modified   : Thu 12 Nov 2015 07:12:19 PM CET
 #
 ##################################################
 
 import os
 import logging
 
+
 if os.environ.get('DJANGO_SETTINGS_MODULE', None):
-    
+     
     logging.info("LOADING DJANGO UTILS")
 
     from django.contrib.auth import get_user_model
-    from djanog.core.urlresolvers import reverse as reverse
+    from django.core.urlresolvers import reverse as reverse
     from django.shortcuts import get_object_or_404, render, resolve_url
 
     User = get_user_model()
@@ -30,6 +31,4 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
 
         services = Service.objects.all()
         roles = Role.objects.all()
-
-
 
