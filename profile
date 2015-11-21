@@ -57,6 +57,13 @@ source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
 
+## Debian Special
+if [ `uname -n` == "debian" ]; then
+    export TOSHIBA_MOVIES=/media/$USERNAME/TOSHIBA/Movies/
+    export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
+    export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
+fi
+
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
     #Fix terminal in Vi mode
