@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 09 Nov 2015 10:17:45 AM CET
+#   Last Modified   : Fri 27 Nov 2015 04:30:57 PM CET
 #
 ##################################################
 
@@ -115,6 +115,10 @@ else:
 HOME_DIR = os.environ.get('HOME')
 PY_HISTORY_FILE = '.pyhistory'
 PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
+
+if not os.path.isfile(PY_HISTORY_PATH):
+    with open(PY_HISTORY_PATH, 'w+') as fd:
+        pass
 
 try: 
     logging.info("LOADING PYTHON SHELL HISTORY")
