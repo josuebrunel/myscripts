@@ -18,8 +18,6 @@ alias la='ls -lhAt'
 alias lt='ls -lht'
 alias ld='du -sh ./*/'
 
-alias www-data_as_new_owner='sudo chown www-data:www-data'
-
 ## FILE COMPRESSION
 alias ltar='tar tzvf'
 alias ctar='tar czvf'
@@ -28,6 +26,10 @@ alias xtar='tar xzvf'
 alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
+alias mv='rsync -avrP --remove-source-files'
+alias mv='rsync -avrP'
+alias www-data_as_new_owner='sudo chown www-data:www-data'
+alias update-system='sudo apt update; sudo apt upgrade'
 
 # JSON
 alias json_pretty='python -m json.tool'
@@ -62,6 +64,7 @@ if [ `uname -n` == "debian" ]; then
     export TOSHIBA_MOVIES=/media/$USERNAME/TOSHIBA/Movies/
     export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
     export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
+    export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
 fi
 
 ## OSX SPECIAL
