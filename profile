@@ -1,4 +1,3 @@
-
 #Colored Terminal
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -27,9 +26,8 @@ alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
 alias mv='rsync -avrP --remove-source-files'
-alias mv='rsync -avrP'
+alias cp='rsync -avrP'
 alias www-data_as_new_owner='sudo chown www-data:www-data'
-alias update-system='sudo apt update; sudo apt upgrade'
 
 # JSON
 alias json_pretty='python -m json.tool'
@@ -59,12 +57,21 @@ source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
 
+## HISTORY SETTINGS
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=-1                   # big big history
+export HISTFILESIZE=-1               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+#Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 ## Debian Special
 if [ `uname -n` == "debian" ]; then
     export TOSHIBA_MOVIES=/media/$USERNAME/TOSHIBA/Movies/
     export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
     export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
     export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
+    alias update-system='sudo apt update; sudo apt upgrade'
 fi
 
 ## OSX SPECIAL
