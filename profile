@@ -67,7 +67,7 @@ shopt -s histappend                      # append to history, don't overwrite it
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ## Debian Special
-if [ `uname -n` == "debian" ]; then
+if [ `uname -s` == "Linux" ]; then
     export TOSHIBA_MOVIES=/media/$USERNAME/TOSHIBA/Movies/
     export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
     export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
