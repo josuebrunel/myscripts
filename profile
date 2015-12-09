@@ -3,7 +3,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export TERM="xterm-color"
-PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$'
+PS1='\[\e[0;33m\]\u\[\e[0m\]%\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$'
 
 # SUDO AUTOCOMPLETE
 complete -cf sudo
@@ -25,8 +25,6 @@ alias xtar='tar xzvf'
 alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
-alias mv='rsync -avrP --remove-source-files'
-alias cp='rsync -avrP'
 alias www-data_as_new_owner='sudo chown www-data:www-data'
 
 # JSON
@@ -65,6 +63,10 @@ export HISTTIMEFORMAT="%d/%m/%y %T " # hist timestamp
 shopt -s histappend                      # append to history, don't overwrite it
 #Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+## ANDOID 
+export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
+export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
 
 ## Debian Special
 if [ `uname -s` == "Linux" ]; then
