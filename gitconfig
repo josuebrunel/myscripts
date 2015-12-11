@@ -3,6 +3,10 @@
 	email = jkouka@entrouvert.com 
 [color]
 	ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 [core]
 	autocrlf = input
 [alias]
@@ -26,6 +30,8 @@
 	smudge = git media smudge %f
 [push]
 	default = matching
+[pull]
+    rebase = true 
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
