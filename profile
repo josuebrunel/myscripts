@@ -64,9 +64,15 @@ shopt -s histappend                      # append to history, don't overwrite it
 #Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-## ANDOID 
+## ANDROID 
+alias android_push='adb push -p'
+alias android_pull='adb pull'
 export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
 export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
+
+## YOUTUBE-DL
+alias youtube-dl-audio='youtube-dl --extract-audio --audio-format mp3'
+alias youtube-dl-video='youtube-dl -f 22'
 
 ## Debian Special
 if [ `uname -s` == "Linux" ]; then
