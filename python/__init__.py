@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     : 
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 27 Nov 2015 04:30:57 PM CET
+#   Last Modified   : Mon 25 Jan 2016 01:37:09 PM CET
 #
 ##################################################
 
@@ -19,8 +19,10 @@ from functools import wraps
 from xml.dom import minidom
 from pprint import pprint as pp
 
+from importlib import import_module
 
-def _myimport_(name, path=None):
+
+def load_module(name, path=None):
     """Handles module import according to a given path
     """
     if not path:
@@ -33,11 +35,11 @@ def _myimport_(name, path=None):
     return imp.load_source(name,path)
 
 if sys.version_info < (3.0,):
-    db = _myimport_('db')
+    db = load_module('db')
 
 # LAODING DJANGO STUFF
 try:
-    django_utils = _myimport_('django_utils')
+    django_utils = load_module('django_utils')
     from django_utils import *
 except ImportError:
     logging.info("No Django Config Found")
