@@ -27,6 +27,8 @@ alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
 alias www-data_as_new_owner='sudo chown www-data:www-data'
 
+alias json_pretty='python -m json.tool'
+
 # JSON
 alias json_pretty='python -m json.tool'
 
