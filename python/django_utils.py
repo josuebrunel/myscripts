@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Mon 25 Jan 2016 01:59:23 PM CET
+#   Last Modified   : Tue 26 Jan 2016 08:52:22 AM CET
 #
 ##################################################
 
@@ -34,14 +34,6 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
         User = get_user_model()
 
         users = User.objects.all()
-
-        #if os.environ.get('DJANGO_SETTINGS_MODULE') == 'authentic2.settings':
-        #    from authentic2.models import Service
-        #    from django_rbac.utils import get_role_model
-        #    Role = get_role_model()
-
-        #    services = Service.objects.all()
-        #    roles = Role.objects.all()
 
         # Allows you to import whatever you need for you current django
         # when lunching shell

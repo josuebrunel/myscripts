@@ -191,5 +191,9 @@ Help
     --brokM/b dirname
 ```
 
+### Django Common
 
+*django common* is a little script which is loaded when you lunch a python shell and
+which looks for a python file name *dj_common.py* at the same level than manage 
+and load everything in that file. 
 
