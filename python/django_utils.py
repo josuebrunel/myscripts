@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Tue 26 Jan 2016 08:52:22 AM CET
+#   Last Modified   : Wed 27 Jan 2016 11:27:11 AM CET
 #
 ##################################################
 
@@ -15,7 +15,12 @@ import logging
 def load_common(common):
     """loads dj_common.py
     """
-    return imp.load_source('common', common)
+    try:
+        module = imp.load_source('common', common)
+        return module
+    except (ImportError,) as e:
+        logging.error(e)
+        return None
 
 if os.environ.get('DJANGO_SETTINGS_MODULE', None):
      
@@ -42,7 +47,8 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
         )
         if os.path.exists(django_common):
             common = load_common(django_common)
-            from common import *
+            if common :
+                from common import *
 
 
 
