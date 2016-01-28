@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Wed 27 Jan 2016 11:27:11 AM CET
+#   Last Modified   : Thu 28 Jan 2016 10:53:20 AM CET
 #
 ##################################################
 
@@ -23,19 +23,25 @@ def load_common(common):
         return None
 
 if os.environ.get('DJANGO_SETTINGS_MODULE', None):
-     
+
     logging.info("LOADING DJANGO UTILS")
 
     from django.conf import settings
+    from django.apps.registry import apps
     from django.db import models
     from django.contrib.auth import get_user_model
     from django.core.urlresolvers import reverse, resolve
+    from django.coro.exceptions import AppRegistryNotReady
     from django.shortcuts import get_object_or_404, render, resolve_url
-
     from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 
-    # If django configured 
-    if settings.configured:
+    try:
+        apps_ready = apps.check_apps_ready()
+    except (AppRegistryNotReady,):
+        apps_ready = None
+
+    # If django configured and apps ready
+    if settings.configured and apps_ready:
         User = get_user_model()
 
         users = User.objects.all()
