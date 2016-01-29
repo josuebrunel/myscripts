@@ -2,9 +2,9 @@
 #
 #   Author          : josuebrunel
 #   Filename        : __init__.py
-#   Description     : 
+#   Description     :
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Mon 25 Jan 2016 01:37:09 PM CET
+#   Last Modified   : Fri 29 Jan 2016 02:20:48 PM CET
 #
 ##################################################
 
@@ -21,6 +21,12 @@ from pprint import pprint as pp
 
 from importlib import import_module
 
+##AUTO COMPLETION
+import readline, rlcompleter
+if 'libedit' in readline.__doc__:
+    readline.parse_and_bind("bind ^I rl_complete")
+else:
+    readline.parse_and_bind("tab: complete")
 
 def load_module(name, path=None):
     """Handles module import according to a given path
@@ -49,7 +55,7 @@ def get_real_path(f):
     """Retuns the realpath of a file
     """
     return os.path.realpath(f)
-    
+
 def get_joined_path(a, b):
     """Returns joined path of to file
     """
@@ -102,16 +108,10 @@ def xml_pretty(data):
     parsed_string = minidom.parseString(data.decode('utf-8'))
     return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
 
-# UUID 
+# UUID
 def uuidgen():
     return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
 
-##AUTO COMPLETION
-import readline, rlcompleter
-if 'libedit' in readline.__doc__:
-    readline.parse_and_bind("bind ^I rl_complete")
-else:
-    readline.parse_and_bind("tab: complete")
 
 ## SAVING HISTORY TO FILE
 HOME_DIR = os.environ.get('HOME')
@@ -122,7 +122,7 @@ if not os.path.isfile(PY_HISTORY_PATH):
     with open(PY_HISTORY_PATH, 'w+') as fd:
         pass
 
-try: 
+try:
     logging.info("LOADING PYTHON SHELL HISTORY")
     readline.read_history_file(PY_HISTORY_PATH)
 except (IOError,) as e:
