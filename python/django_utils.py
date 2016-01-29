@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Fri 29 Jan 2016 12:16:49 PM CET
+#   Last Modified   : Fri 29 Jan 2016 07:05:55 PM CET
 #
 ##################################################
 
@@ -26,14 +26,9 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
 
     logging.info("LOADING DJANGO UTILS")
 
+    from django.core.exceptions import AppRegistryNotReady
     from django.conf import settings
     from django.apps.registry import apps
-    from django.db import models
-    from django.contrib.auth import get_user_model
-    from django.core.urlresolvers import reverse, resolve
-    from django.core.exceptions import AppRegistryNotReady
-    from django.shortcuts import get_object_or_404, render, resolve_url
-    from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 
     try:
         apps_ready = apps.check_apps_ready()
@@ -42,6 +37,12 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
 
     # If django configured and apps ready
     if settings.configured and apps_ready:
+        from django.db import models
+        from django.contrib.auth import get_user_model
+        from django.core.urlresolvers import reverse, resolve
+        from django.shortcuts import get_object_or_404, render, resolve_url
+        from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
+
         User = get_user_model()
 
         users = User.objects.all()
@@ -55,7 +56,4 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
             common = load_common(django_common)
             if common :
                 from common import *
-
-
-
 
