@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Thu 28 Jan 2016 10:53:20 AM CET
+#   Last Modified   : Fri 29 Jan 2016 12:16:49 PM CET
 #
 ##################################################
 
@@ -31,7 +31,7 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
     from django.db import models
     from django.contrib.auth import get_user_model
     from django.core.urlresolvers import reverse, resolve
-    from django.coro.exceptions import AppRegistryNotReady
+    from django.core.exceptions import AppRegistryNotReady
     from django.shortcuts import get_object_or_404, render, resolve_url
     from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 
