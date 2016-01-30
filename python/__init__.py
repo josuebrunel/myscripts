@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     :
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 29 Jan 2016 02:20:48 PM CET
+#   Last Modified   : Sat 30 Jan 2016 12:06:42 PM CET
 #
 ##################################################
 
@@ -45,8 +45,8 @@ if sys.version_info < (3.0,):
 
 # LAODING DJANGO STUFF
 try:
-    django_utils = load_module('django_utils')
-    from django_utils import *
+    django_common = load_module('django_common')
+    from django_common import *
 except ImportError:
     logging.info("No Django Config Found")
 
