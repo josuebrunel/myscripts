@@ -4,7 +4,7 @@
 #   Filename        : django.py
 #   Description     :
 #   Creation Date   : 21-10-2015
-#   Last Modified   : Sat 30 Jan 2016 12:13:11 PM CET
+#   Last Modified   : Sat 30 Jan 2016 01:39:20 PM CET
 #
 ##################################################
 
@@ -47,6 +47,7 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
         django_common = os.path.join(
             os.path.realpath('.'), 'dj_common.py'
         )
+
         if os.path.exists(django_common):
             common = load_common(django_common)
             if common :

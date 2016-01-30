@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     :
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Sat 30 Jan 2016 12:06:42 PM CET
+#   Last Modified   : Sat 30 Jan 2016 01:32:09 PM CET
 #
 ##################################################
 
@@ -28,12 +28,13 @@ if 'libedit' in readline.__doc__:
 else:
     readline.parse_and_bind("tab: complete")
 
-def load_module(name, path=None):
+def common_loader(name, path=None):
     """Handles module import according to a given path
     """
     if not path:
-        home_scripts_python = os.path.join(os.environ['HOME_SCRIPTS'],'python')
-        path = os.path.join(home_scripts_python,name+'.py')
+        path = os.path.join(os.environ['HOME_SCRIPTS'],'python')
+
+    path = os.path.join(path, name+'.py')
 
     if not os.path.isfile(path):
         raise ImportError("No such file : {0}".format(path))
@@ -41,14 +42,15 @@ def load_module(name, path=None):
     return imp.load_source(name,path)
 
 if sys.version_info < (3.0,):
-    db = load_module('db')
+    db = common_loader('db')
 
-# LAODING DJANGO STUFF
-try:
-    django_common = load_module('django_common')
-    from django_common import *
-except ImportError:
-    logging.info("No Django Config Found")
+# LAODING COMMONS
+for common in ('py_common', 'django_common'):
+    try:
+        common = common_loader(common)
+        from common import *
+    except ImportError:
+        logging.info("No {} Config Found".format(common))
 
 #USEFUL METHOD
 def get_real_path(f):
