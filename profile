@@ -58,13 +58,15 @@ source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
 
 ## HISTORY SETTINGS
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=-1                   # big big history
-export HISTFILESIZE=-1               # big big history
-export HISTTIMEFORMAT="%d/%m/%y %T " # hist timestamp
-shopt -s histappend                      # append to history, don't overwrite it
-#Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+if [ `uname -s` == "Linux" ]; then
+    export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+    export HISTSIZE=-1                   # big big history
+    export HISTFILESIZE=-1               # big big history
+    export HISTTIMEFORMAT="%d/%m/%y %T " # hist timestamp
+    shopt -s histappend                      # append to history, don't overwrite it
+    #Save and reload the history after each command finishes
+    export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+fi
 
 ## ANDROID 
 alias android_push='adb push -p'
@@ -125,8 +127,5 @@ if [ `uname -s` == "Darwin" ]; then
 
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*   
 fi
-
-## DJANGO
-export ENV_ROLE=development
 
 fortune
