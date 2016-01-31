@@ -101,6 +101,7 @@ if [ `uname -s` == "Darwin" ]; then
     alias goto_macext='cd /Volumes/MacintoshEX/'
     alias disklist='diskutil list'
 
+    alias update-system='port selfupdate; sudo port upgrade outdated'
     alias emax='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
     alias show_hidden_files='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
     alias hide_hidden_files='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
