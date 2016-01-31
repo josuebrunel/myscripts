@@ -20,7 +20,7 @@
     pull-all = pull --recurse-submodules 
     update-all = submodule update --recursive
     update-init-all = submodule update --init --recursive
-    pup = git pull & git submodule init & git submodule update & git submodule status
+    pup = pull & git submodule init & git submodule update & git submodule status
 [credential]
 	helper = osxkeychain
 	helper = cache --timeout=86400
