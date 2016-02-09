@@ -1,6 +1,7 @@
 # module loading py_common.py if found in current dir
 import os
 import imp
+import logging
 
 def load_common(common):
     """loads dj_common.py
