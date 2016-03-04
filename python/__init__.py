@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     :
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 04 Mar 2016 04:39:33 PM CET
+#   Last Modified   : Fri 04 Mar 2016 06:46:51 PM CET
 #
 ##################################################
 
@@ -31,25 +31,14 @@ else:
 HOME_DIR = os.environ.get('HOME')
 HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 
-def common_loader(name, path=None):
-    """Handles module import according to a given path
-    """
-    if not path:
-        path = os.path.join(os.environ['HOME_SCRIPTS'],'python')
-
-    path = os.path.join(path, name+'.py')
-
-    if not os.path.isfile(path):
-        raise ImportError("No such file : {0}".format(path))
-
-    return imp.load_source(name,path)
-
 if sys.version_info < (3.0,):
-    db = common_loader('db')
+    execfile(os.path.join(HOME_SCRIPTS, 'python', 'db.py'))
 
 # LAODING COMMONS
 for common in ('py_common', 'django_common'):
-    execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
+    if os.path.realpath(
+        os.path.join( HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
+        execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
 
 #USEFUL METHOD
 def get_real_path(f):

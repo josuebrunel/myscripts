@@ -37,7 +37,7 @@ class Database(object):
             return self.cr
         except (Exception,) as e:
             print(e)
-            
+
         return False
 
     def commit(self,):
@@ -53,7 +53,7 @@ class Database(object):
         """Returns the id of the last affected row
         """
         return self.cr.rowcount
-        
+
 ## SQLITE CLASS
 
 class MySqlite(Database):
@@ -64,7 +64,7 @@ class MySqlite(Database):
         """
         """
         super(MySqlite, self).__init__()
-        
+
         self.dbfile = dbfile
 
     def connect(self,):
