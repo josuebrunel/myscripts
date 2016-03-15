@@ -68,11 +68,12 @@ if [ `uname -s` == "Linux" ]; then
     export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 fi
 
-## ANDROID 
+## ANDROID
 alias android_push='adb push -p'
 alias android_pull='adb pull'
 export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
 export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
+export ANDROID_SD_DOC=/storage/extSdCard/Documentations/
 
 ## YOUTUBE-DL
 alias youtube-dl-audio='youtube-dl --extract-audio --audio-format mp3'
@@ -86,6 +87,9 @@ if [ `uname -s` == "Linux" ]; then
     export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
     alias update-system='sudo apt update; sudo apt upgrade'
 fi
+
+# Thinkpad fix wifi
+alias fix-wifi='nmcli device disconnect wlp3s0  ; nmcli device connect wlp3s0'
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
@@ -115,7 +119,7 @@ if [ `uname -s` == "Darwin" ]; then
 
     #LOAD SCRIPTS
     source $HOME_SCRIPTS/shell/osx/myfixers.sh
-    
+
     ##
     # Your previous /Users/josue/.profile file was backed up as /Users/josue/.profile.macports-saved_2014-11-08_at_12:21:31
     ##
@@ -126,7 +130,7 @@ if [ `uname -s` == "Darwin" ]; then
 
     export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*   
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
-fortune
+fortune 2> /dev/null
