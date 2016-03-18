@@ -4,7 +4,7 @@
 #   Filename        : __init__.py
 #   Description     :
 #   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 04 Mar 2016 06:46:51 PM CET
+#   Last Modified   : Fri 18 Mar 2016 09:43:45 AM CET
 #
 ##################################################
 
@@ -101,6 +101,34 @@ def xml_pretty(data):
 # UUID
 def uuidgen():
     return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
+
+# Python-Requests
+try:
+    import requests
+
+    class LoggedRequest(requests.Session):
+
+        def __init__(self, *args, **kwargs):
+            super(LoggedRequest, self).__init__(*args, **kwargs)
+            self.logger = logging.getLogger(__name__)
+
+        def request(self, method, url, **kwargs):
+            print('Request\n%s - %s' %(method, url))
+            response = super(LoggedRequest, self).request(method, url, **kwargs)
+            print('\n'.join(
+                ['%s: %s' %(k,v) for k,v in response.request.headers.items()]
+            ))
+            print('Data: %s' %response.request.body)
+            print('\nResponse\n%s' %response.status_code)
+            print('\n'.join(
+                ['%s: %s' %(k,v) for k,v in response.headers.items()]
+            ))
+            print('Data: %s' %response.content)
+
+    # Substittude requests
+    requests = LoggedRequest()
+except (ImportError,) as e:
+    pass
 
 
 ## SAVING HISTORY TO FILE
