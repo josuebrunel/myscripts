@@ -45,6 +45,7 @@ export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
 #GOPATH
 export GOPATH=$HOME/workspace/go
+export PATH=$PATH:/usr/local/go/bin
 
 ## LOADS SCRIPTS
 source $HOME_SCRIPTS/shell/exit_f.sh
