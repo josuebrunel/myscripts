@@ -74,11 +74,15 @@ alias android_push='adb push -p'
 alias android_pull='adb pull'
 export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
 export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
+export ANDROID_SD_SERMONS=/storage/extSdCard/Sermons/
 export ANDROID_SD_DOC=/storage/extSdCard/Documentations/
 
 ## YOUTUBE-DL
 alias youtube-dl-audio='youtube-dl --extract-audio --audio-format mp3'
 alias youtube-dl-video='youtube-dl -f 22'
+
+## SOUNDCLOUD DL
+alias soundcloud-dl='scdl -l'
 
 ## Debian Special
 if [ `uname -s` == "Linux" ]; then
