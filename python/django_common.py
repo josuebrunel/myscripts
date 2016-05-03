@@ -19,6 +19,10 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
     from django.core.exceptions import AppRegistryNotReady
     from django.conf import settings
     from django.apps.registry import apps
+    from django.core.cache import cache
+
+    def clear_cache():
+        cache.clear()
 
     # If django configured and apps ready
     if settings.configured and apps.apps_ready:
