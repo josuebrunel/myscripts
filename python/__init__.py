@@ -91,7 +91,8 @@ def xml_get_data(xml_file):
 
 # JSON/XML prettyfier
 def json_pretty(data):
-    data = json.loads(data.decode('utf-8'))
+    if isinstance(data, str):
+        data = json.loads(data.decode('utf-8'))
     return json.dumps(data, indent=2, sort_keys=True)
 
 def xml_pretty(data):
@@ -125,11 +126,12 @@ try:
             ))
             print('Data: %s' %response.content)
 
+            return response
+
     # Substittude requests
     requests = LoggedRequest()
 except (ImportError,) as e:
     pass
-
 
 ## SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
