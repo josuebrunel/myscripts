@@ -34,11 +34,6 @@ HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 if sys.version_info < (3.0,):
     execfile(os.path.join(HOME_SCRIPTS, 'python', 'db.py'))
 
-# LAODING COMMONS
-for common in ('py_common', 'django_common'):
-    if os.path.realpath(
-        os.path.join( HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
-        execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
 
 #USEFUL METHOD
 def get_real_path(f):
@@ -132,6 +127,12 @@ try:
     requests = LoggedRequest()
 except (ImportError,) as e:
     pass
+
+# LAODING COMMONS
+for common in ('py_common', 'django_common'):
+    if os.path.realpath(
+        os.path.join( HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
+        execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
 
 ## SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
