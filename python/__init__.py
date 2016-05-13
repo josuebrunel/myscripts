@@ -143,7 +143,10 @@ except (ImportError,) as e:
 for common in ('py_common', 'django_common'):
     if os.path.realpath(
         os.path.join( HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
-        execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
+        try:
+            execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
+        except(Exception,) as e:
+            logger.error(e.message)
 
 del common
 
