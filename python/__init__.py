@@ -21,15 +21,26 @@ from pprint import pprint as pp
 
 from importlib import import_module
 
+HOME_DIR = os.environ.get('HOME')
+HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
+HOME_SCRIPTS_PYTHON = os.path.join(HOME_SCRIPTS, 'python')
+
+## SETTING UP DEFAULT LOGGER
+execfile(os.path.join(HOME_SCRIPTS_PYTHON,'default_logger.py'))
+
+logging.setLoggerClass(DefaultLogger)
+logger = logging.getLogger('default_logger')
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
+
+
 ##AUTO COMPLETION
+logger.info("SETTING UP AUTOCOMPLETION")
 import readline, rlcompleter
 if 'libedit' in readline.__doc__:
     readline.parse_and_bind("bind ^I rl_complete")
 else:
     readline.parse_and_bind("tab: complete")
-
-HOME_DIR = os.environ.get('HOME')
-HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 
 if sys.version_info < (3.0,):
     execfile(os.path.join(HOME_SCRIPTS, 'python', 'db.py'))
@@ -134,6 +145,8 @@ for common in ('py_common', 'django_common'):
         os.path.join( HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
         execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
 
+del common
+
 ## SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
 PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
@@ -143,11 +156,11 @@ if not os.path.isfile(PY_HISTORY_PATH):
         pass
 
 try:
-    logging.info("LOADING PYTHON SHELL HISTORY")
     readline.read_history_file(PY_HISTORY_PATH)
+    logger.info("SHELL HISTORY LOADED")
 except (IOError,) as e:
-    logging.error("LOADING OF PYTHON SHELL HISTORY FAILED")
-    logging.error(e)
+    logger.info("LOADING SHELL HISTORY FAILED")
+    logger.error(e.message)
 else:
     import atexit
     atexit.register(readline.write_history_file, PY_HISTORY_PATH)

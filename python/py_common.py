@@ -10,4 +10,5 @@ py_common = os.path.join(
 )
 
 if os.path.exists(py_common):
+    logger.info("LOADING PY_COMMON FILE")
     execfile(py_common)

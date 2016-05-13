@@ -9,12 +9,12 @@
 ##################################################
 
 import os
-import logging
+#import logging
 
 
 if os.environ.get('DJANGO_SETTINGS_MODULE', None):
 
-    logging.info("LOADING DJANGO UTILS")
+    logger.info("LOADING DJANGO UTILS")
 
     from django.core.exceptions import AppRegistryNotReady
     from django.conf import settings
@@ -43,5 +43,6 @@ if os.environ.get('DJANGO_SETTINGS_MODULE', None):
         )
 
         if os.path.exists(django_common):
+            logger.info("LOADING DJANGO_COMMON FILE")
             execfile(django_common)
 
