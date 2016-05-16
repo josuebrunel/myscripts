@@ -152,6 +152,7 @@ for common in ('py_common', 'django_common'):
             execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
         except(Exception,) as e:
             logger.error(e.message)
+            pdb.set_trace()
 
 del common
 
