@@ -17,6 +17,7 @@ import uuid
 import time, logging, datetime
 from functools import wraps
 from xml.dom import minidom
+from xml.etree import cElementTree as ctree
 from pprint import pprint as pp
 
 from importlib import import_module
@@ -94,6 +95,10 @@ def json_write_data(json_data, output):
 # XML TOOL
 def xml_get_data(xml_file):
     pass
+
+def xml_to_string(elt):
+    return ctree.tostring(elt)
+
 
 # JSON/XML prettyfier
 def json_pretty(data):
