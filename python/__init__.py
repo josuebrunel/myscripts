@@ -15,6 +15,7 @@ import pdb
 import json
 import uuid
 import time, logging, datetime
+from logging.config import dictConfig
 from functools import wraps
 from xml.dom import minidom
 from xml.etree import cElementTree as ctree
@@ -27,12 +28,38 @@ HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 HOME_SCRIPTS_PYTHON = os.path.join(HOME_SCRIPTS, 'python')
 
 ## SETTING UP DEFAULT LOGGER
-execfile(os.path.join(HOME_SCRIPTS_PYTHON,'default_logger.py'))
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            },
+        'syslog': {
+            'level': 'DEBUG',
+            'address': '/dev/log',
+            'class': 'logging.handlers.SysLogHandler',
+            'formatter': 'syslog',
+        },
+    },
+    'formatters': {
+        'syslog': {
+            'format': '%(levelname)s %(name)s.%(funcName)s: %(message)s',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console', 'syslog'],
+            'level': 'DEBUG',
+            'propragate': True,
+        }
+    }
+}
 
-logging.setLoggerClass(DefaultLogger)
-logger = logging.getLogger('default_logger')
-logger.setLevel(logging.DEBUG)
-logger.propagate = False
+dictConfig(LOGGING)
+
+logger = logging.getLogger('piwik_manage')
 
 
 ##AUTO COMPLETION
@@ -125,17 +152,17 @@ try:
             self.logger = logging.getLogger(__name__)
 
         def request(self, method, url, **kwargs):
-            print('Request\n%s - %s' %(method, url))
+            logger.debug('Request\n%s - %s' %(method, url))
             response = super(LoggedRequest, self).request(method, url, **kwargs)
-            print('\n'.join(
+            logger.debug('\n'.join(
                 ['%s: %s' %(k,v) for k,v in response.request.headers.items()]
             ))
-            print('Data: %s' %response.request.body)
-            print('\nResponse\n%s' %response.status_code)
-            print('\n'.join(
+            logger.debug('Data: %s' %response.request.body)
+            logger.debug('\nResponse\n%s' %response.status_code)
+            logger.debug('\n'.join(
                 ['%s: %s' %(k,v) for k,v in response.headers.items()]
             ))
-            print('Data: %s' %response.content)
+            logger.debug('Data: %s' %response.content)
 
             return response
 
