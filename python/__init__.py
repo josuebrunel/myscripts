@@ -59,7 +59,7 @@ LOGGING = {
 
 dictConfig(LOGGING)
 
-logger = logging.getLogger('piwik_manage')
+logger = logging.getLogger('default_logger')
 
 
 ##AUTO COMPLETION
