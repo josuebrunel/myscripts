@@ -23,6 +23,7 @@ from pprint import pprint as pp
 
 from importlib import import_module
 
+
 HOME_DIR = os.environ.get('HOME')
 HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 HOME_SCRIPTS_PYTHON = os.path.join(HOME_SCRIPTS, 'python')
@@ -125,6 +126,19 @@ def xml_get_data(xml_file):
 
 def xml_to_string(elt):
     return ctree.tostring(elt)
+
+# CSV TOOL
+def csv_get_data(filename, as_dict=False, skip_header=False):
+    data = []
+    with open(filename, 'rb') as fd:
+        read_method = 'DictReader' if as_dict else 'reader'
+        rows = vars(csv)[read_method](fd, delimiter=',', quotechar='"')
+        if read_method == 'reader' and skip_header:
+            rows.next()
+        for row in rows:
+            data.append(row)
+
+        return data
 
 
 # JSON/XML prettyfier
