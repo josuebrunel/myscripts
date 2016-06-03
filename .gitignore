@@ -2,3 +2,5 @@
 *~
 logs/
 *.log*
+*.swp
+*.swo
