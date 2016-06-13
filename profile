@@ -72,6 +72,7 @@ fi
 ## ANDROID
 alias android_push='adb push -p'
 alias android_pull='adb pull'
+export ANDROID_SD=/storage/extSdCard/
 export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
 export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
 export ANDROID_SD_SERMONS=/storage/extSdCard/Sermons/
