@@ -1,13 +1,3 @@
-##################################################
-#
-#   Author          : josuebrunel
-#   Filename        : __init__.py
-#   Description     :
-#   Creation Date   : 09-03-2015
-#   Last Modified   : Fri 18 Mar 2016 09:43:45 AM CET
-#
-##################################################
-
 import os
 import sys
 import imp
@@ -15,7 +5,7 @@ import pdb
 import csv
 import json
 import uuid
-import readline
+import readline, rlcompleter
 import time, logging, datetime
 from logging.config import dictConfig
 from functools import wraps
@@ -128,7 +118,7 @@ def json_write_data(json_data, output):
 
 # XML TOOL
 def xml_get_data(xml_file):
-    pass
+    raise NotImplementedError()
 
 
 def xml_to_string(elt):
@@ -199,12 +189,10 @@ except (ImportError,) as e:
 for common in ('py_common', 'django_common'):
     if os.path.realpath(os.path.join(HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
         try:
-            execfile(os.path.join(HOME_SCRIPTS, 'python', common+'.py'))
+            execfile(os.path.join(HOME_SCRIPTS, 'python', common + '.py'))
         except(Exception,) as e:
             logger.error(e.message)
             pdb.set_trace()
-
-del common
 
 
 # SAVING HISTORY TO FILE
@@ -224,4 +212,3 @@ except (IOError,) as e:
 else:
     import atexit
     atexit.register(readline.write_history_file, PY_HISTORY_PATH)
-
