@@ -76,14 +76,15 @@ def get_real_path(f):
 def get_joined_path(a, b):
     """Returns joined path of to file
     """
-    return os.path.join(a,b)
+    return os.path.join(a, b)
 
 
 def get_file_content(filename):
     """Returns content of a given file
     """
-    with open(filename) as f :
+    with open(filename) as f:
         return f.read()
+
 
 # MY DECORATORS
 def timethis(func):
@@ -149,6 +150,15 @@ def json_pretty(data):
 def xml_pretty(data):
     parsed_string = minidom.parseString(data.decode('utf-8'))
     return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
+
+
+# PKG TOOLS
+def whereis(pkg):
+    return getattr(pkg, '__path__', None)
+
+
+def show(pkg):
+    pass
 
 
 # UUID

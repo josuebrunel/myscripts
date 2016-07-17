@@ -1,11 +1,8 @@
-import os
 import abc
-import datetime
-import logging
 import sqlite3
 
-##GENERIC DATABASE  CLASS
 
+# GENERIC DATABASE  CLASS
 class Database(object):
     """Just an usual class
     """
@@ -54,8 +51,8 @@ class Database(object):
         """
         return self.cr.rowcount
 
-## SQLITE CLASS
 
+# SQLITE CLASS
 class MySqlite(Database):
     """Simple SQlite3 class handler
     """
