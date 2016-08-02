@@ -86,6 +86,13 @@ def get_file_content(filename):
         return f.read()
 
 
+def write_content_into_file(content, filename):
+    """Save content into the given file
+    """
+    with open(filename, 'wb') as fd:
+        fd.write(content)
+
+
 # MY DECORATORS
 def timethis(func):
     @wraps(func)
@@ -208,10 +215,13 @@ for common in ('py_common', 'django_common'):
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
 PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
+PY_HISTORY_MAX_LENGTH = -1
 
 if not os.path.isfile(PY_HISTORY_PATH):
     with open(PY_HISTORY_PATH, 'w+') as fd:
         pass
+
+readline.set_history_length(PY_HISTORY_MAX_LENGTH)
 
 try:
     readline.read_history_file(PY_HISTORY_PATH)
