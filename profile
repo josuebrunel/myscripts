@@ -16,6 +16,7 @@ alias ll='ls -lht'
 alias la='ls -lhAt'
 alias lt='ls -lht'
 alias ld='du -sh ./*/'
+alias list-ca='awk -v cmd="openssl x509 -noout -subject" "/BEGIN/{close(cmd)};{print | cmd}" < /etc/ssl/certs/ca-certificates.crt'
 
 ## FILE COMPRESSION
 alias ltar='tar tzvf'
@@ -91,7 +92,7 @@ if [ `uname -s` == "Linux" ]; then
     export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
     export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
     export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
-    alias update-system='sudo apt update; sudo apt upgrade'
+    alias update-system='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt dist-upgrade'
 fi
 
 # Thinkpad fix wifi
