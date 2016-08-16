@@ -1,6 +1,6 @@
 [user]
 	name = Josue Kouka
-	email = jkouka@entrouvert.com 
+	email = jkouka@entrouvert.com
 [color]
 	ui = true
 	branch = auto
@@ -9,6 +9,7 @@
 	status = auto
 [core]
 	autocrlf = input
+	excludesfile = ~/.gitignore
 [alias]
     co = checkout
     ci = commit
@@ -17,10 +18,11 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
     dump = cat-file -p
-    pull-all = pull --recurse-submodules 
+    pull-all = pull --recurse-submodules
     update-all = submodule update --recursive
     update-init-all = submodule update --init --recursive
     pup = pull & git submodule init & git submodule update & git submodule status
+    which-files = diff-tree --no-commit-id --name-only -r
 [credential]
 	helper = osxkeychain
 	helper = cache --timeout=86400
@@ -31,7 +33,7 @@
 [push]
 	default = matching
 [pull]
-    rebase = true 
+    rebase = true
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
