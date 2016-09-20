@@ -96,7 +96,7 @@ if [ `uname -s` == "Linux" ]; then
 fi
 
 # Thinkpad fix wifi
-alias fix-wifi='nmcli device disconnect wlp3s0  ; nmcli device connect wlp3s0'
+alias fix-wifi='sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee'
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
