@@ -15,6 +15,14 @@ from pprint import pprint as pp
 
 from importlib import import_module
 
+py_version = sys.version_info[0]
+
+if py_version > 2:
+    def execfile(filename):
+        with open(filename) as fd:
+            code = compile(fd.read(), filename, 'exec')
+            exec(code, globals(), locals())
+
 
 HOME_DIR = os.environ.get('HOME')
 HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
