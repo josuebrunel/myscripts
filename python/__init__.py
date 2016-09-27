@@ -155,6 +155,19 @@ def csv_get_data(filename, as_dict=False, skip_header=False):
         return data
 
 
+def csv_get_dict_data(filename, fieldnames=[], delimiter=','):
+    with open(filename, 'rb') as fd:
+        reader = csv.DictReader(fd, delimiter=delimiter, quotechar='|', fieldnames=fieldnames)
+        return list(reader)
+    return False
+
+
+def csv_write_dict_data(data, filename):
+    with open(filename, 'wb') as fd:
+        writer = csv.DictWriter(fd, data[0].keys())
+        writer.writerows(data)
+
+
 # JSON/XML prettyfier
 def json_pretty(data):
     if isinstance(data, str):
