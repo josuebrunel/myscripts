@@ -164,9 +164,11 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=',', skip_header=False)
     return False
 
 
-def csv_write_dict_data(data, filename):
+def csv_write_dict_data(data, filename, fieldnames=[]):
     with open(filename, 'wb') as fd:
-        writer = csv.DictWriter(fd, data[0].keys())
+        if not fieldnames:
+            fieldnames = data[0].keys()
+        writer = csv.DictWriter(fd, fieldnames)
         writer.writerows(data)
 
 
