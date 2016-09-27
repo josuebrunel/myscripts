@@ -155,9 +155,11 @@ def csv_get_data(filename, as_dict=False, skip_header=False):
         return data
 
 
-def csv_get_dict_data(filename, fieldnames=[], delimiter=','):
+def csv_get_dict_data(filename, fieldnames=[], delimiter=',', skip_header=False):
     with open(filename, 'rb') as fd:
         reader = csv.DictReader(fd, delimiter=delimiter, quotechar='|', fieldnames=fieldnames)
+        if skip_header:
+            reader.next()
         return list(reader)
     return False
 
