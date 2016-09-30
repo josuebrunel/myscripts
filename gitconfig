@@ -10,6 +10,7 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore
+	editor = vim
 [alias]
     co = checkout
     ci = commit
