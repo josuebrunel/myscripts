@@ -63,7 +63,7 @@ else:
     readline.parse_and_bind("tab: complete")
 
 if sys.version_info < (3.0,):
-    execfile(os.path.join(HOME_SCRIPTS, 'python', 'db.py'))
+    execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'db.py'))
 
 # LOADING FUNCTIONS
 logger.info("COMMON FUNCTIONS LOADED")
@@ -75,9 +75,9 @@ execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'classes.py'))
 
 # LAODING COMMONS
 for common in ('py_common', 'django_common'):
-    if os.path.realpath(os.path.join(HOME_SCRIPTS, 'python')) != os.path.realpath('.'):
+    if os.path.realpath(HOME_SCRIPTS_PYTHON) != os.path.realpath('.'):
         try:
-            execfile(os.path.join(HOME_SCRIPTS, 'python', common + '.py'))
+            execfile(os.path.join(HOME_SCRIPTS_PYTHON, common + '.py'))
         except(Exception,) as e:
             logger.error(e.message)
             pdb.set_trace()
