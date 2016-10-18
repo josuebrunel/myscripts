@@ -6,9 +6,11 @@ index-servers =
 [pypi]
 repository: https://pypi.python.org/pypi
 username: josuebrunel
+password: Kjbg@mes1
 
 [pypitest]
 repository: https://testpypi.python.org/pypi
 username: josuebrunel
+password: Kjbg@mes1
 
 

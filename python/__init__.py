@@ -10,7 +10,7 @@ import time, logging, datetime
 from logging.config import dictConfig
 from functools import wraps
 from xml.dom import minidom
-from xml.etree import cElementTree as ctree
+from xml.etree import ElementTree as etree
 from pprint import pprint as pp
 
 from importlib import import_module
@@ -134,11 +134,19 @@ def json_write_data(json_data, output):
 
 # XML TOOL
 def xml_get_data(xml_file):
-    raise NotImplementedError()
+    root = etree.parse(xml_file)
+    return root.getroot()
+
+
+def xml_write_data(xml, filename):
+    with open(filename, 'wb') as fd:
+        data = xml_pretty(xml_to_string(xml))
+        fd.write(data)
+        return True
 
 
 def xml_to_string(elt):
-    return ctree.tostring(elt)
+    return etree.tostring(elt)
 
 
 # CSV TOOL
