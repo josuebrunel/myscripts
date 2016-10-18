@@ -1,19 +1,11 @@
 import os
 import sys
-import imp
 import pdb
-import csv
-import json
-import uuid
-import readline, rlcompleter
-import time, logging, datetime
+import logging
+import readline
+import rlcompleter
 from logging.config import dictConfig
-from functools import wraps
-from xml.dom import minidom
-from xml.etree import ElementTree as etree
-from pprint import pprint as pp
 
-from importlib import import_module
 
 py_version = sys.version_info[0]
 
@@ -73,179 +65,13 @@ else:
 if sys.version_info < (3.0,):
     execfile(os.path.join(HOME_SCRIPTS, 'python', 'db.py'))
 
+# LOADING FUNCTIONS
+logger.info("COMMON FUNCTIONS LOADED")
+execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'functions.py'))
 
-# USEFUL METHOD
-def get_real_path(f):
-    """Retuns the realpath of a file
-    """
-    return os.path.realpath(f)
-
-
-def get_joined_path(a, b):
-    """Returns joined path of to file
-    """
-    return os.path.join(a, b)
-
-
-def get_file_content(filename):
-    """Returns content of a given file
-    """
-    with open(filename) as f:
-        return f.read()
-
-
-def write_content_into_file(content, filename):
-    """Save content into the given file
-    """
-    with open(filename, 'wb') as fd:
-        fd.write(content)
-
-
-# MY DECORATORS
-def timethis(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        start = time.time()
-        result = func(*args, **kwargs)
-        end = time.time()
-        print("{0} executed in {1}".format(func.__name__, end - start))
-        return result
-    return wrapper
-
-
-# JSON TOOL
-def json_get_data(json_file):
-    """Returns a json data
-    """
-    with open(json_file) as f:
-        json_data = json.load(f)
-
-    return json_data
-
-
-def json_write_data(json_data, output):
-    """Write data into a json file
-    """
-    with open(output, 'w') as f:
-        json.dump(json_data, f, indent=4, encoding='utf-8', sort_keys=True)
-        return True
-    return False
-
-
-# XML TOOL
-def xml_get_data(xml_file):
-    root = etree.parse(xml_file)
-    return root.getroot()
-
-
-def xml_write_data(xml, filename):
-    with open(filename, 'wb') as fd:
-        data = xml_pretty(xml_to_string(xml))
-        fd.write(data)
-        return True
-
-
-def xml_to_string(elt):
-    return etree.tostring(elt)
-
-
-# CSV TOOL
-def get_dialect(filename):
-    with open(filename, 'rb') as fd:
-        content = fd.read()
-        content = content.decode('utf-8-sig', 'ignore').encode('utf-8')
-        dialect = csv.Sniffer().sniff(content)
-        return dialect
-
-
-def csv_get_data(filename, as_dict=False, skip_header=False):
-    data = []
-    with open(filename, 'rb') as fd:
-        read_method = 'DictReader' if as_dict else 'reader'
-        rows = vars(csv)[read_method](fd, delimiter=',', quotechar='"')
-        if read_method == 'reader' and skip_header:
-            rows.next()
-        for row in rows:
-            data.append(row)
-
-        return data
-
-
-def csv_get_dict_data(filename, fieldnames=[], delimiter=',', skip_header=False):
-    with open(filename, 'rb') as fd:
-        reader = csv.DictReader(fd, dialect=get_dialect(filename), fieldnames=fieldnames)
-        if skip_header:
-            reader.next()
-        return list(reader)
-    return False
-
-
-def csv_write_dict_data(data, filename, fieldnames=[]):
-    with open(filename, 'wb') as fd:
-        if not fieldnames:
-            fieldnames = data[0].keys()
-        writer = csv.DictWriter(fd, fieldnames)
-        writer.writerows(data)
-
-
-# JSON/XML prettyfier
-def json_pretty(data):
-    if isinstance(data, str):
-        data = json.loads(data.decode('utf-8'))
-    return json.dumps(data, indent=2, sort_keys=True)
-
-
-def xml_pretty(data):
-    parsed_string = minidom.parseString(data.decode('utf-8'))
-    return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
-
-
-def xml_dump(element):
-    print(xml_pretty(etree.tostring(element)))
-
-
-# PKG TOOLS
-def whereis(pkg):
-    return getattr(pkg, '__path__', None)
-
-
-def show(pkg):
-    pass
-
-
-# UUID
-def uuidgen():
-    return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
-
-# Python-Requests
-try:
-    import requests
-
-    class LoggedRequest(requests.Session):
-
-        def __init__(self, *args, **kwargs):
-            super(LoggedRequest, self).__init__(*args, **kwargs)
-            self.logger = logging.getLogger(__name__)
-
-        def request(self, method, url, **kwargs):
-            logger.debug('Request\n%s - %s' % (method, url))
-            response = super(LoggedRequest, self).request(method, url, **kwargs)
-            logger.debug('\n'.join(
-                ['%s: %s' % (k, v) for k, v in response.request.headers.items()]
-            ))
-            logger.debug('Data: %s' % response.request.body)
-            logger.debug('\nResponse\n%s' % response.status_code)
-            logger.debug('\n'.join(
-                ['%s: %s' % (k, v) for k, v in response.headers.items()]
-            ))
-            logger.debug('Data: %s' % response.content)
-
-            return response
-
-    # Substittude requests
-    requests = LoggedRequest()
-except (ImportError,) as e:
-    pass
+# LOADING CLASSES
+logger.info("COMMON CLASSES LOADED")
+execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'classes.py'))
 
 # LAODING COMMONS
 for common in ('py_common', 'django_common'):
@@ -256,6 +82,9 @@ for common in ('py_common', 'django_common'):
             logger.error(e.message)
             pdb.set_trace()
 
+# LOADING IMPORTS
+logger.info("COMMON IMPORTS LOADED")
+execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'imports.py'))
 
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
