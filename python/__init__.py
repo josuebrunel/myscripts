@@ -142,6 +142,14 @@ def xml_to_string(elt):
 
 
 # CSV TOOL
+def get_dialect(filename):
+    with open(filename, 'rb') as fd:
+        content = fd.read()
+        content = content.decode('utf-8-sig', 'ignore').encode('utf-8')
+        dialect = csv.Sniffer().sniff(content)
+        return dialect
+
+
 def csv_get_data(filename, as_dict=False, skip_header=False):
     data = []
     with open(filename, 'rb') as fd:
@@ -157,7 +165,7 @@ def csv_get_data(filename, as_dict=False, skip_header=False):
 
 def csv_get_dict_data(filename, fieldnames=[], delimiter=',', skip_header=False):
     with open(filename, 'rb') as fd:
-        reader = csv.DictReader(fd, delimiter=delimiter, quotechar='|', fieldnames=fieldnames)
+        reader = csv.DictReader(fd, dialect=get_dialect(filename), fieldnames=fieldnames)
         if skip_header:
             reader.next()
         return list(reader)
@@ -182,6 +190,10 @@ def json_pretty(data):
 def xml_pretty(data):
     parsed_string = minidom.parseString(data.decode('utf-8'))
     return parsed_string.toprettyxml(indent='\t', encoding='utf-8')
+
+
+def xml_dump(element):
+    print(xml_pretty(etree.tostring(element)))
 
 
 # PKG TOOLS
