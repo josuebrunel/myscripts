@@ -37,7 +37,7 @@ try:
             return response
 
     # Substitute requests
-    requests = LoggedRequest()
+    logged_requests = LoggedRequest()
 except (ImportError,) as e:
     pass
 
