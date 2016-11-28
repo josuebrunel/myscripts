@@ -5,6 +5,13 @@ from xml.etree import ElementTree as etree
 
 logger = logging.getLogger('default_logger')
 
+
+class Dict2Object(object):
+
+    def __init__(self, **kwargs):
+        vars(self).update(kwargs)
+
+
 # Python-Requests
 try:
     import requests
@@ -29,7 +36,7 @@ try:
 
             return response
 
-    # Substittude requests
+    # Substitute requests
     requests = LoggedRequest()
 except (ImportError,) as e:
     pass
