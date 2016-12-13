@@ -95,9 +95,17 @@ def csv_get_data(filename, as_dict=False, skip_header=False):
         return data
 
 
-def csv_get_dict_data(filename, fieldnames=[], delimiter=',', skip_header=False):
+def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False):
     with open(filename, 'rb') as fd:
-        reader = csv.DictReader(fd, dialect=get_dialect(filename), fieldnames=fieldnames)
+        kwargs = {'fieldnames': fieldnames}
+
+        # use dialect if delimiter not set
+        if not delimiter:
+            kwargs['dialect'] = get_dialect(filename)
+        else:
+            kwargs['delimiter'] = delimiter
+
+        reader = csv.DictReader(fd, **kwargs)
         if skip_header:
             reader.next()
         return list(reader)
