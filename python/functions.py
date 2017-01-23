@@ -74,12 +74,22 @@ def xml_to_string(elt):
 
 
 # CSV TOOL
-def get_dialect(filename):
+def csv_get_dialect(filename):
     with open(filename, 'rb') as fd:
         content = fd.read()
         content = content.decode('utf-8-sig', 'ignore').encode('utf-8')
         dialect = csv.Sniffer().sniff(content)
         return dialect
+
+
+def csv_unicode_to_str(data):
+    for datum in data:
+        for key, value in datum.items():
+            if isinstance(value, (unicode,)):
+                datum[key] = value.encode('utf-8')
+            else:
+                datum[key] = value
+    return data
 
 
 def csv_get_data(filename, as_dict=False, skip_header=False):
@@ -101,7 +111,7 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False
 
         # use dialect if delimiter not set
         if not delimiter:
-            kwargs['dialect'] = get_dialect(filename)
+            kwargs['dialect'] = csv_get_dialect(filename)
         else:
             kwargs['delimiter'] = delimiter
 
@@ -112,10 +122,12 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False
     return False
 
 
-def csv_write_dict_data(data, filename, fieldnames=[], delimiter=';'):
+def csv_write_dict_data(data, filename, fieldnames=[], delimiter=';', unicode_to_str=False):
     with open(filename, 'wb') as fd:
         if not fieldnames:
             fieldnames = data[0].keys()
+        if unicode_to_str:
+            data = csv_unicode_to_str(data)
         writer = csv.DictWriter(fd, fieldnames, delimiter=delimiter)
         writer.writerows(data)
 
