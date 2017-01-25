@@ -122,13 +122,15 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False
     return False
 
 
-def csv_write_dict_data(data, filename, fieldnames=[], delimiter=';', unicode_to_str=False):
+def csv_write_dict_data(data, filename, fieldnames=[], delimiter=';', header=True, unicode_to_str=False):
     with open(filename, 'wb') as fd:
         if not fieldnames:
             fieldnames = data[0].keys()
         if unicode_to_str:
             data = csv_unicode_to_str(data)
         writer = csv.DictWriter(fd, fieldnames, delimiter=delimiter)
+        if header:
+            writer.writeheader()
         writer.writerows(data)
 
 
