@@ -56,6 +56,14 @@ def json_write_data(json_data, output):
     return False
 
 
+def json_get_lines(filename):
+    data = []
+    with open(filename, 'rb') as fd:
+        for line in fd:
+            data.append(json.loads(line))
+    return data
+
+
 # XML TOOL
 def xml_get_data(xml_file):
     root = etree.parse(xml_file)
