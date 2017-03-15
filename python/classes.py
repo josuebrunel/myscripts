@@ -3,8 +3,6 @@
 import logging
 from xml.etree import ElementTree as etree
 
-logger = logging.getLogger('default_logger')
-
 
 class Dict2Object(object):
 
@@ -19,20 +17,21 @@ try:
     class LoggedRequest(requests.Session):
 
         def __init__(self, *args, **kwargs):
+            self.logger = logging.getLogger('logged_request')
             super(LoggedRequest, self).__init__(*args, **kwargs)
 
         def request(self, method, url, **kwargs):
-            logger.debug('Request\n%s - %s' % (method, url))
+            self.logger.debug('Request\n%s - %s' % (method, url))
             response = super(LoggedRequest, self).request(method, url, **kwargs)
-            logger.debug('\n'.join(
+            self.logger.debug('\n'.join(
                 ['%s: %s' % (k, v) for k, v in response.request.headers.items()]
             ))
-            logger.debug('Data: %s' % response.request.body)
-            logger.debug('\nResponse\n%s' % response.status_code)
-            logger.debug('\n'.join(
+            self.logger.debug('Data: %s' % response.request.body)
+            self.logger.debug('\nResponse\n%s' % response.status_code)
+            self.logger.debug('\n'.join(
                 ['%s: %s' % (k, v) for k, v in response.headers.items()]
             ))
-            logger.debug('Data: %s' % response.content)
+            self.logger.debug('Data: %s' % response.content)
 
             return response
 
