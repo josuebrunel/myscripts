@@ -187,8 +187,6 @@ class QuerySet(object):
 class Table(object):
 
     def __init__(self, **kwargs):
-        self.manager.table = self
-        self.manager.cursor = kwargs.pop('cursor')
         self._Meta = type('Meta', (object,), kwargs)
 
     def __unicode__(self):
@@ -197,7 +195,7 @@ class Table(object):
     __repr__ = __unicode__
     __str__ = __unicode__
 
-    manager = QuerySet()
+    manager = None
 
     @property
     def pk(self):
@@ -273,6 +271,7 @@ class LiteORM(object):
         tables = []
         for row in res.fetchall():
             table = Table(cursor=self.cursor, **row.values())
+            setattr(table, 'manager', QuerySet(table=table, cursor=self.cursor))
             tables.append(table)
         self._tables = tables
         return tables
