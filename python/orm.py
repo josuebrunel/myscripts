@@ -80,8 +80,8 @@ class SelectQuery(SQLQueryBase):
 class InsertQuery(SQLQueryBase):
     keyword = 'INSERT'
 
-    def __init__(self, *args, **kwargs):
-        super(InsertQuery, self).__init__(self.keyword, *args, **kwargs)
+    def __init__(self, table, **kwargs):
+        super(InsertQuery, self).__init__(self.keyword, table, **kwargs)
 
     def _command(self):
         self._sql_query = 'INSERT'
@@ -90,8 +90,8 @@ class InsertQuery(SQLQueryBase):
 class UpdateQuery(SQLQueryBase):
     keyword = 'UPDATE'
 
-    def __init__(self, *args, **kwargs):
-        super(UpdateQuery, self).__init__(self.keyword, *args, **kwargs)
+    def __init__(self, table, **kwargs):
+        super(UpdateQuery, self).__init__(self.keyword, table, **kwargs)
 
     def _command(self):
         self._sql_query = 'UPDATE'
@@ -100,8 +100,8 @@ class UpdateQuery(SQLQueryBase):
 class DeleteQuery(SQLQueryBase):
     keyword = 'DELETE'
 
-    def __init__(self, *args, **kwargs):
-        super(DeleteQuery, self).__init__(self.keyword, *args, **kwargs)
+    def __init__(self, table, **kwargs):
+        super(DeleteQuery, self).__init__(self.keyword, table, **kwargs)
 
     def _command(self):
         self._sql_query = 'DELETE'
