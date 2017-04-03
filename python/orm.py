@@ -1,8 +1,16 @@
 import sqlite3
 
+################
+#   EXCEPTIONS
+################
+
 
 class NoCursorFound(Exception):
     pass
+
+###############
+#   QUERY
+###############
 
 
 class SQLQueryBase(object):
@@ -99,6 +107,9 @@ class DeleteQuery(SQLQueryBase):
         self._sql_query = 'DELETE'
 
 
+##################
+#       DB
+##################
 class Field(object):
 
     def __init__(self, name, kind, null=False, default=None, pk=False):
@@ -194,6 +205,10 @@ class Table(object):
         for field in self.fields:
             if field.pk:
                 return field
+
+#############
+#   ORM
+#############
 
 
 class LiteROW(sqlite3.Row):
