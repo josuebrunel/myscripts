@@ -173,10 +173,10 @@ class FieldLookup(object):
         return '%s <= %s' % (key, value)
 
     def __contains__(self, key, value):
-        return "%s LIKE '\%%ss\%'" % (key, value)
+        return "%s LIKE '%%%s%%'" % (key, value)
 
     def __icontains__(self, key, value):
-        return "%s ILIKE '\%%ss\%'" % (key, value)
+        return "%s ILIKE '%%%ss%%'" % (key, value)
 
 
 class QuerySet(object):
@@ -201,8 +201,14 @@ class QuerySet(object):
             return result.fetchone()
         return result.fetchall()
 
-    def from_sql_result(sql_result):
-        pass
+    def _filters_to_conditions(self, **filters):
+        conditions = []
+        for key, value in filters.items():
+            conditions.append(FieldLookup(key, value)())
+        return conditions
+
+    def get(self, **filters):
+        return self.filter(one_result=True, **filters)
 
     def all(self):
         query = SelectQuery(self.table._Meta.name, order_by=self.table.pk.name).query
@@ -224,12 +230,10 @@ class QuerySet(object):
                             order='DESC', limit=1).query
         return self._validate(query, one=True)
 
-    def filter(self, **filters):
-        conditions = []
-        for key, value in filters.items():
-            conditions.append(FieldLookup(key, value)())
+    def filter(self, one_result=False, **filters):
+        conditions = self._filters_to_conditions(**filters)
         query = SelectQuery(self.table._Meta.name, conditions=conditions).query
-        return self._validate(query)
+        return self._validate(query, one=one_result)
 
     def values(self, keys=None):
         if not self._cache:
