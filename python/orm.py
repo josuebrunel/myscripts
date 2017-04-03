@@ -13,6 +13,12 @@ class NoCursorFound(Exception):
 ###############
 
 
+class Condition(object):
+
+    def __init__(self, contions):
+        pass
+
+
 class SQLQueryBase(object):
 
     def __init__(self, keyword, table, columns=None, conditions=None, order_by=None, order='ASC', limit=None):
@@ -49,7 +55,7 @@ class SQLQueryBase(object):
         if not self._conditions:
             return
         clause = 'WHERE '
-        condition = ' AND '.join('%s %s %s' % cond for cond in self._conditions)
+        condition = ' AND '.join('%s' % cond for cond in self._conditions)
         self._sql_query += ' %s %s' % (clause, condition)
 
     def _build_order_by(self):
@@ -126,6 +132,53 @@ class Field(object):
     __str__ = __unicode__
 
 
+class FieldLookup(object):
+
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+    def __call__(self):
+        try:
+            name, lookup = self.key.split('__')
+            lookup = '__%s__' % lookup
+        except (IndexError, ValueError):
+            name, lookup = self.key, '__eq__'
+        return '%s' % (getattr(self, lookup)(name, self.value))
+
+    def __eq__(self, key, value):
+        return '%s = %s' % (key, value)
+
+    __exact__ = __eq__
+
+    def __neq__(self, key, value):
+        return '%s <> %s' % (key, value)
+
+    def __in__(self, key, value):
+        return '%s IN %s' % (key, value)
+
+    def __iexact__(self, key, value):
+        return '%s ILIKE %s' % (key, value)
+
+    def __gt__(self, key, value):
+        return '%s > %s' % (key, value)
+
+    def __gte__(self, key, value):
+        return '%s >= %s' % (key, value)
+
+    def __lt__(self, key, value):
+        return '%s < %s' % (key, value)
+
+    def __lte__(self, key, value):
+        return '%s <= %s' % (key, value)
+
+    def __contains__(self, key, value):
+        return "%s LIKE '\%%ss\%'" % (key, value)
+
+    def __icontains__(self, key, value):
+        return "%s ILIKE '\%%ss\%'" % (key, value)
+
+
 class QuerySet(object):
 
     def __init__(self, table=None, cursor=None):
@@ -172,7 +225,11 @@ class QuerySet(object):
         return self._validate(query, one=True)
 
     def filter(self, **filters):
-        pass
+        conditions = []
+        for key, value in filters.items():
+            conditions.append(FieldLookup(key, value)())
+        query = SelectQuery(self.table._Meta.name, conditions=conditions).query
+        return self._validate(query)
 
     def values(self, keys=None):
         if not self._cache:
@@ -190,7 +247,7 @@ class Table(object):
         self._Meta = type('Meta', (object,), kwargs)
 
     def __unicode__(self):
-        return '<Table: %s>' % (self.name)
+        return '<Table: %s>' % (self._Meta.name)
 
     __repr__ = __unicode__
     __str__ = __unicode__
