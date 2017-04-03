@@ -70,8 +70,8 @@ class SQLQueryBase(object):
 class SelectQuery(SQLQueryBase):
     keyword = 'SELECT'
 
-    def __init__(self, *args, **kwargs):
-        super(SelectQuery, self).__init__(self.keyword, *args, **kwargs)
+    def __init__(self, table, **kwargs):
+        super(SelectQuery, self).__init__(self.keyword, table, **kwargs)
 
     def _command(self):
         self._sql_query = 'SELECT'
@@ -153,7 +153,7 @@ class QuerySet(object):
         pass
 
     def all(self):
-        query = SelectQuery(self.table.name, None, None, order_by=self.table.pk.name).query
+        query = SelectQuery(self.table._Meta.name, order_by=self.table.pk.name).query
         result = self._validate(query)
         if result:
             self._cache = result
@@ -162,13 +162,13 @@ class QuerySet(object):
     def first(self):
         if self._cache:
             return self._cache[0]
-        query = SelectQuery(self.table.name, None, None, limit=1).query
+        query = SelectQuery(self.table._Meta.name, limit=1).query
         return self._validate(query, one=True)
 
     def last(self):
         if self._cache:
             return self._cache[:-1]
-        query = SelectQuery(self.table.name, None, None, order_by=self.table.pk.name,
+        query = SelectQuery(self.table._Meta.name, order_by=self.table.pk.name,
                             order='DESC', limit=1).query
         return self._validate(query, one=True)
 
@@ -188,12 +188,12 @@ class QuerySet(object):
 class Table(object):
 
     def __init__(self, **kwargs):
-        vars(self).update(kwargs)
         self.manager.table = self
-        self.manager.cursor = self.cursor
+        self.manager.cursor = kwargs.pop('cursor')
+        self._Meta = type('Meta', (object,), kwargs)
 
     def __unicode__(self):
-        return '%s %s' % (self.name)
+        return '<Table: %s>' % (self.name)
 
     __repr__ = __unicode__
     __str__ = __unicode__
@@ -218,7 +218,7 @@ class LiteROW(sqlite3.Row):
         vars(self).update(self.values())
 
     def __repr__(self):
-        return '%s' % self.__dict__.items()
+        return '<Row: %s>' % self.__dict__.items()
 
     def values(self, *keys):
         if not keys:
@@ -247,7 +247,7 @@ class LiteORM(object):
             table = self._get_table_info(table)
 
     def _get_table_info(self, table):
-        query = 'PRAGMA table_info(%s)' % table.name
+        query = 'PRAGMA table_info(%s)' % table._Meta.name
         try:
             rows = self.raw_query(query)
         except (sqlite3.OperationnalError):
@@ -273,7 +273,8 @@ class LiteORM(object):
         res = self.raw_query(self._schema_query)
         tables = []
         for row in res.fetchall():
-            tables.append(Table(cursor=self.cursor, **row.values()))
+            table = Table(cursor=self.cursor, **row.values())
+            tables.append(table)
         self._tables = tables
         return tables
 
