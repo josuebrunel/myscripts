@@ -7,38 +7,67 @@ class NoCursorFound(Exception):
 
 class SQLQueryBase(object):
 
-    def __init__(self, keyword, table, columns=None, conditions=None):
+    def __init__(self, keyword, table, columns=None, conditions=None, order_by=None, order='ASC', limit=None):
+        self._sql_query = None
         self.keyword = keyword
         self.table = table
-        self.columns = columns
-        self.conditions = conditions
-        self._sql_query = None
+        self._columns = columns
+        self._conditions = conditions
+        self._order_by = order_by
+        self._order = order
+        self._limit = limit
+        self._build_query()
 
     def _build_query(self):
-        self._sql_query += '%s' % self.keyword
+        self._command()
+        self._build_columns()
+        self._build_conditions()
+        self._build_order_by()
+        self._build_limit()
 
-    def where(self):
-        pass
+    def _command(self):
+        raise NotImplemented
+
+    def _build_columns(self):
+        if not self._columns:
+            columns = '*'
+        else:
+            columns = ', '.join(self._columns)
+        self._sql_query += ' %s FROM %s' % (columns, self.table)
+
+    def _build_conditions(self):
+        if not self._conditions:
+            return
+        clause = 'WHERE '
+        condition = ' AND '.join('%s %s %s' % cond for cond in self._conditions)
+        self._sql_query += ' %s %s' % (clause, condition)
+
+    def _build_order_by(self):
+        if not self._order_by:
+            return
+        self._sql_query += ' ORDER BY %s %s' % (self._order_by, self._order)
+
+    def _build_limit(self):
+        if not self._limit:
+            return
+        self._sql_query += ' LIMIT %d' % self._limit
 
     def to_sql(self):
-        pass
+        return self._sql_query
 
 
 class SelectQuery(SQLQueryBase):
     keyword = 'SELECT'
 
     def __init__(self, *args, **kwargs):
-        super(SelectQuery, self).__init__(self.keyword, *args, **kwargs)
+        super(SelectQuery, self).__init__(*args, **kwargs)
 
-    def _columns(self):
-        pass
-
-    def _condition(self):
-        pass
+    def _command(self):
+        self._sql_query = 'SELECT'
 
     @property
     def query(self):
-        pass
+        return self._sql_query
 
 
 class Field(object):
