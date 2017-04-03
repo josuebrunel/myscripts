@@ -26,7 +26,7 @@ class Database(object):
         query = "CREATE TABLE {} ".format(args[0])
         print(query)
 
-    def executeQuery(self, query):
+    def execute(self, query):
         """Executes a SQL query
         """
         try:
