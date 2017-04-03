@@ -1,4 +1,5 @@
 # Bunch of functions i use on daily basis
+import __builtin__
 import os
 import csv
 import json
@@ -11,6 +12,9 @@ from xml.etree import ElementTree as etree
 
 
 # USEFUL FUNCTIONS
+def set_builtin_var(name, value):
+    setattr(__builtin__, name, value)
+
 def get_real_path(f):
     """Retuns the realpath of a file
     """
