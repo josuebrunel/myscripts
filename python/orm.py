@@ -255,6 +255,10 @@ class Table(object):
     manager = None
 
     @property
+    def name(self):
+        return self._Meta.name
+
+    @property
     def pk(self):
         for field in self.fields:
             if field.pk:
