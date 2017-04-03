@@ -60,7 +60,7 @@ class SelectQuery(SQLQueryBase):
     keyword = 'SELECT'
 
     def __init__(self, *args, **kwargs):
-        super(SelectQuery, self).__init__(*args, **kwargs)
+        super(SelectQuery, self).__init__(self.keyword, *args, **kwargs)
 
     def _command(self):
         self._sql_query = 'SELECT'
@@ -99,6 +99,7 @@ class QuerySet(object):
         self.table = table
         self.cursor = cursor
         self._cache = None
+        self.query = None
 
     def __iter__(self):
         return iter(self._cache)
@@ -108,6 +109,7 @@ class QuerySet(object):
         return [key[0] for key in self.query_result.description]
 
     def _validate(self, query, one=False):
+        self.query = query
         result = self.cursor.execute(query)
         if one:
             return result.fetchone()
@@ -117,7 +119,7 @@ class QuerySet(object):
         pass
 
     def all(self):
-        query = 'SELECT * FROM %s ORDER BY %s' % (self.table.name, self.table.pk.name)
+        query = SelectQuery(self.table.name, None, None, order_by=self.table.pk.name).query
         result = self._validate(query)
         if result:
             self._cache = result
@@ -126,13 +128,14 @@ class QuerySet(object):
     def first(self):
         if self._cache:
             return self._cache[0]
-        query = 'SELECT * FROM %s LIMIT 1' % self.table.name
+        query = SelectQuery(self.table.name, None, None, limit=1).query
         return self._validate(query, one=True)
 
     def last(self):
         if self._cache:
             return self._cache[:-1]
-        query = 'SELECT * FROM %s ORDER BY %s DESC LIMIT 1' % (self.table.name, self.table.pk.name)
+        query = SelectQuery(self.table.name, None, None, order_by=self.table.pk.name,
+                            order='DESC', limit=1).query
         return self._validate(query, one=True)
 
     def filter(self, **filters):
