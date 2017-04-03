@@ -65,6 +65,9 @@ else:
 if sys.version_info < (3.0,):
     execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'db.py'))
 
+# LOADING LiteORM
+execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'orm.py'))
+
 # LOADING FUNCTIONS
 logger.info("COMMON FUNCTIONS LOADED")
 execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'functions.py'))
