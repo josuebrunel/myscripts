@@ -29,7 +29,9 @@ class SQLQueryBase(object):
         raise NotImplemented
 
     def _build_columns(self):
-        if not self._columns:
+        if not self._columns and self.keyword != 'SELECT':
+            return ''
+        elif not self._columns:
             columns = '*'
         else:
             columns = ', '.join(self._columns)
@@ -52,7 +54,8 @@ class SQLQueryBase(object):
             return
         self._sql_query += ' LIMIT %d' % self._limit
 
-    def to_sql(self):
+    @property
+    def query(self):
         return self._sql_query
 
 
@@ -65,9 +68,35 @@ class SelectQuery(SQLQueryBase):
     def _command(self):
         self._sql_query = 'SELECT'
 
-    @property
-    def query(self):
-        return self._sql_query
+
+class InsertQuery(SQLQueryBase):
+    keyword = 'INSERT'
+
+    def __init__(self, *args, **kwargs):
+        super(InsertQuery, self).__init__(self.keyword, *args, **kwargs)
+
+    def _command(self):
+        self._sql_query = 'INSERT'
+
+
+class UpdateQuery(SQLQueryBase):
+    keyword = 'UPDATE'
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateQuery, self).__init__(self.keyword, *args, **kwargs)
+
+    def _command(self):
+        self._sql_query = 'UPDATE'
+
+
+class DeleteQuery(SQLQueryBase):
+    keyword = 'DELETE'
+
+    def __init__(self, *args, **kwargs):
+        super(DeleteQuery, self).__init__(self.keyword, *args, **kwargs)
+
+    def _command(self):
+        self._sql_query = 'DELETE'
 
 
 class Field(object):
@@ -85,12 +114,6 @@ class Field(object):
 
     __repr__ = __unicode__
     __str__ = __unicode__
-
-    def to_python(self):
-        pass
-
-    def to_sql(self):
-        pass
 
 
 class QuerySet(object):
