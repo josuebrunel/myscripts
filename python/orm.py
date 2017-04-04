@@ -186,6 +186,12 @@ class FieldLookup(object):
     def __icontains__(self, key, value):
         return "%s ILIKE '%%%ss%%'" % (key, value)
 
+    def __isnull__(self, key, value):
+        return '%s IS NULL'
+
+    def __isnotnull__(self, key, value):
+        return '%s IS NOT NULL'
+
 
 class QuerySet(object):
 
