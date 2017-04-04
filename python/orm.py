@@ -1,5 +1,13 @@
 import sqlite3
 
+
+def parse_int(value):
+    try:
+        int(value)
+        return value
+    except (ValueError,):
+        return "'%s'" % value
+
 ################
 #   EXCEPTIONS
 ################
@@ -147,12 +155,12 @@ class FieldLookup(object):
         return '%s' % (getattr(self, lookup)(name, self.value))
 
     def __eq__(self, key, value):
-        return '%s = %s' % (key, value)
+        return '%s = %s' % (key, parse_int(value))
 
     __exact__ = __eq__
 
     def __neq__(self, key, value):
-        return '%s <> %s' % (key, value)
+        return '%s <> %s' % (key, parse_int(value))
 
     def __in__(self, key, value):
         return '%s IN %s' % (key, value)
