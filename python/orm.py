@@ -21,12 +21,6 @@ class NoCursorFound(Exception):
 ###############
 
 
-class Condition(object):
-
-    def __init__(self, contions):
-        pass
-
-
 class SQLQueryBase(object):
 
     def __init__(self, keyword, table, columns=None, conditions=None, order_by=None, order='ASC', limit=None):
@@ -187,9 +181,8 @@ class FieldLookup(object):
         return "%s ILIKE '%%%ss%%'" % (key, value)
 
     def __isnull__(self, key, value):
-        return '%s IS NULL'
-
-    def __isnotnull__(self, key, value):
+        if value:
+            return '%s IS NULL'
         return '%s IS NOT NULL'
 
 
