@@ -225,7 +225,7 @@ class QuerySet(object):
         return self.filter(one_result=True, **filters)
 
     def all(self):
-        query = SelectQuery(self.table._Meta.name, order_by=self.table.pk.name).query
+        query = SelectQuery(self.table.name, order_by=self.table.pk.name).query
         result = self._validate(query)
         if result:
             self._cache = result
@@ -234,19 +234,19 @@ class QuerySet(object):
     def first(self):
         if self._cache:
             return self._cache[0]
-        query = SelectQuery(self.table._Meta.name, limit=1).query
+        query = SelectQuery(self.table.name, limit=1).query
         return self._validate(query, one=True)
 
     def last(self):
         if self._cache:
             return self._cache[:-1]
-        query = SelectQuery(self.table._Meta.name, order_by=self.table.pk.name,
+        query = SelectQuery(self.table.name, order_by=self.table.pk.name,
                             order='DESC', limit=1).query
         return self._validate(query, one=True)
 
     def filter(self, one_result=False, **filters):
         conditions = self._filters_to_conditions(**filters)
-        query = SelectQuery(self.table._Meta.name, conditions=conditions).query
+        query = SelectQuery(self.table.name, conditions=conditions).query
         return self._validate(query, one=one_result)
 
     def values(self, keys=None):
@@ -265,7 +265,7 @@ class Table(object):
         self._Meta = type('Meta', (object,), kwargs)
 
     def __unicode__(self):
-        return '<Table: %s>' % (self._Meta.name)
+        return '<Table: %s>' % (self.name)
 
     __repr__ = __unicode__
     __str__ = __unicode__
@@ -323,7 +323,7 @@ class LiteORM(object):
             table = self._get_table_info(table)
 
     def _get_table_info(self, table):
-        query = 'PRAGMA table_info(%s)' % table._Meta.name
+        query = 'PRAGMA table_info(%s)' % table.name
         try:
             rows = self.raw_query(query)
         except (sqlite3.OperationnalError):
