@@ -352,6 +352,12 @@ class LiteORM(object):
     def tables(self):
         return self._tables
 
+    def get_table_by_name(self, tablename):
+        for table in self._tables:
+            if table.name == tablename:
+                return table
+        return None
+
     def connect(self):
         self.connection = sqlite3.connect(self.dbfile)
         self.connection.row_factory = LiteROW
