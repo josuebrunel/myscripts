@@ -205,8 +205,8 @@ class QuerySet(object):
         self.query = query
         result = self.cursor.execute(query)
         if one:
-            return result.fetchone()
-        return result.fetchall()
+            return RowTable(self.table, result.fetchone())
+        return [RowTable(self.table, res) for res in result.fetchall()]
 
     def _filters_to_conditions(self, **filters):
         conditions = []
@@ -222,7 +222,7 @@ class QuerySet(object):
         result = self._validate(query)
         if result:
             self._cache = result
-        return self
+        return result
 
     def first(self):
         if self._cache:
@@ -275,6 +275,26 @@ class Table(object):
             if field.pk:
                 return field
 
+
+class RowTable(Table):
+
+    def __init__(self, table, row):
+        super(RowTable, self).__init__(**vars(table._Meta))
+        self._raw = row
+        for key in row.keys():
+            setattr(self, key, row[key])
+
+    def __repr__(self):
+        return self._raw.__repr__()
+
+    @property
+    def keys(self):
+        return self._raw.keys()
+
+    def values(self, *keys):
+        return self._raw.values(*keys)
+
+
 #############
 #   ORM
 #############
@@ -293,9 +313,6 @@ class LiteROW(sqlite3.Row):
         if not keys:
             keys = self.keys()
         return {key: self[key] for key in keys}
-
-    def delete(self):
-        pass
 
 
 class LiteORM(object):
