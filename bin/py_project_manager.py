@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import argparse
 import subprocess
 
@@ -37,7 +38,11 @@ class StartsProjectAction(argparse.Action):
             self.git_init(fullpath)
 
     def create_dir(self, dirname):
-        os.mkdir(dirname)
+        try:
+            os.mkdir(dirname)
+        except (OSError,) as e:
+            print('Error: %s' % e.strerror)
+            sys.exit(1)
         return True
 
     def create_file(self, filename, content=''):
