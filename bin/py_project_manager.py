@@ -2,8 +2,15 @@
 
 import os
 import argparse
+import subprocess
 
 DEFAULT_FILES = ['setup.py', 'README.md', 'MANIFEST.in']
+
+
+def run_bash_command(command, cwd='.'):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd=cwd, shell=True)
+    result = process.communicate()
+    return result
 
 
 class StartsProjectAction(argparse.Action):
@@ -25,6 +32,10 @@ class StartsProjectAction(argparse.Action):
         for default_file in DEFAULT_FILES:
             self.create_file(os.path.join(fullpath, default_file))
 
+        # initialize as git project
+        if namespace.git:
+            self.git_init(fullpath)
+
     def create_dir(self, dirname):
         os.mkdir(dirname)
         return True
@@ -32,6 +43,16 @@ class StartsProjectAction(argparse.Action):
     def create_file(self, filename, content=''):
         with open(filename, 'wb') as fd:
             fd.write(content)
+
+    def git_init(self, project_dir):
+        commands = [
+            'git init',
+            'git add -A',
+            'git commit -m "starts project"'
+        ]
+
+        for cmd in commands:
+            run_bash_command(cmd, cwd=project_dir)
 
 
 if __name__ == '__main__':
@@ -41,5 +62,7 @@ if __name__ == '__main__':
     startsproject_parser = subparsers.add_parser('startsproject')
     startsproject_parser.add_argument(
         'startsproject', action=StartsProjectAction, nargs=1, help='Path of the project directory')
+
+    startsproject_parser.add_argument('--git', action='store_true', default=False, help='Initialize project as git project')
 
     args = parser.parse_args()
