@@ -16,5 +16,7 @@ for f in profile pypirc irbrc gitconfig gitignore sqliterc; do
     setup $f
 done
 
-source $HOME/.profile
+# set python project manager binary
+ln -s ~/.scripts/bin/py_project_manager.py ~/.local/bin/py-project-manager
 
+source $HOME/.profile
