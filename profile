@@ -27,6 +27,7 @@ alias reload='source $HOME/.profile'
 alias goto_workspace='cd $HOME/workspace'
 alias goto_scripts='cd $HOME_SCRIPTS'
 alias www-data_as_new_owner='sudo chown www-data:www-data'
+alias empathy-harakiri='pgrep empathy| xargs kill -9'
 
 alias json_pretty='python -m json.tool'
 
@@ -61,6 +62,7 @@ source $HOME_SCRIPTS/shell/ssh_connect_to.sh
 source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
+source $HOME_SCRIPTS/shell/harakiri.sh
 
 ## HISTORY SETTINGS
 if [ `uname -s` == "Linux" ]; then

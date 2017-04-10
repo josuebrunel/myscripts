@@ -25,7 +25,7 @@ function __backup__(){
 function __restore__(){
 	archive_name=$1
 	location=$2
-	
+
 	if  tar xzvf $archive_name -C $location ; then
 		_info "$archive_name restored to $location"
 		return 0
@@ -56,9 +56,9 @@ function archive(){
                 return 1
             fi
 
-            input=$2 
+            input=$2
             archive_name="${2%/}-${now}.tar.gz" # %/ remove trailing slash if dir
-            
+
             if [ ! -z $3 ]; then
                 if [ ! -d $3 ]; then
                     echo -e "$3 is an invalid path"
@@ -66,7 +66,7 @@ function archive(){
                 fi
                 path=$3
             fi
-            
+
             echo -e "Backing up ${input} ..."
             __backup__ $input $archive_name $path
             ;;
@@ -74,7 +74,7 @@ function archive(){
             if [ -z $2 ]; then
                 echo -e "An archive file is required"
                 return 1
-            else 
+            else
                 archive_name=$2
 
                 if [ ! -f $archive_name ]; then
@@ -91,7 +91,7 @@ function archive(){
             fi
 
             echo -e "Restoring workspace ..."
-            __restore__ $archive_name $path 
+            __restore__ $archive_name $path
             ;;
         *)
             echo -e "Action not recognized. Only --backup or --restore are allowed"
