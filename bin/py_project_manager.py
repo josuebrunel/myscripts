@@ -5,7 +5,8 @@ import sys
 import argparse
 import subprocess
 
-DEFAULT_FILES = ['setup.py', 'README.md', 'MANIFEST.in']
+
+DEFAULT_FILES = ['setup.py', 'setup.cfg', 'README.md', 'MANIFEST.in']
 
 
 def run_bash_command(command, cwd='.'):
