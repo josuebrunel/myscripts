@@ -8,7 +8,7 @@ function harakiri(){
 
     process_name=$1
 
-    if pgrep $process_name; xargs kill -9; then
+    if pgrep $process_name| xargs kill -9; then
         _info "$process_name properly terminated"
     else
         _error "Something went wrong"
