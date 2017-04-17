@@ -5,7 +5,7 @@ import sys
 import argparse
 import subprocess
 
-
+HOME_DIR = os.path.expanduser('~')
 DEFAULT_FILES = ['setup.py', 'setup.cfg', 'README.md', 'MANIFEST.in']
 
 
@@ -38,6 +38,10 @@ class StartsProjectAction(argparse.Action):
         if namespace.git:
             self.git_init(fullpath)
 
+        # create virtualenv
+        if namespace.venv:
+            self.mkvirtualenv(name)
+
     def create_dir(self, dirname):
         try:
             os.mkdir(dirname)
@@ -60,6 +64,14 @@ class StartsProjectAction(argparse.Action):
         for cmd in commands:
             run_bash_command(cmd, cwd=project_dir)
 
+    def mkvirtualenv(self, name):
+        try:
+            import virtualenv
+        except (ImportError,) as e:
+            print('Error: %s' % e.strerror)
+            sys.exit(1)
+        virtualenv.create_environment(os.path.join(HOME_DIR, '.virtualenvs', name))
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='py_project_manager', description='Simple tool to create python project')
@@ -70,5 +82,6 @@ if __name__ == '__main__':
         'startsproject', action=StartsProjectAction, nargs=1, help='Path of the project directory')
 
     startsproject_parser.add_argument('--git', action='store_true', default=False, help='Initialize project as git project')
+    startsproject_parser.add_argument('--venv', action='store_true', default=False, help='Initialize project and create the corresponding virtual env')
 
     args = parser.parse_args()
