@@ -5,6 +5,7 @@ import csv
 import json
 import time
 import uuid
+import subprocess
 
 from functools import wraps
 from xml.dom import minidom
@@ -14,6 +15,7 @@ from xml.etree import ElementTree as etree
 # USEFUL FUNCTIONS
 def set_builtin_var(name, value):
     setattr(__builtin__, name, value)
+
 
 def get_real_path(f):
     """Retuns the realpath of a file
@@ -186,3 +188,9 @@ def show(pkg):
 # UUID
 def uuidgen():
     return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
+
+
+def run_bash_command(command, cwd='.'):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd=cwd, shell=True)
+    result = process.communicate()
+    return result
