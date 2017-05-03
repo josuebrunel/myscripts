@@ -8,7 +8,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-patches
+*.patch
+patches/
 py_common.py
 dj_common.py
 
