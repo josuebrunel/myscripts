@@ -11,28 +11,6 @@ complete -cf sudo
 #VARIABLES
 export HOME_SCRIPTS=$HOME/.scripts
 
-## COMMON LS
-alias ll='ls -lht'
-alias la='ls -lhAt'
-alias lt='ls -lht'
-alias ld='du -sh ./*/'
-alias list-ca='awk -v cmd="openssl x509 -noout -subject" "/BEGIN/{close(cmd)};{print | cmd}" < /etc/ssl/certs/ca-certificates.crt'
-
-## FILE COMPRESSION
-alias ltar='tar tzvf'
-alias ctar='tar czvf'
-alias xtar='tar xzvf'
-
-alias reload='source $HOME/.profile'
-alias goto_workspace='cd $HOME/workspace'
-alias goto_scripts='cd $HOME_SCRIPTS'
-alias www-data_as_new_owner='sudo chown www-data:www-data'
-alias empathy-harakiri='pgrep empathy| xargs kill -9'
-
-alias json_pretty='python -m json.tool'
-
-# JSON
-alias json_pretty='python -m json.tool'
 
 # GZIP & XZ COMPRESSION LEVEL
 export GZIP=-9
@@ -53,6 +31,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.local/bin
 
 ## LOADS SCRIPTS
+source $HOME_SCRIPTS/aliases
 source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/ssh_push_key.sh
 source $HOME_SCRIPTS/shell/archive.sh
@@ -75,21 +54,12 @@ if [ `uname -s` == "Linux" ]; then
     export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 fi
 
-## ANDROID
-alias android_push='adb push -p'
-alias android_pull='adb pull'
 export ANDROID_SD=/storage/extSdCard/
 export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
 export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
 export ANDROID_SD_SERMONS=/storage/extSdCard/Sermons/
 export ANDROID_SD_DOC=/storage/extSdCard/Documentations/
 
-## YOUTUBE-DL
-alias youtube-dl-audio='youtube-dl --extract-audio --audio-format mp3'
-alias youtube-dl-video='youtube-dl -f 22'
-
-## SOUNDCLOUD DL
-alias soundcloud-dl='scdl -l'
 
 ## Debian Special
 if [ `uname -s` == "Linux" ]; then
@@ -99,14 +69,6 @@ if [ `uname -s` == "Linux" ]; then
     export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
     alias update-system='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt dist-upgrade'
 fi
-
-# Thinkpad fix wifi
-# alias wifi_reload_kernel_module='sudo service network-manager stop; sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee; sudo service network-manager start'
-alias wifi_reload_kernel_module='sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee; sudo service network-manager stop; sudo service network-manager start'
-alias wifi_reconnect='nmcli device disconnect wlp3s0; nmcli device connect wlp3s0'
-
-# Restart nginx
-alias nginx_restart='sudo service nginx restart'
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
