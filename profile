@@ -31,6 +31,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.local/bin
 
 ## LOADS SCRIPTS
+source $HOME_SCRIPTS/osx
 source $HOME_SCRIPTS/aliases
 source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/ssh_push_key.sh
@@ -67,49 +68,11 @@ if [ `uname -s` == "Linux" ]; then
     export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
     export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
     export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
-    alias update-system='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt dist-upgrade'
 fi
 
 ## OSX SPECIAL
 if [ `uname -s` == "Darwin" ]; then
-    #Fix terminal in Vi mode
-    set -o emacs
-
-    ## Vim location
-    alias vim='/usr/bin/vim'
-
-    #MY ALIASES
-    alias umount_toshiba='sudo umount /VOLUMES/TOSHIBA/'
-    alias goto_toshiba='cd /Volumes/TOSHIBA/'
-    alias goto_macext='cd /Volumes/MacintoshEX/'
-    alias disklist='diskutil list'
-
-    alias update-system='port selfupdate; sudo port upgrade outdated'
-    alias emax='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
-    alias show_hidden_files='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-    alias hide_hidden_files='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-
-    #VIRTUAL ENVS
-    source /usr/local/bin/virtualenvwrapper.sh
-
-    #MYSQL CONFIG
-    export PATH=$PATH:/usr/local/mysql/bin
-    export DYLD_LIBRARY_PATH=/usr/local/mysql/lib
-
-    #LOAD SCRIPTS
-    source $HOME_SCRIPTS/shell/osx/myfixers.sh
-
-    ##
-    # Your previous /Users/josue/.profile file was backed up as /Users/josue/.profile.macports-saved_2014-11-08_at_12:21:31
-    ##
-
-    # MacPorts Installer addition on 2014-11-08_at_12:21:31: adding an appropriate PATH variable for use with MacPorts.
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    # Finished adapting your PATH environment variable for use with MacPorts.
-
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+    source osx
 fi
 
 fortune 2> /dev/null
