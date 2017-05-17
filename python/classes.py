@@ -4,10 +4,28 @@ import logging
 from xml.etree import ElementTree as etree
 
 
-class Dict2Object(object):
+class Dict2Object(dict):
+
+    class _Meta:
+        name = 'Dict2Object'
 
     def __init__(self, **kwargs):
+        if 'meta_name' in kwargs:
+            self._Meta.name = kwargs.pop('meta_name')
         vars(self).update(kwargs)
+        super(Dict2Object, self).__init__(**kwargs)
+
+    def __unicode__(self):
+        return '%s' % self._Meta.name
+
+    __repr__ = __str__ = __unicode__
+
+
+class Dict2ObjectLower(Dict2Object):
+
+    def __init__(self, **kwargs):
+        kwargs = {key.lower(): value for key, value in kwargs.items()}
+        super(Dict2ObjectLower, self).__init__(**kwargs)
 
 
 # Python-Requests
