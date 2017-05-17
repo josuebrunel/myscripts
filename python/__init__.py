@@ -1,4 +1,5 @@
 import os
+import imp
 import sys
 import pdb
 import logging
@@ -62,32 +63,8 @@ if 'libedit' in readline.__doc__:
 else:
     readline.parse_and_bind("tab: complete")
 
-if sys.version_info < (3.0,):
-    execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'db.py'))
-
-# LOADING LiteORM
-execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'orm.py'))
-
-# LOADING FUNCTIONS
-logger.info("COMMON FUNCTIONS LOADED")
-execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'functions.py'))
-
-# LOADING CLASSES
-logger.info("COMMON CLASSES LOADED")
-execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'classes.py'))
-
-# LAODING COMMONS
-for common in ('py_common', 'django_common'):
-    if os.path.realpath(HOME_SCRIPTS_PYTHON) != os.path.realpath('.'):
-        try:
-            execfile(os.path.join(HOME_SCRIPTS_PYTHON, common + '.py'))
-        except(Exception,) as e:
-            logger.error(e.message)
-            pdb.set_trace()
-
-# LOADING IMPORTS
-logger.info("COMMON IMPORTS LOADED")
-execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'imports.py'))
+# LOAD PERSONAL UTILS MODULE
+myutils = imp.load_source('myutils', os.path.join(HOME_SCRIPTS_PYTHON, 'myutils.py'))
 
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
