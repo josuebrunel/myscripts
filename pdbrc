@@ -1,3 +1,10 @@
+# vi:filetype=python
+
+import os
+import imp
 import rlcompleter
 import pdb
 pdb.Pdb.complete = rlcompleter.Completer(locals()).complete
+
+# load common
+myutils = imp.load_source('myutils', os.path.join(os.environ.get('HOME_SCRIPTS'), 'python', 'myutils.py'))
