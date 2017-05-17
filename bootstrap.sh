@@ -12,7 +12,7 @@ function setup {
     ln -s ~/.scripts/$filename ~/.$filename
 }
 
-for f in profile pypirc irbrc gitconfig gitignore sqliterc; do
+for f in profile pypirc irbrc pdbrc gitconfig gitignore sqliterc; do
     setup $f
 done
 
