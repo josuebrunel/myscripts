@@ -36,7 +36,10 @@ try:
 
         def __init__(self, *args, **kwargs):
             self.logger = logging.getLogger('logged_request')
-            super(LoggedRequest, self).__init__(*args, **kwargs)
+            if py_version > 2:
+                super().__init__(*args, **kwargs)
+            else:
+                super(LoggedRequest, self).__init__(*args, **kwargs)
 
         def request(self, method, url, **kwargs):
             self.logger.debug('Request\n%s - %s' % (method, url))

@@ -1,9 +1,20 @@
 import os
+import sys
+import pdb
 import logging
 
 logger = logging.getLogger('default_logger')
 
 HOME_SCRIPTS_PYTHON = os.path.join(os.environ.get('HOME_SCRIPTS'), 'python')
+
+
+py_version = sys.version_info[0]
+
+if py_version > 2:
+    def execfile(filename):
+        with open(filename) as fd:
+            code = compile(fd.read(), filename, 'exec')
+            exec(code, globals(), locals())
 
 # LOADING LiteORM
 execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'orm.py'))

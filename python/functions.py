@@ -1,5 +1,9 @@
 # Bunch of functions i use on daily basis
-import __builtin__
+try:
+    import __builtin__
+except (ImportError,):
+    import builtins as __builtin__  # python3
+
 import os
 import csv
 import json

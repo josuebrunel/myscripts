@@ -1,20 +1,9 @@
 import os
 import imp
-import sys
-import pdb
 import logging
 import readline
 import rlcompleter
 from logging.config import dictConfig
-
-
-py_version = sys.version_info[0]
-
-if py_version > 2:
-    def execfile(filename):
-        with open(filename) as fd:
-            code = compile(fd.read(), filename, 'exec')
-            exec(code, globals(), locals())
 
 
 HOME_DIR = os.environ.get('HOME')
