@@ -54,6 +54,7 @@ else:
 
 # LOAD PERSONAL UTILS MODULE
 myutils = imp.load_source('myutils', os.path.join(HOME_SCRIPTS_PYTHON, 'myutils.py'))
+from myutils import *
 
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
