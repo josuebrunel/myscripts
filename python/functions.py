@@ -9,6 +9,7 @@ import csv
 import json
 import time
 import uuid
+import datetime
 import subprocess
 
 from functools import wraps
@@ -198,3 +199,7 @@ def run_bash_command(command, cwd='.'):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd=cwd, shell=True)
     result = process.communicate()
     return result
+
+
+def datetime_now():
+    return datetime.datetime.now()
