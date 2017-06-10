@@ -1,13 +1,3 @@
-##################################################
-#
-#   Author          : josuebrunel
-#   Filename        : django.py
-#   Description     :
-#   Creation Date   : 21-10-2015
-#   Last Modified   : Fri 04 Mar 2016 04:39:39 PM CET
-#
-##################################################
-
 import os
 
 
