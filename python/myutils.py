@@ -32,12 +32,11 @@ for common in ('py_common', 'django_common'):
     if os.path.realpath(HOME_SCRIPTS_PYTHON) != os.path.realpath('.'):
         try:
             execfile(os.path.join(HOME_SCRIPTS_PYTHON, common + '.py'))
-        except(Exception,) as e:
-            logger.error(e.message)
+        except(Exception,) as exc:
+            logger.error(exc)
+            print(exc)
             pdb.set_trace()
 
 # LOADING IMPORTS
 logger.info("COMMON IMPORTS LOADED")
 execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'imports.py'))
-
-del common
