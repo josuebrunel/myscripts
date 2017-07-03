@@ -16,7 +16,7 @@ class Dict2Object(dict):
         super(Dict2Object, self).__init__(**kwargs)
 
     def __unicode__(self):
-        return '%s' % self._Meta.name
+        return '<%s>' % self._Meta.name
 
     __repr__ = __str__ = __unicode__
 
