@@ -1,6 +1,7 @@
 # Bunch of functions i use on daily basis
 try:
     import __builtin__
+    from __builtin__ import unicode
 except (ImportError,):
     import builtins as __builtin__  # python3
 
@@ -22,16 +23,16 @@ def set_builtin_var(name, value):
     setattr(__builtin__, name, value)
 
 
-def get_real_path(f):
+def get_realpath(f):
     """Retuns the realpath of a file
     """
     return os.path.realpath(f)
 
 
-def get_joined_path(a, b):
+def get_joined_path(*args):
     """Returns joined path of to file
     """
-    return os.path.join(a, b)
+    return os.path.join(*args)
 
 
 def get_file_content(filename):
