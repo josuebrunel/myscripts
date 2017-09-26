@@ -11,7 +11,9 @@ import json
 import time
 import uuid
 import datetime
+import tempfile
 import subprocess
+import webbrowser
 
 from functools import wraps
 from xml.dom import minidom
@@ -208,3 +210,15 @@ def datetime_now():
 
 def get_datetime_from(dts):
     return datetime.datetime.strptime(dts, '%Y-%m-%d %H:%M')
+
+
+def showbrowser(content=None, filepath=None):
+    if not any((content, filepath)):
+        raise Exception('<content> or <filepath> must be set')
+    if content:
+        with tempfile.NamedTemporaryFile(prefix='py-shell', suffix='.html', delete=False) as tpf:
+            tpf.write(content)
+            filepath = tpf.name
+
+    webbrowser.open_new_tab('file://' + filepath)
+    return True
