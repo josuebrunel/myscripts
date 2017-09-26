@@ -204,3 +204,7 @@ def run_bash_command(command, cwd='.'):
 
 def datetime_now():
     return datetime.datetime.now()
+
+
+def get_datetime_from(dts):
+    return datetime.datetime.strptime(dts, '%Y-%m-%d %H:%M')
