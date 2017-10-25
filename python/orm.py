@@ -128,7 +128,7 @@ class Field(object):
         self.pk = pk
 
     def __unicode__(self):
-        return '<Field: %s>' % self.__dict__.items()
+        return '<%s: %s>' % (self.type, self.name)
 
     __repr__ = __unicode__
     __str__ = __unicode__
