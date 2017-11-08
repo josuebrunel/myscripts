@@ -12,9 +12,8 @@ py_version = sys.version_info[0]
 
 if py_version > 2:
     def execfile(filename):
-        with open(filename) as fd:
-            code = compile(fd.read(), filename, 'exec')
-            exec(code, globals(), locals())
+        code = compile(open(filename, 'rb').read(), filename, 'exec')
+        exec(code, globals(), locals())
 
 # LOADING LiteORM
 execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'orm.py'))
