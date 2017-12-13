@@ -118,6 +118,8 @@ class DeleteQuery(SQLQueryBase):
 ##################
 #       DB
 ##################
+
+
 class Field(object):
 
     def __init__(self, name, kind, null=False, default=None, pk=False):
@@ -126,9 +128,13 @@ class Field(object):
         self.null = null
         self.default = default
         self.pk = pk
+        self.reference = None
 
     def __unicode__(self):
-        return '<%s: %s>' % (self.type, self.name)
+        desc = '%s: %s' % (self.type, self.name)
+        if self.reference:
+            desc += ' REFERENCE TO (%s)' % self.reference.table
+        return '<%s>' % desc
 
     __repr__ = __unicode__
     __str__ = __unicode__
@@ -254,6 +260,9 @@ class QuerySet(object):
 
 class Table(object):
 
+    fields = []
+    references = []
+
     def __init__(self, **kwargs):
         self._Meta = type('Meta', (object,), kwargs)
 
@@ -274,6 +283,12 @@ class Table(object):
         for field in self.fields:
             if field.pk:
                 return field
+
+    def get_field(self, fname):
+        for field in self.fields:
+            if field.name == fname:
+                return field
+        return None
 
 
 class RowTable(Table):
@@ -331,6 +346,7 @@ class LiteORM(object):
         tables = self._get_schema()
         for table in tables:
             table = self._get_table_info(table)
+            self._get_table_references(table)
 
     def _get_table_info(self, table):
         query = 'PRAGMA table_info(%s)' % table.name
@@ -349,8 +365,17 @@ class LiteORM(object):
             field_attr['default'] = row['dflt_value']
             field_attr['pk'] = bool(row['pk'])
             fields.append(Field(**field_attr))
-
         table.fields = fields
+        return table
+
+    def _get_table_references(self, table):
+        query = 'PRAGMA foreign_key_list(%s)' % table.name
+        references = self.raw_query(query)
+        for ref in references.fetchall():
+            table.references.append(ref.__dict__)
+            ref_from = getattr(ref, 'from')
+            related_field = table.get_field(ref_from)
+            related_field.reference = ref
         return table
 
     def _get_schema(self):
