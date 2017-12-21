@@ -9,11 +9,15 @@ class Dict2Object(dict):
     class _Meta:
         name = 'Dict2Object'
 
-    def __init__(self, **kwargs):
-        if 'meta_name' in kwargs:
-            self._Meta.name = kwargs.pop('meta_name')
-        vars(self).update(kwargs)
-        super(Dict2Object, self).__init__(**kwargs)
+    def __init__(self, data, meta_name=None):
+        if meta_name:
+            self._Meta.name = meta_name
+        for key, value in data.iteritems():
+            if isinstance(value, (dict)):
+                setattr(self, key, Dict2Object(value))
+            else:
+                setattr(self, key, value)
+        super(Dict2Object, self).__init__(**data)
 
     def __unicode__(self):
         return '<%s>' % self._Meta.name
