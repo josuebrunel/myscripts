@@ -16,6 +16,10 @@ def parse_int(value):
 class NoCursorFound(Exception):
     pass
 
+
+class InvalidFunctionName(Exception):
+    pass
+
 ###############
 #   QUERY
 ###############
@@ -23,10 +27,13 @@ class NoCursorFound(Exception):
 
 class SQLQueryBase(object):
 
-    def __init__(self, keyword, table, columns=None, conditions=None, order_by=None, order='ASC', limit=None):
+    FUNCTIONS = ('AVG', 'COUNT', 'SUM')
+
+    def __init__(self, keyword, table, function=None, columns=None, conditions=None, order_by=None, order='ASC', limit=None):
         self._sql_query = None
         self.keyword = keyword
         self.table = table
+        self._function = function
         self._columns = columns
         self._conditions = conditions
         self._order_by = order_by
@@ -44,6 +51,11 @@ class SQLQueryBase(object):
     def _command(self):
         raise NotImplemented
 
+    def _check_function(self):
+        if self._function.upper() not in self.FUNCTIONS:
+            raise InvalidFunctionName('%s is not in %s' % (self._function, self.FUNCTIONS))
+        return True
+
     def _build_columns(self):
         if not self._columns and self.keyword != 'SELECT':
             return ''
@@ -51,6 +63,8 @@ class SQLQueryBase(object):
             columns = '*'
         else:
             columns = ', '.join(self._columns)
+        if self._function and self._check_function():
+            columns = '%s(%s)' % (self._function, columns)
         self._sql_query += ' %s FROM %s' % (columns, self.table)
 
     def _build_conditions(self):
@@ -222,6 +236,13 @@ class QuerySet(object):
 
     def get(self, **filters):
         return self.filter(one_result=True, **filters)
+
+    def count(self):
+        query = SelectQuery(self.table.name, function='count').query
+        result = self._validate(query, one=True)
+        if not result.values():
+            return 0
+        return result.values().values()[0] 
 
     def all(self):
         query = SelectQuery(self.table.name, order_by=self.table.pk.name).query
