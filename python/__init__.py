@@ -1,6 +1,7 @@
 import os
 import imp
 import logging
+import platform
 import readline
 import rlcompleter
 from logging.config import dictConfig
@@ -11,6 +12,7 @@ HOME_SCRIPTS = os.environ['HOME_SCRIPTS']
 HOME_SCRIPTS_PYTHON = os.path.join(HOME_SCRIPTS, 'python')
 
 # SETTING UP DEFAULT LOGGER
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -19,26 +21,29 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },
-        'syslog': {
-            'level': 'DEBUG',
-            'address': '/dev/log',
-            'class': 'logging.handlers.SysLogHandler',
-            'formatter': 'syslog',
-        },
     },
     'formatters': {
-        'syslog': {
-            'format': '%(levelname)s %(name)s.%(funcName)s: %(message)s',
-        },
     },
     'loggers': {
         '': {
-            'handlers': ['console', 'syslog'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propragate': True,
         }
     }
 }
+
+if platform.system() == 'Linux':
+    LOGGING['handlers']['syslog'] = {
+        'level': 'DEBUG',
+        'address': '/dev/log',
+        'class': 'logging.handlers.SysLogHandler',
+        'formatter': 'syslog',
+    }
+    LOGGING['formatters']['syslog'] = {
+        'format': '%(levelname)s %(name)s.%(funcName)s: %(message)s',
+    }
+    LOGGING['loggers']['']['handlers'] += ['syslog']
 
 dictConfig(LOGGING)
 
