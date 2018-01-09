@@ -242,7 +242,7 @@ class QuerySet(object):
         result = self._validate(query, one=True)
         if not result.values():
             return 0
-        return result.values().values()[0] 
+        return result.values().values()[0]
 
     def all(self):
         query = SelectQuery(self.table.name, order_by=self.table.pk.name).query
@@ -434,7 +434,7 @@ class LiteORM(object):
 
     def execute(self, query):
         res = self.raw_query(query)
-        return QuerySet(res)
+        return res
 
     def __enter__(self):
         self.connect()
