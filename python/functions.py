@@ -6,6 +6,7 @@ except (ImportError,):
     import builtins as __builtin__  # python3
 
 import os
+import re
 import csv
 import json
 import time
@@ -222,3 +223,16 @@ def showbrowser(content=None, filepath=None):
 
     webbrowser.open_new_tab('file://' + filepath)
     return True
+
+
+def slugify(value):
+    import unicodedata
+
+    _slugify_strip_re = re.compile(r'[^\w\s-]')
+    _slugify_hyphenate_re = re.compile(r'[-\s]+')
+
+    if not isinstance(value, unicode):
+        value = unicode(value, errors='ignore')
+        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
+        value = unicode(_slugify_strip_re.sub('', value).strip().lower(), errors='ignore')
+        return _slugify_hyphenate_re.sub('-', value)
