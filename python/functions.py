@@ -185,6 +185,15 @@ def timethis(func):
     return wrapper
 
 
+def coroutine(func):
+    @wraps(func)
+    def start(*args, **kwargs):
+        cr = func(*args, **kwargs)
+        cr.next()
+        return cr
+    return start
+
+
 # PKG TOOLS
 def whereis(pkg):
     return getattr(pkg, '__path__', None)
