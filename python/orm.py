@@ -373,7 +373,7 @@ class LiteORM(object):
         query = 'PRAGMA table_info(%s)' % table.name
         try:
             rows = self.raw_query(query)
-        except (sqlite3.OperationnalError):
+        except (sqlite3.OperationalError):
             table.fields = []
             return table
         fields = []
