@@ -32,8 +32,7 @@ for common in ('py_common', 'django_common'):
         try:
             execfile(os.path.join(HOME_SCRIPTS_PYTHON, common + '.py'))
         except(Exception,) as exc:
-            logger.error(exc)
-            print(exc)
+            logger.exception('ERROR OCCURED')
             pdb.set_trace()
 
 # LOADING IMPORTS
