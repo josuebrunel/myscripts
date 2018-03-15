@@ -424,6 +424,7 @@ class LiteORM(object):
     def connect(self):
         self.connection = sqlite3.connect(self.dbfile)
         self.connection.row_factory = LiteROW
+        self.connection.text_factory = str
         self.cursor = self.connection.cursor()
 
     def close(self):
