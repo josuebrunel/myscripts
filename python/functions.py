@@ -230,7 +230,7 @@ def showbrowser(content=None, filepath=None):
             tpf.write(content)
             filepath = tpf.name
 
-    webbrowser.open_new_tab('file://' + filepath)
+    webbrowser.open_new_tab(filepath)
     return True
 
 
