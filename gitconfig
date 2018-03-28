@@ -24,6 +24,8 @@
     update-init-all = submodule update --init --recursive
     pup = pull & git submodule init & git submodule update & git submodule status
     which-files = diff-tree --no-commit-id --name-only -r
+    fmp = format
+    format-patch-sha = format-patch -1
 [credential]
 	helper = osxkeychain
 	helper = cache --timeout=86400
