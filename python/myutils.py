@@ -8,9 +8,7 @@ logger = logging.getLogger('default_logger')
 HOME_SCRIPTS_PYTHON = os.path.join(os.environ.get('HOME_SCRIPTS'), 'python')
 
 
-py_version = sys.version_info[0]
-
-if py_version > 2:
+if sys.version_info.major == 3:
     def execfile(filename):
         code = compile(open(filename, 'rb').read(), filename, 'exec')
         exec(code, globals(), locals())

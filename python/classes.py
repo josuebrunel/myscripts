@@ -1,6 +1,7 @@
 # Bunch of my custom classes
 #
 import logging
+import sys
 from xml.etree import ElementTree as etree
 
 
@@ -12,7 +13,7 @@ class Dict2Object(dict):
     def __init__(self, data, meta_name=None):
         if meta_name:
             self._Meta.name = meta_name
-        for key, value in data.iteritems():
+        for key, value in data.items():
             if isinstance(value, (dict)):
                 setattr(self, key, Dict2Object(value))
             else:
@@ -40,7 +41,7 @@ try:
 
         def __init__(self, *args, **kwargs):
             self.logger = logging.getLogger('logged_request')
-            if py_version > 2:
+            if sys.version_info.major > 2:
                 super().__init__(*args, **kwargs)
             else:
                 super(LoggedRequest, self).__init__(*args, **kwargs)
