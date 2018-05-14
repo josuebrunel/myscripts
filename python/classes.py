@@ -98,3 +98,14 @@ class ElementFactory(etree.Element):
     def extend(self, elements):
         super(ElementFactory, self).extend(elements)
         return self
+
+
+class DataClass(object):
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+    def __repr__(self):
+        klassname = self.__class__.__name__
+        items = self.__dict__.items()
+        return '<%s:%s>' % (klassname, items)
