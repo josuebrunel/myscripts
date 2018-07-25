@@ -26,6 +26,7 @@
     which-files = diff-tree --no-commit-id --name-only -r
     fmp = format
     format-patch-sha = format-patch -1
+    list-tags = tag --sort -version:refname
 [credential]
 	helper = osxkeychain
 	helper = cache --timeout=86400
