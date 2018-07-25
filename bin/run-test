@@ -3,4 +3,4 @@ if [ -f tests/settings.py ]; then
     "${VENV_NAME_UPPER}_SETTINGS_FILE"=$PROJECT_BASE_DIR/tests/settings.py;
 fi
 
-py.test -vs tests/$1
+python -m pytest -vs tests/$1
