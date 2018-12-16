@@ -3,6 +3,7 @@
 import os
 import sys
 import argparse
+import shutil
 import subprocess
 
 HOME_DIR = os.path.expanduser('~')
@@ -21,7 +22,7 @@ class StartsProjectAction(argparse.Action):
         fullpath = value[0]
         basepath, name = os.path.split(fullpath)
 
-        self.create_dir(fullpath)
+        self.create_dir(fullpath, namespace.reset)
 
         # create subdir
         for subdir in (name, 'tests'):
@@ -42,7 +43,9 @@ class StartsProjectAction(argparse.Action):
         if namespace.venv:
             self.mkvirtualenv(name)
 
-    def create_dir(self, dirname):
+    def create_dir(self, dirname, reset=False):
+        if reset:
+            shutil.rmtree(dirname)
         try:
             os.mkdir(dirname)
         except (OSError,) as e:
@@ -83,5 +86,6 @@ if __name__ == '__main__':
 
     startsproject_parser.add_argument('--git', action='store_true', default=False, help='Initialize project as git project')
     startsproject_parser.add_argument('--venv', action='store_true', default=False, help='Initialize project and create the corresponding virtual env')
+    startsproject_parser.add_argument('--reset', action='store_true', default=False, help='Reset an empty project')
 
     args = parser.parse_args()
