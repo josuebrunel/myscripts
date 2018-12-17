@@ -22,6 +22,21 @@ commands=
     - python -m coverage report -m
 """
 
+TRAVIS_CONTENT = """
+sudo: false
+language: python
+python:
+    - '2.7'
+    - '3.5'
+install:
+    - pip install coverage coveralls
+script:
+    - python -m coverage run --source={name} -m pytest -vs tests/
+after_success:
+    - python -m coverage report
+    - coveralls
+"""
+
 
 def run_bash_command(command, cwd='.'):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd=cwd, shell=True)
@@ -38,7 +53,9 @@ class DefaultFile(object):
 
 DEFAULT_FILES = [
     DefaultFile('setup.py'), DefaultFile('setup.cfg'), DefaultFile('README.md'),
-    DefaultFile('MANIFEST.in'), DefaultFile('tox.ini', TOX_CONTENT)]
+    DefaultFile('MANIFEST.in'), DefaultFile('tox.ini', TOX_CONTENT),
+    DefaultFile('.travis.yml', TRAVIS_CONTENT)
+]
 
 
 class StartsProjectAction(argparse.Action):
