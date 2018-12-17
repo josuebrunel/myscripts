@@ -34,7 +34,7 @@ alias reload='source .bashrc'
 
 #### The Custom Shell Logger
 This is the module used in other script to simulate a logger.
-If the variable ***LOG_OUTPUT*** is not defined, logs are 
+If the variable ***LOG_OUTPUT*** is not defined, logs are
 redirected to *STDOUT*.
 
 * **_info**
@@ -97,15 +97,15 @@ $ ssh_list_hosts
 
 #### Archiving
 
-This function help you backup/restore a file 
+This function help you backup/restore a file
 
 
 ```shell
 john@doe:$ archive
-Help:  
-         archive --backup|-b input [destination path] 
+Help:
+         archive --backup|-b input [destination path]
          archive --restore|-r {archive} [destination path]
-john@doe:$ archive -b myfoler/ 
+john@doe:$ archive -b myfoler/
 john@doe:$ archive -r myfoler.tar.gz
 ```
 
@@ -136,12 +136,12 @@ Run the commands below in your project folder
 john@doe:$ pypi
 Help:
         pypi --register|-r [server] #Register the package
-        pypi --upload|-u [server] #Upload the package 
+        pypi --upload|-u [server] #Upload the package
         pypi --all|-a [server] # Register then Upload the package
 ```
 
-### Date 
-Just a couple of date shorcuts 
+### Date
+Just a couple of date shorcuts
 
 * ___get_date [format]___
 ```shell
@@ -160,7 +160,7 @@ $ get_time
 $ get_datetime
 2015-08-12 14:04:14
 ```
-* ___date_add___ 
+* ___date_add___
 ```shell
 $ date_add '10 years'
 Tue Aug 12 14:04:52 CEST 2025
@@ -194,6 +194,5 @@ Help
 ### Django Common
 
 *django common* is a little script which is loaded when you lunch a python shell and
-which looks for a python file name *dj_common.py* at the same level than manage 
-and load everything in that file. 
-
+which looks for a python file name *dj_common.py* at the same level than manage
+and load everything in that file.
