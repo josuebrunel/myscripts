@@ -21,15 +21,20 @@ class StartsProjectAction(argparse.Action):
     def __call__(self, parser, namespace, value, options=None):
         fullpath = value[0]
         basepath, name = os.path.split(fullpath)
+        subdirs = [name, 'tests']
 
-        self.create_dir(fullpath, namespace.reset)
+        if namespace.django:
+            command = 'django-admin startproject %s' % name
+            run_bash_command(command)
+            subdirs.pop(subdirs.index(name))
+        else:
+            self.create_dir(fullpath, namespace.reset)
+            # create subdir project __init__.py file
+            self.create_file(os.path.join(fullpath, name, '__init__.py'))
 
         # create subdir
-        for subdir in (name, 'tests'):
+        for subdir in subdirs:
             self.create_dir(os.path.join(fullpath, subdir))
-
-        # create subdir project __init__.py file
-        self.create_file(os.path.join(fullpath, name, '__init__.py'))
 
         # create files
         for default_file in DEFAULT_FILES:
@@ -87,5 +92,6 @@ if __name__ == '__main__':
     startsproject_parser.add_argument('--git', action='store_true', default=False, help='Initialize project as git project')
     startsproject_parser.add_argument('--venv', action='store_true', default=False, help='Initialize project and create the corresponding virtual env')
     startsproject_parser.add_argument('--reset', action='store_true', default=False, help='Reset an empty project')
+    startsproject_parser.add_argument('--django', action='store_true', default=False, help='Starts a django project')
 
     args = parser.parse_args()
