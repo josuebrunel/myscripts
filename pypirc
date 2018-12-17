@@ -2,8 +2,9 @@
 index-servers =
     pypi
     pypitest
+    pypiold
 
-[pypi]
+[pypiold]
 repository: https://pypi.python.org/pypi
 username: josuebrunel
 password: Kjbg@mes1
@@ -13,4 +14,8 @@ repository: https://testpypi.python.org/pypi
 username: josuebrunel
 password: Kjbg@mes1
 
+[pypi]
+repository: https://upload.pypi.org/legacy/
+username: josuebrunel
+password: Kjbg@mes321
 
