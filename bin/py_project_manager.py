@@ -7,13 +7,38 @@ import shutil
 import subprocess
 
 HOME_DIR = os.path.expanduser('~')
-DEFAULT_FILES = ['setup.py', 'setup.cfg', 'README.md', 'MANIFEST.in']
+
+
+TOX_CONTENT = """
+[tox]
+envlist = py27, py35
+
+[testenv]
+deps=
+    pytest
+    coverage
+commands=
+    - python -m coverage run --source={name} -m pytest -vvs tests/
+    - python -m coverage report -m
+"""
 
 
 def run_bash_command(command, cwd='.'):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, cwd=cwd, shell=True)
     result = process.communicate()
     return result
+
+
+class DefaultFile(object):
+
+    def __init__(self, name, content=''):
+        self.name = name
+        self.content = content
+
+
+DEFAULT_FILES = [
+    DefaultFile('setup.py'), DefaultFile('setup.cfg'), DefaultFile('README.md'),
+    DefaultFile('MANIFEST.in'), DefaultFile('tox.ini', TOX_CONTENT)]
 
 
 class StartsProjectAction(argparse.Action):
@@ -38,7 +63,8 @@ class StartsProjectAction(argparse.Action):
 
         # create files
         for default_file in DEFAULT_FILES:
-            self.create_file(os.path.join(fullpath, default_file))
+            self.create_file(
+                os.path.join(fullpath, default_file.name), default_file.content.format(name=name).strip())
 
         # initialize as git project
         if namespace.git:
