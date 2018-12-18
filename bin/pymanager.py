@@ -193,12 +193,12 @@ class StartsProjectAction(argparse.Action):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog='py_project_manager', description='Simple tool to create python project')
+    parser = argparse.ArgumentParser(prog='pymanager', description='Simple tool to create python project')
 
     subparsers = parser.add_subparsers(help='commands')
-    startsproject_parser = subparsers.add_parser('startsproject')
+    startsproject_parser = subparsers.add_parser('start')
     startsproject_parser.add_argument(
-        'startsproject', action=StartsProjectAction, nargs=1, help='Path of the project directory')
+        'start', action=StartsProjectAction, nargs=1, help='Start a project')
 
     startsproject_parser.add_argument('--git', action='store_true', default=False, help='Initialize project as git project')
     startsproject_parser.add_argument('--venv', action='store_true', default=False, help='Initialize project and create the corresponding virtual env')
