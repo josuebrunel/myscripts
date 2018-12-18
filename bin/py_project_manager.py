@@ -110,6 +110,12 @@ class DefaultFile(object):
         self.name = name
         self.content = content
 
+    def __str__(self):
+        return self.content.strip()
+
+    def __repr__(self):
+        return '<DefaultFile: %s>' % self.name
+
 
 DEFAULT_FILES = [
     DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg'), DefaultFile('README.md'),
