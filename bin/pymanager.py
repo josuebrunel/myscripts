@@ -9,6 +9,13 @@ import subprocess
 HOME_DIR = os.path.expanduser('~')
 
 
+MANIFEST_CONTENT = """
+include requirements.txt
+include README.rst
+include version.py
+"""
+
+
 SETUP_CONTENT = """
 import os
 from setuptools import setup, find_packages
@@ -119,7 +126,7 @@ class DefaultFile(object):
 
 DEFAULT_FILES = [
     DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg'), DefaultFile('README.rst'),
-    DefaultFile('MANIFEST.in'), DefaultFile('tox.ini', TOX_CONTENT),
+    DefaultFile('MANIFEST.in', MANIFEST_CONTENT), DefaultFile('tox.ini', TOX_CONTENT),
     DefaultFile('.travis.yml', TRAVIS_CONTENT)
 ]
 
