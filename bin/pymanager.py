@@ -16,6 +16,12 @@ include version.py
 """
 
 
+SETUPCFG_CONTENT = """
+[metadata]
+description-file = README.md
+"""
+
+
 SETUP_CONTENT = """
 import os
 from setuptools import setup, find_packages
@@ -125,9 +131,9 @@ class DefaultFile(object):
 
 
 DEFAULT_FILES = [
-    DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg'), DefaultFile('README.rst'),
-    DefaultFile('MANIFEST.in', MANIFEST_CONTENT), DefaultFile('tox.ini', TOX_CONTENT),
-    DefaultFile('.travis.yml', TRAVIS_CONTENT)
+    DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg', SETUPCFG_CONTENT),
+    DefaultFile('README.rst'), DefaultFile('MANIFEST.in', MANIFEST_CONTENT),
+    DefaultFile('tox.ini', TOX_CONTENT), DefaultFile('.travis.yml', TRAVIS_CONTENT)
 ]
 
 
