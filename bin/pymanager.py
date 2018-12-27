@@ -137,12 +137,13 @@ class StartsProjectAction(argparse.Action):
             subdirs.pop(subdirs.index(name))
         else:
             self.create_dir(fullpath, namespace.reset)
-            # create subdir project __init__.py file
-            self.create_file(os.path.join(fullpath, name, '__init__.py'))
 
         # create subdir
         for subdir in subdirs:
             self.create_dir(os.path.join(fullpath, subdir))
+
+        # create subdir project __init__.py file
+        self.create_file(os.path.join(fullpath, name, '__init__.py'))
 
         # create files
         context = {'name': name, 'author': '', 'email': '',
