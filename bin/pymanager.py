@@ -118,7 +118,7 @@ class DefaultFile(object):
 
 
 DEFAULT_FILES = [
-    DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg'), DefaultFile('README.md'),
+    DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg'), DefaultFile('README.rst'),
     DefaultFile('MANIFEST.in'), DefaultFile('tox.ini', TOX_CONTENT),
     DefaultFile('.travis.yml', TRAVIS_CONTENT)
 ]
