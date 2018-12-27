@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import datetime
 import os
 import sys
 import argparse
@@ -7,6 +8,31 @@ import shutil
 import subprocess
 
 HOME_DIR = os.path.expanduser('~')
+
+
+LICENSE_CONTENT = """
+MIT License
+
+Copyright (c) {date.year} {author}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files ({name}), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 
 
 MANIFEST_CONTENT = """
@@ -133,7 +159,8 @@ class DefaultFile(object):
 DEFAULT_FILES = [
     DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg', SETUPCFG_CONTENT),
     DefaultFile('README.rst'), DefaultFile('MANIFEST.in', MANIFEST_CONTENT),
-    DefaultFile('tox.ini', TOX_CONTENT), DefaultFile('.travis.yml', TRAVIS_CONTENT)
+    DefaultFile('tox.ini', TOX_CONTENT), DefaultFile('.travis.yml', TRAVIS_CONTENT),
+    DefaultFile('LICENSE', LICENSE_CONTENT)
 ]
 
 
@@ -159,8 +186,11 @@ class StartsProjectAction(argparse.Action):
         self.create_file(os.path.join(fullpath, name, '__init__.py'))
 
         # create files
-        context = {'name': name, 'author': '', 'email': '',
-                   'description': '', 'version': '{version}'}
+        context = {
+            'name': name.capitalize(), 'author': '{author}', 'email': '{email}',
+            'description': '', 'version': '{version}',
+            'date': datetime.datetime.now()
+        }
         for default_file in DEFAULT_FILES:
             self.create_file(
                 os.path.join(fullpath, default_file.name), default_file.content.format(**context).strip())
