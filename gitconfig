@@ -1,6 +1,6 @@
 [user]
 	name = Josue Kouka
-	email = jkouka@entrouvert.com
+	email = jkouka@scaleway.net
 [color]
 	ui = true
 	branch = auto
@@ -27,8 +27,9 @@
     fmp = format
     format-patch-sha = format-patch -1
     list-tags = tag --sort -version:refname
+    sub-to-master = submodule foreach --recursive git co master; git stash; git pull origin master || true
 [credential]
-	helper = osxkeychain
+    # helper = osxkeychain
 	helper = cache --timeout=86400
 [filter "media"]
 	required = true
