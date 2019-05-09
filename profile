@@ -31,7 +31,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.local/bin
 
 ## LOADS SCRIPTS
-source $HOME_SCRIPTS/osx
+# source $HOME_SCRIPTS/osx
 source $HOME_SCRIPTS/aliases
 source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/ssh_push_key.sh
@@ -43,6 +43,7 @@ source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
 source $HOME_SCRIPTS/shell/harakiri.sh
+source $HOME_SCRIPTS/shell/process_line_as.sh
 
 ## HISTORY SETTINGS
 if [ `uname -s` == "Linux" ]; then
