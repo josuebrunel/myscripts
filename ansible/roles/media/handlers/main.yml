@@ -1,0 +1,6 @@
+- name: Starts qbittorrent service
+  systemd:
+    daemon_reload: yes
+    name: qbittorrent
+    enabled: yes
+    state: started

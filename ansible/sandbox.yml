@@ -1,0 +1,9 @@
+- hosts: kimsufi
+  become: yes
+  tasks:
+      - apt:
+          name: python-apt
+          update_cache: yes
+  roles:
+      - media
+
