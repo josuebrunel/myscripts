@@ -17,7 +17,8 @@
       name: media
       group: media
       shell: /bin/bash
-      home: /var/lib/media/
+      home: /home/media/
+      move_home: yes
       state: present
 
 - name: Set up qbittorrent-nox service
