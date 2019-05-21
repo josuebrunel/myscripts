@@ -20,6 +20,9 @@ export XZ_OPT=-9
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+#EDITOR
+export EDITOR=vim
+
 #MY PYTHON ENVIRONMENT
 export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
