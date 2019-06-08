@@ -14,13 +14,12 @@ if sys.version_info.major == 3:
         exec(code, globals(), locals())
 
 # LAODING COMMONS
-for common in ('py_common', 'django_common'):
-    if os.path.realpath(HOME_SCRIPTS_PYTHON) != os.path.realpath('.'):
-        try:
-            execfile(os.path.join(HOME_SCRIPTS_PYTHON, common + '.py'))
-        except(Exception,) as exc:
-            logger.exception('ERROR OCCURED')
-            pdb.set_trace()
+if os.path.realpath(HOME_SCRIPTS_PYTHON) != os.path.realpath('.'):
+    try:
+        execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'py_common.py'))
+    except(Exception,) as exc:
+        logger.exception('ERROR OCCURED')
+        pdb.set_trace()
 
 # LOADING IMPORTS
 logger.info("COMMON IMPORTS LOADED")
