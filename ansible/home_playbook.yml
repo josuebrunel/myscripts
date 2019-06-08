@@ -1,0 +1,9 @@
+- hosts: localhost
+  pre_tasks:
+    - set_fact:
+        homedir: "{{ lookup('env', 'HOME') }}"
+        remote_user: "{{ lookup('env', 'USER') }}"
+        home_script: "{{ home_script | default('toto') }}"
+  roles:
+    - home
+

@@ -1,0 +1,7 @@
+target_username: ''
+pypirc_username: ''
+pypirc_password: ''
+gitconfig_name: ''
+gitconfig_email: ''
+ssh_keys:
+    -

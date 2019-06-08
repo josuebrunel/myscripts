@@ -1,0 +1,58 @@
+- name: Clone repository
+  git:
+    repo: https://github.com/josuebrunel/myscripts.git
+    dest: "{{ homedir }}/.toto/"
+
+- name: Get Python 2 user site
+  command: "python{{ item }} -m site --user-site"
+  register: python_user_sites
+  with_items:
+    - 2
+    - 3
+
+
+- name: Create python user site
+  file:
+    path: "{{ item.stdout }}"
+    state: directory
+    mode: '0755'
+  with_items: "{{ python_user_sites.results }}"
+
+
+- name: Add myutils.pth to python user site
+  file:
+    src: "{{homedir}}/.{{ home_script }}/python/myutils.pth"
+    dest: "{{ item.stdout }}/myutils.pth"
+    state: link
+  with_items: "{{ python_user_sites.results }}"
+
+
+- name: Add myutils package to python user site
+  file:
+    src: "{{ homedir }}/.{{ home_script }}/python/myutils/"
+    dest: "{{ item.stdout }}/myutils"
+    state: link
+    force: yes
+  with_items: "{{ python_user_sites.results }}"
+
+    # - name: Copy home config file
+    #   copy:
+    #     src: "{{ role_path }}/files/{{ item }}"
+    #     dest: "{{ local_home }}/.{{item}}"
+    #   vars:
+    #     local_home: "{{ lookup('env', 'HOME') }}"
+    #   with_items:
+    #     - gitignore
+    #     - irbrc
+    #     - pdbrc
+    #     - sqliterc
+    #
+    # - name: Copy home config file with vars
+    #   template:
+    #     src: "{{ role_path }}/templates/{{ item }}"
+    #     dest: "{{ local_home }}/.{{item}}"
+    #   vars:
+    #     local_home: "{{ lookup('env', 'HOME') }}"
+    #   with_items:
+    #     - gitconfig
+    #     - pypirc
