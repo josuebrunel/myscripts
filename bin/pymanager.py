@@ -214,7 +214,7 @@ class StartsProjectAction(argparse.Action):
         return True
 
     def create_file(self, filename, content=''):
-        with open(filename, 'wb') as fd:
+        with open(filename, 'w') as fd:
             fd.write(content)
 
     def git_init(self, project_dir):
