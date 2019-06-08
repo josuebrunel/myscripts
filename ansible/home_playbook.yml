@@ -3,7 +3,7 @@
     - set_fact:
         homedir: "{{ lookup('env', 'HOME') }}"
         remote_user: "{{ lookup('env', 'USER') }}"
-        home_script: "{{ home_script | default('toto') }}"
+        home_script: "{{ home_script | default('.scripts') }}"
   roles:
     - home
 
