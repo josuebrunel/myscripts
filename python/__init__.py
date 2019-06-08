@@ -73,10 +73,6 @@ if os.path.exists(py_common):
         logger.exception('ERROR OCCURED: %s' % (exc))
 
 
-# LOADING IMPORTS
-logger.info("COMMON IMPORTS LOADED")
-execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'imports.py'))
-
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
 PY_HISTORY_PATH = os.path.join(HOME_DIR, PY_HISTORY_FILE)
