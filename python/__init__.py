@@ -58,12 +58,6 @@ else:
     readline.parse_and_bind("tab: complete")
 
 # LOAD PERSONAL UTILS MODULE
-if sys.version_info.major == 3:
-    def execfile(filename):
-        code = compile(open(filename, 'rb').read(), filename, 'exec')
-        exec(code, globals(), locals())
-
-
 py_common = os.path.join(
     os.path.realpath('.'), 'py_common.py'
 )
@@ -71,7 +65,10 @@ py_common = os.path.join(
 if os.path.exists(py_common):
     logger.info("LOADING PY_COMMON FILE")
     try:
-        execfile(py_common)
+        if sys.version_info.major == 3:
+            exec(open(py_common).read())
+        else:
+            execfile(py_common)
     except(Exception,) as exc:
         logger.exception('ERROR OCCURED: %s' % (exc))
 
