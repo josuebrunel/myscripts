@@ -1,10 +1,10 @@
 import os
-import imp
 import logging
 import platform
 import readline
 import rlcompleter
 from logging.config import dictConfig
+import sys
 
 
 HOME_DIR = os.environ.get('HOME')
@@ -58,8 +58,27 @@ else:
     readline.parse_and_bind("tab: complete")
 
 # LOAD PERSONAL UTILS MODULE
-myutils = imp.load_source('myutils', os.path.join(HOME_SCRIPTS_PYTHON, 'myutils.py'))
-from myutils import *
+if sys.version_info.major == 3:
+    def execfile(filename):
+        code = compile(open(filename, 'rb').read(), filename, 'exec')
+        exec(code, globals(), locals())
+
+
+py_common = os.path.join(
+    os.path.realpath('.'), 'py_common.py'
+)
+
+if os.path.exists(py_common):
+    logger.info("LOADING PY_COMMON FILE")
+    try:
+        execfile(py_common)
+    except(Exception,) as exc:
+        logger.exception('ERROR OCCURED: %s' % (exc))
+
+
+# LOADING IMPORTS
+logger.info("COMMON IMPORTS LOADED")
+execfile(os.path.join(HOME_SCRIPTS_PYTHON, 'imports.py'))
 
 # SAVING HISTORY TO FILE
 PY_HISTORY_FILE = '.pyhistory'
