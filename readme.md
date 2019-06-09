@@ -62,36 +62,6 @@ john@doe:$ archive -b myfoler/
 john@doe:$ archive -r myfoler.tar.gz
 ```
 
-#### Pypi Register/Publish
-This function helps publishing a package on the Python Package Index
-
-A ***$HOME/.pypirc*** is required. i.e
-
-```cfg
-[distutils] # this tells distutils what package indexes you can push to
-index-servers =
-    pypi
-    pypitest
-
-[pypi]
-repository: https://pypi.python.org/pypi
-username: josuebrunel
-
-[pypitest]
-repository: https://testpypi.python.org/pypi
-username: josuebrunel
-
-```
-
-Run the commands below in your project folder
-
-```shell
-john@doe:$ pypi
-Help:
-        pypi --register|-r [server] #Register the package
-        pypi --upload|-u [server] #Upload the package
-        pypi --all|-a [server] # Register then Upload the package
-```
 
 ### Date
 Just a couple of date shorcuts

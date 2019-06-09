@@ -40,7 +40,6 @@ source $HOME_SCRIPTS/shell/exit_f.sh
 source $HOME_SCRIPTS/shell/archive.sh
 source $HOME_SCRIPTS/shell/mylogger.sh
 source $HOME_SCRIPTS/shell/setup_editors.sh
-source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
 source $HOME_SCRIPTS/shell/harakiri.sh
