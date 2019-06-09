@@ -50,17 +50,17 @@
 
 
 
-    # - name: Copy home config file
-    #   copy:
-    #     src: "{{ role_path }}/files/{{ item }}"
-    #     dest: "{{ local_home }}/.{{item}}"
-    #   vars:
-    #     local_home: "{{ lookup('env', 'HOME') }}"
-    #   with_items:
-    #     - gitignore
-    #     - irbrc
-    #     - pdbrc
-    #     - sqliterc
+- name: Copy home config file
+  file:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "{{ homedir }}/.{{item}}"
+    state: link
+    force: yes
+  with_items:
+    - gitignore
+    - irbrc
+    - pdbrc
+    - sqliterc
     #
     # - name: Copy home config file with vars
     #   template:
