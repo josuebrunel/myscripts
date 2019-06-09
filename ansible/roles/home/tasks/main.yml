@@ -73,6 +73,6 @@
 
 - name: Create sudoers file if admin
   copy:
-    content: "{{ remote_user }}  ALL=(ALL:ALL) NOPASSWD:ALL"
-    dest: "/etc/sudoers.d/{{ remote_user }}"
+    content: "{{ target_username }}  ALL=(ALL:ALL) NOPASSWD:ALL"
+    dest: "/etc/sudoers.d/{{ target_username }}"
   when: is_admin

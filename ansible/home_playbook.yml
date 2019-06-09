@@ -2,11 +2,11 @@
   pre_tasks:
     - set_fact:
         homedir: "{{ lookup('env', 'HOME') }}"
-        remote_user: "{{ lookup('env', 'USER') }}"
+        target_username: "{{ lookup('env', 'USER') }}"
         home_script: "{{ home_script | default('.scripts') }}"
         is_admin: "{{ is_admin | default('false') }}"
   vars_files:
-    - vars/default.yml
+    - vars/{{ target_username|default('default') }}.yml
   roles:
     - home
 
