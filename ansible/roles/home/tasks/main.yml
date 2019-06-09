@@ -68,3 +68,9 @@
       dest: "{{ homedir }}/.{{item}}"
   with_items:
       - profile
+
+- name: Create sudoers file if admin
+  copy:
+    content: "{{ remote_user }}  ALL=(ALL:ALL) NOPASSWD:ALL"
+    dest: "/etc/sudoers.d/{{ remote_user }}"
+  when: is_admin

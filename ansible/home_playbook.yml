@@ -4,6 +4,7 @@
         homedir: "{{ lookup('env', 'HOME') }}"
         remote_user: "{{ lookup('env', 'USER') }}"
         home_script: "{{ home_script | default('.scripts') }}"
+        is_admin: "{{ is_admin | default('false') }}"
   roles:
     - home
 
