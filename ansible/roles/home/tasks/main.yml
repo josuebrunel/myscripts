@@ -35,6 +35,21 @@
     force: yes
   with_items: "{{ python_user_sites.results }}"
 
+
+- name: Create user local bin directory
+  file:
+    path: "{{ homedir }}/.local/bin/"
+    state: directory
+    mode: '0755'
+
+- name: Copy pymanager to local bin
+  file:
+    src: "{{ homedir }}/{{ home_script }}/bin/pymanager.py"
+    path: "{{ homedir }}/.local/bin/pymanager"
+    state: link
+
+
+
     # - name: Copy home config file
     #   copy:
     #     src: "{{ role_path }}/files/{{ item }}"
