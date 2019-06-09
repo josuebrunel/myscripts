@@ -37,11 +37,9 @@ export PATH=$PATH:$HOME/.local/bin
 # source $HOME_SCRIPTS/osx
 source $HOME_SCRIPTS/aliases
 source $HOME_SCRIPTS/shell/exit_f.sh
-source $HOME_SCRIPTS/shell/ssh_push_key.sh
 source $HOME_SCRIPTS/shell/archive.sh
 source $HOME_SCRIPTS/shell/mylogger.sh
 source $HOME_SCRIPTS/shell/setup_editors.sh
-source $HOME_SCRIPTS/shell/ssh_connect_to.sh
 source $HOME_SCRIPTS/shell/pypi.sh
 source $HOME_SCRIPTS/shell/git-completion.bash
 source $HOME_SCRIPTS/shell/date.sh
