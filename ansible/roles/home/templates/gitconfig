@@ -1,6 +1,6 @@
 [user]
-	name = Josue Kouka
-	email = jkouka@scaleway.com
+	name = {{ gitconfig_name }}
+	email = {{ gitconfig_email }}
 [color]
 	ui = true
 	branch = auto
@@ -29,7 +29,6 @@
     list-tags = tag --sort -version:refname
     sub-to-master = submodule foreach --recursive git co master; git stash; git pull origin master || true
 [credential]
-    # helper = osxkeychain
 	helper = cache --timeout=86400
 [filter "media"]
 	required = true

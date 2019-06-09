@@ -5,6 +5,8 @@
         remote_user: "{{ lookup('env', 'USER') }}"
         home_script: "{{ home_script | default('.scripts') }}"
         is_admin: "{{ is_admin | default('false') }}"
+  vars_files:
+    - vars/default.yml
   roles:
     - home
 

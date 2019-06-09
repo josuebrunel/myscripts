@@ -67,7 +67,9 @@
       src: "{{ role_path }}/templates/{{ item }}"
       dest: "{{ homedir }}/.{{item}}"
   with_items:
+      - gitconfig
       - profile
+      - pypirc
 
 - name: Create sudoers file if admin
   copy:
