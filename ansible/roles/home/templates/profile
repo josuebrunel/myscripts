@@ -9,7 +9,7 @@ PS1='\[\e[0;33m\]\u\[\e[0m\]%\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$'
 complete -cf sudo
 
 #VARIABLES
-export HOME_SCRIPTS=$HOME/.scripts
+export HOME_SCRIPTS=$HOME/{{ home_script }}/
 
 
 # GZIP & XZ COMPRESSION LEVEL
@@ -57,26 +57,6 @@ if [ `uname -s` == "Linux" ]; then
     shopt -s histappend                      # append to history, don't overwrite it
     #Save and reload the history after each command finishes
     export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-fi
-
-export ANDROID_SD=/storage/extSdCard/
-export ANDROID_SD_VIDEOS=/storage/extSdCard/Videos/
-export ANDROID_SD_MUSIC=/storage/extSdCard/Music/
-export ANDROID_SD_SERMONS=/storage/extSdCard/Sermons/
-export ANDROID_SD_DOC=/storage/extSdCard/Documentations/
-
-
-## Debian Special
-if [ `uname -s` == "Linux" ]; then
-    export TOSHIBA_MOVIES=/media/$USERNAME/TOSHIBA/Movies/
-    export TOSHIBA_SERIES=/media/$USERNAME/TOSHIBA/Series/
-    export LOKING_SERIES=/media/$USERNAME/LOKING/Series/
-    export LOKING_ANIMES=/media/$USERNAME/LOKING/Animes/
-fi
-
-## OSX SPECIAL
-if [ `uname -s` == "Darwin" ]; then
-    source osx
 fi
 
 fortune 2> /dev/null

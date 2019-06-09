@@ -49,7 +49,6 @@
     state: link
 
 
-
 - name: Copy home config file
   file:
     src: "{{ role_path }}/files/{{ item }}"
@@ -61,13 +60,11 @@
     - irbrc
     - pdbrc
     - sqliterc
-    #
-    # - name: Copy home config file with vars
-    #   template:
-    #     src: "{{ role_path }}/templates/{{ item }}"
-    #     dest: "{{ local_home }}/.{{item}}"
-    #   vars:
-    #     local_home: "{{ lookup('env', 'HOME') }}"
-    #   with_items:
-    #     - gitconfig
-    #     - pypirc
+
+
+- name: Copy home config file with vars
+  template:
+      src: "{{ role_path }}/templates/{{ item }}"
+      dest: "{{ homedir }}/.{{item}}"
+  with_items:
+      - profile
