@@ -1,7 +1,7 @@
 - name: Clone repository
   git:
     repo: https://github.com/josuebrunel/myscripts.git
-    dest: "{{ homedir }}/.toto/"
+    dest: "{{ homedir }}/{{ home_script }}/"
 
 - name: Get Python 2 user site
   command: "python{{ item }} -m site --user-site"
@@ -21,7 +21,7 @@
 
 - name: Add myutils.pth to python user site
   file:
-    src: "{{homedir}}/.{{ home_script }}/python/myutils.pth"
+    src: "{{homedir}}/{{ home_script }}/python/myutils.pth"
     dest: "{{ item.stdout }}/myutils.pth"
     state: link
   with_items: "{{ python_user_sites.results }}"
@@ -29,7 +29,7 @@
 
 - name: Add myutils package to python user site
   file:
-    src: "{{ homedir }}/.{{ home_script }}/python/myutils/"
+    src: "{{ homedir }}/{{ home_script }}/python/myutils/"
     dest: "{{ item.stdout }}/myutils"
     state: link
     force: yes
