@@ -1,0 +1,21 @@
+[distutils] # this tells distutils what package indexes you can push to
+index-servers =
+    pypi
+    pypitest
+    pypiold
+
+[pypiold]
+repository: https://pypi.python.org/pypi
+username: {{ pypirc_username }}
+password: {{ pypirc_password }}
+
+[pypitest]
+repository: https://testpypi.python.org/pypi
+username: {{ pypirc_username }}
+password: {{ pypirc_password }}
+
+[pypi]
+repository: https://upload.pypi.org/legacy/
+username: {{ pypirc_username }}
+password: {{ pypirc_password }}
+
