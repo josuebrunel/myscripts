@@ -1,0 +1,7 @@
+all:
+  hosts:
+    home:
+      hosts:
+        lokinghd.freeboxos.fr
+    localhost:
+        host: localhost

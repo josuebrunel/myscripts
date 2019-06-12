@@ -5,8 +5,10 @@
         target_username: "{{ lookup('env', 'USER') }}"
         home_script: "{{ home_script | default('.scripts') }}"
         is_admin: "{{ is_admin | default('false') }}"
+        user_local_bin: "{{ lookup('env', 'HOME') }}/.local/bin/"
+        user_local_conf: "{{ lookup('env', 'HOME') }}/.config/"
   vars_files:
     - vars/{{ target_username|default('default') }}.yml
   roles:
     - home
-
+    - neovim

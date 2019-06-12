@@ -1,0 +1,76 @@
+- name: Download neovim app image
+  get_url:
+    url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    dest: "{{ user_local_bin }}"
+    mode: '0755'
+
+- name: Set neovim binary as xvim
+  file:
+    src: "{{ user_local_bin }}nvim.appimage"
+    dest: "{{ user_local_bin }}xvim"
+    state: link
+
+- name: Install dependancies
+  apt:
+      name: "{{ packages }}"
+  vars:
+      packages:
+          - python-pip
+          - python3-pip
+  when: is_admin
+
+- name: Get pip3 binary location
+  command: "which pip3"
+  register: pip3_binary_path
+
+- debug:
+  msg: pip3_binary_path.results.stdout
+
+- name: Install Neovim pip dependancies  
+  pip:
+    name: "{{ item }}"
+    executable: "{{ pip3_binary_path.stdout }}"
+  with_items:
+    - neovim
+    - jedi
+
+- name: Make neovim virtualens
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ homedir }}/.virtualenvs/neovim3/"
+    virtualenv_python: python3
+  with_items:
+    - neovim
+    - jedi
+
+- name: Create neovim config dir
+  file:
+    path: "{{ user_local_conf }}nvim/"
+    state: directory
+    mode: '0755'
+
+- name: Create neovim local share dir
+  file:
+    path: "{{ homedir }}/.local/share/nvim/site/autoload/"
+    state: directory
+    mode: '0755'
+
+- name: Install plug-vim
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ homedir }}/.local/share/nvim/site/autoload/plug.vim"
+    mode: '0755'
+
+- name: Install Neovim config
+  copy:
+    src: "{{ role_path }}/files/init.vim"
+    dest: "{{ user_local_conf }}nvim/init.vim"
+
+- name: Make sym link for init.vim
+  file:
+    src: "{{ user_local_conf }}nvim/init.vim"
+    dest: "{{ homedir }}/.xvimrc"
+    state: link
+
+- name: Install Neovim plugins with plug-vim
+  command: xvim -c "PlugInstall|quitall"
