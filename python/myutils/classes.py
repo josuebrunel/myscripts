@@ -148,15 +148,16 @@ class DictManager(object):
     def filter(self, *args, **kwargs):
         result = []
         for datum in self.dataset:
+            tests = []
             for key, value in kwargs.items():
                 keyname, _, op = key.partition(self.DELIMITOR)
                 op = op if op else 'eq'
                 try:
-                    test = getattr(operator, op)(datum.get(keyname), value)
+                    tests.append(getattr(operator, op)(datum.get(keyname), value))
                 except (AttributeError, ) as exc:
-                    test = getattr(self.Xoperator(), op)(datum.get(keyname), value)
-                if test:
-                    result.append(datum)
+                    tests.append(getattr(self.Xoperator(), op)(datum.get(keyname), value))
+            if all(tests):
+                result.append(datum)
 
         return DictManager(result)
 
