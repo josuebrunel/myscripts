@@ -1,6 +1,10 @@
 # Bunch of my custom classes
 #
+
+from collections import defaultdict
+import itertools
 import logging
+import operator
 import sys
 from xml.etree import ElementTree as etree
 
@@ -171,6 +175,17 @@ class DictManager(object):
             self.dataset = []
             return True
         return False
+
+    def order_by(self, *args):
+        self.dataset.sort(key=operator.itemgetter(*args))
+        return self
+
+    def group_by(self, *args):
+        result = defaultdict(list)
+        self.dataset.sort(key=operator.itemgetter(*args))
+        for key, group in itertools.groupby(self.dataset, operator.itemgetter(*args)):
+            result[key].extend(list(group))
+        return result
 
     def first(self):
         return self[0]
