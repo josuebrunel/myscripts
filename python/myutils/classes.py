@@ -109,3 +109,71 @@ class DataClass(object):
         klassname = self.__class__.__name__
         items = self.__dict__.items()
         return '<%s:%s>' % (klassname, items)
+
+
+class DictManager(object):
+
+    DELIMITOR = '__'
+
+    OPERATIONS = {
+        '': lambda left, right: left == right,
+        'neq': lambda left, right: left != right,
+        'gt': lambda left, right: left > right,
+        'gte': lambda left, right: left >= right,
+        'lt': lambda left, right: left < right,
+        'lte': lambda left, right: left <= right,
+        'contains': lambda left, right: right in left,
+        'icontains': lambda left, right: right.lower() in left.lower(),
+    }
+
+    def __init__(self, dataset, **kwargs):
+        self.dataset = dataset
+
+    def __getitem__(self, idx):
+        return self.dataset[idx]
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __str__(self):
+        return '%s' % self.dataset
+
+    def __repr__(self):
+        return '<%s: %s >' % (self.__class__.__name__, str(self))
+
+    def filter(self, *args, **kwargs):
+        result = []
+        for datum in self.dataset:
+            for key, value in kwargs.items():
+                keyname, _, op = key.partition(self.DELIMITOR)
+                if self.OPERATIONS[op](datum.get(keyname), value):
+                    result.append(datum)
+        return DictManager(result)
+
+    def exists(self):
+        return bool(len(self.dataset))
+
+    def get(self, *args, **kwargs):
+        result = self.filter(*args, **kwargs)
+        if not result:
+            return None
+        if len(result) > 1:
+            raise Exception('Multiple values resturned')
+        return result[0]
+
+    def delete(self, *args, **kwargs):
+        if kwargs:
+            result = self.filter(*args, **kwargs)
+            if result.exists():
+                self.dataset = [datum for datum in self.dataset if datum not in result.dataset]
+                return True
+        else:
+            self.dataset = []
+            return True
+        return False
+
+    def first(self):
+        return self[0]
+
+    def last(self):
+        return self[-1]
