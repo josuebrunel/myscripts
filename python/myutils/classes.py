@@ -119,16 +119,16 @@ class DictManager(object):
 
     DELIMITOR = '__'
 
-    OPERATIONS = {
-        '': lambda left, right: left == right,
-        'neq': lambda left, right: left != right,
-        'gt': lambda left, right: left > right,
-        'gte': lambda left, right: left >= right,
-        'lt': lambda left, right: left < right,
-        'lte': lambda left, right: left <= right,
-        'contains': lambda left, right: right in left,
-        'icontains': lambda left, right: right.lower() in left.lower(),
-    }
+    class Xoperator(object):
+
+        def icontains(self, left, right):
+            return operator.contains(left.lower(), right.lower())
+
+        def _in(self, left, right):
+            return left in right
+
+        def not_in(self, left, right):
+            return left not in right
 
     def __init__(self, dataset, **kwargs):
         self.dataset = dataset
@@ -150,12 +150,21 @@ class DictManager(object):
         for datum in self.dataset:
             for key, value in kwargs.items():
                 keyname, _, op = key.partition(self.DELIMITOR)
-                if self.OPERATIONS[op](datum.get(keyname), value):
+                op = op if op else 'eq'
+                try:
+                    test = getattr(operator, op)(datum.get(keyname), value)
+                except (AttributeError, ) as exc:
+                    test = getattr(self.Xoperator(), op)(datum.get(keyname), value)
+                if test:
                     result.append(datum)
+
         return DictManager(result)
 
     def exists(self):
         return bool(len(self.dataset))
+
+    def count(self):
+        return len(self)
 
     def get(self, *args, **kwargs):
         result = self.filter(*args, **kwargs)
