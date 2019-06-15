@@ -194,15 +194,6 @@ def coroutine(func):
     return start
 
 
-# PKG TOOLS
-def whereis(pkg):
-    return getattr(pkg, '__path__', None)
-
-
-def show(pkg):
-    pass
-
-
 # UUID
 def uuidgen():
     return uuid.uuid4().bytes.encode('base64').rstrip('=\n').replace('/', '_')
@@ -245,7 +236,3 @@ def slugify(value):
         value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
         value = unicode(_slugify_strip_re.sub('', value).strip().lower(), errors='ignore')
         return _slugify_hyphenate_re.sub('-', value)
-
-
-def make_class_quickly(classname, attrs, parents):
-    return type(classname, parents, attrs)
