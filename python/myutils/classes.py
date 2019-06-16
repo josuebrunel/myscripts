@@ -122,6 +122,7 @@ class DictManager(object):
     class Xoperator(object):
 
         def __init__(self):
+            self.__dict__[''] = operator.eq
             self.__dict__['in'] = self._in
 
         def icontains(self, left, right):
@@ -154,7 +155,6 @@ class DictManager(object):
             tests = []
             for key, value in kwargs.items():
                 keyname, _, op = key.partition(self.DELIMITOR)
-                op = op if op else 'eq'
                 try:
                     tests.append(getattr(operator, op)(datum.get(keyname), value))
                 except (AttributeError, ) as exc:
