@@ -121,6 +121,9 @@ class DictManager(object):
 
     class Xoperator(object):
 
+        def __init__(self):
+            self.__dict__['in'] = self._in
+
         def icontains(self, left, right):
             return operator.contains(left.lower(), right.lower())
 
