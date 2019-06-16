@@ -124,6 +124,9 @@ class DictManager(object):
         def __init__(self):
             self.__dict__[''] = operator.eq
             self.__dict__['in'] = self._in
+            self.__dict__.update({
+                fname: func for fname, func in operator.__dict__.items() if callable(func) and not fname.startswith('_')
+            })
 
         def icontains(self, left, right):
             return operator.contains(left.lower(), right.lower())
@@ -136,6 +139,7 @@ class DictManager(object):
 
     def __init__(self, dataset, **kwargs):
         self.dataset = dataset
+        self._xoperator = self.Xoperator()
 
     def __getitem__(self, idx):
         return self.dataset[idx]
@@ -149,16 +153,20 @@ class DictManager(object):
     def __repr__(self):
         return '<%s: %s >' % (self.__class__.__name__, str(self))
 
+    def _lookup(self, datum, key, value):
+        keyname, _, op = key.partition(self.DELIMITOR)
+        if self.DELIMITOR in op:
+            return self._lookup(datum[keyname], op, value)
+        if op not in self._xoperator.__dict__:
+            return self._lookup(datum[keyname], '%s__eq' % op, value)
+        return getattr(self._xoperator, op)(datum.get(keyname), value)
+
     def filter(self, *args, **kwargs):
         result = []
         for datum in self.dataset:
             tests = []
             for key, value in kwargs.items():
-                keyname, _, op = key.partition(self.DELIMITOR)
-                try:
-                    tests.append(getattr(operator, op)(datum.get(keyname), value))
-                except (AttributeError, ) as exc:
-                    tests.append(getattr(self.Xoperator(), op)(datum.get(keyname), value))
+                tests.append(self._lookup(datum, key, value))
             if all(tests):
                 result.append(datum)
 
