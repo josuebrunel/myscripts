@@ -128,6 +128,15 @@ class DictManager(object):
                 fname: func for fname, func in operator.__dict__.items() if callable(func) and not fname.startswith('_')
             })
 
+        @staticmethod
+        def isnum(val):
+            try:
+                int(val)
+                return True
+            except (ValueError,):
+                pass
+            return False
+
         def icontains(self, left, right):
             return operator.contains(left.lower(), right.lower())
 
@@ -156,8 +165,12 @@ class DictManager(object):
     def _lookup(self, datum, key, value):
         keyname, _, op = key.partition(self.DELIMITOR)
         if self.DELIMITOR in op:
+            if self._xoperator.isnum(keyname):
+                keyname = int(keyname)
             return self._lookup(datum[keyname], op, value)
         if op not in self._xoperator.__dict__:
+            if isinstance(datum, (list,)) and self._xoperator.isnum(keyname):
+                keyname = int(keyname)
             return self._lookup(datum[keyname], '%s__eq' % op, value)
         return getattr(self._xoperator, op)(datum.get(keyname), value)
 
