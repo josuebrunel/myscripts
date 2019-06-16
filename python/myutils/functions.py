@@ -2,11 +2,14 @@
 try:
     import __builtin__
     from __builtin__ import unicode
+    import anydbm
 except (ImportError,):
     import builtins as __builtin__  # python3
+    import dbm as anydbm
 
 import os
 import re
+from contextlib import contextmanager
 import csv
 import json
 import time
@@ -236,3 +239,12 @@ def slugify(value):
         value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
         value = unicode(_slugify_strip_re.sub('', value).strip().lower(), errors='ignore')
         return _slugify_hyphenate_re.sub('-', value)
+
+
+@contextmanager
+def openanydbm(dbname):
+    db = anydbm.open(dbname, 'c')
+    try:
+        yield db
+    finally:
+        db.close()
