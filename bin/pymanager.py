@@ -77,7 +77,8 @@ def read(fname):
 
 url = "https://github.com/%s/%s/" % (__author__, name)
 download_url = url + 'archive/{version}.tar.gz'.format(version=version_git)
-requirements = read('requirements.txt').splitlines()
+
+requirements = read('requirements.txt').splitlines() if os.path.file('requirements.txt') else []
 
 setup(
     name=name,
