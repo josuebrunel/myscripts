@@ -51,7 +51,7 @@ def get_file_content(filename):
 def write_content_into_file(content, filename):
     """Save content into the given file
     """
-    with open(filename, 'wb') as fd:
+    with open(filename, 'w') as fd:
         fd.write(content)
 
 
@@ -76,7 +76,7 @@ def json_write_data(json_data, output):
 
 def json_get_lines(filename):
     data = []
-    with open(filename, 'rb') as fd:
+    with open(filename, 'r') as fd:
         for line in fd:
             data.append(json.loads(line))
     return data
@@ -89,7 +89,7 @@ def xml_get_data(xml_file):
 
 
 def xml_write_data(xml, filename):
-    with open(filename, 'wb') as fd:
+    with open(filename, 'w') as fd:
         data = xml_pretty(xml_to_string(xml))
         fd.write(data)
         return True
@@ -101,7 +101,7 @@ def xml_to_string(elt):
 
 # CSV TOOL
 def csv_get_dialect(filename):
-    with open(filename, 'rb') as fd:
+    with open(filename, 'r') as fd:
         content = fd.read()
         content = content.decode('utf-8-sig', 'ignore').encode('utf-8')
         dialect = csv.Sniffer().sniff(content)
@@ -120,7 +120,7 @@ def csv_unicode_to_str(data):
 
 def csv_get_data(filename, as_dict=False, skip_header=False):
     data = []
-    with open(filename, 'rb') as fd:
+    with open(filename, 'r') as fd:
         read_method = 'DictReader' if as_dict else 'reader'
         rows = vars(csv)[read_method](fd, delimiter=',', quotechar='"')
         if read_method == 'reader' and skip_header:
@@ -132,7 +132,7 @@ def csv_get_data(filename, as_dict=False, skip_header=False):
 
 
 def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False):
-    with open(filename, 'rb') as fd:
+    with open(filename, 'r') as fd:
         kwargs = {'fieldnames': fieldnames}
 
         # use dialect if delimiter not set
@@ -149,7 +149,7 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False
 
 
 def csv_write_dict_data(data, filename, fieldnames=[], delimiter=';', header=True, unicode_to_str=False):
-    with open(filename, 'wb') as fd:
+    with open(filename, 'w') as fd:
         if not fieldnames:
             fieldnames = data[0].keys()
         if unicode_to_str:
