@@ -185,6 +185,16 @@ class DictManager(object):
 
         return DictManager(result)
 
+    def values(self, *args):
+        data = []
+        for datum in self.dataset:
+            cdata = {}
+            for key, value in datum.items():
+                if key in args:
+                    cdata[key] = value
+            data.append(cdata)
+        return data
+
     def exists(self):
         return bool(len(self.dataset))
 
