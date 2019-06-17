@@ -195,6 +195,12 @@ class DictManager(object):
             data.append(cdata)
         return data
 
+    def apply(self, func=lambda x: x, *args):
+        for datum in self.dataset:
+            for key in args:
+                datum[key] = func(datum[key])
+        return self
+
     def exists(self):
         return bool(len(self.dataset))
 
