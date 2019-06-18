@@ -74,6 +74,14 @@ call plug#end()
 set nu
 set cursorline
 filetype plugin indent on
+set tabstop=4 " tab width
+set shiftwidth=4 " indent width
+set softtabstop=4 " dealing with combination of space and tab used to simulate ...
+set smarttab " make "tab" insert indents instead of tabs at the beginning of a line
+set expandtab " always uses spaces instead of tab characters
+set backspace=2 " Fixes backspace issues
+set autoindent "always set autoindenting on
+set copyindent "copy the previous indentation on autoindenting
 
 " Python binary paths
 let g:python_host_prog = $HOME . '/.virtualenvs/neovim2/bin/python'
@@ -130,6 +138,7 @@ augroup NCM2
   set completeopt=noinsert,menuone,noselect
   " When the <Enter> key is pressed while the popup menu is visible, it only
   " hides the menu. Use this mapping to close the menu and also start a new line.
+  "inoremap <expr> <CR> (pumvisible() ? \"\<c-y>\<cr>" : \"\<CR>")
   inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
   " uncomment this block if you use vimtex for LaTex
   " autocmd Filetype tex call ncm2#register_source({
@@ -156,9 +165,6 @@ let g:airline_right_sep = ''
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
 let airline#extensions#ale#warning_symbol = 'W:'
-
-"let g:airline_theme='dark'
-
 
 " Remenber last postion
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
