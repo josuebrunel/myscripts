@@ -7,7 +7,7 @@
 john@doe:$ sudo apt install ansible
 john@doe:$ git clone https://github.com/josuebrunel/myscripts.git .scripts/
 john@doe:$ cd .scripts/
-john@doe:$ ansible-playbook -vv ansible/home_playbook.yml --extra_vars "target_username=john" --ask-vault
+john@doe:$ ansible-playbook -vv ansible/home_playbook.yml --extra-vars "target_username=john" --ask-vault
 ```
 
 ## Documentation
