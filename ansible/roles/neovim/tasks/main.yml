@@ -24,9 +24,6 @@
   command: "which pip3"
   register: pip3_binary_path
 
-- debug:
-  msg: pip3_binary_path.results.stdout
-
 - name: Install Neovim pip dependancies  
   pip:
     name: "{{ item }}"
