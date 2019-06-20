@@ -59,6 +59,12 @@
     dest: "{{ homedir }}/.local/share/nvim/site/autoload/plug.vim"
     mode: '0755'
 
+- name: Install fuse for AppImage binary
+  apt:
+    name: fuse
+  become: yes
+  when: is_admin
+
 - name: Install Neovim config
   copy:
     src: "{{ role_path }}/files/init.vim"
