@@ -18,6 +18,7 @@
           - python-pip
           - python3-pip
   when: is_admin
+  become: yes
 
 - name: Get pip3 binary location
   command: "which pip3"
