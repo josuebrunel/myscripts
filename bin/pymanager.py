@@ -161,7 +161,7 @@ DEFAULT_FILES = [
     DefaultFile('setup.py', SETUP_CONTENT), DefaultFile('setup.cfg', SETUPCFG_CONTENT),
     DefaultFile('README.rst'), DefaultFile('MANIFEST.in', MANIFEST_CONTENT),
     DefaultFile('tox.ini', TOX_CONTENT), DefaultFile('.travis.yml', TRAVIS_CONTENT),
-    DefaultFile('LICENSE', LICENSE_CONTENT)
+    DefaultFile('LICENSE', LICENSE_CONTENT), DefaultFile('version.py')
 ]
 
 
