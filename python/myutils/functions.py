@@ -143,7 +143,7 @@ def csv_get_dict_data(filename, fieldnames=[], delimiter=None, skip_header=False
 
         reader = csv.DictReader(fd, **kwargs)
         if skip_header:
-            reader.next()
+            next(reader)
         return list(reader)
     return False
 
