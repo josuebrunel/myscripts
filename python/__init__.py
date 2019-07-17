@@ -93,3 +93,11 @@ except (IOError,) as e:
 else:
     import atexit
     atexit.register(readline.write_history_file, PY_HISTORY_PATH)
+
+
+try:
+    import myutils
+except (ImportError,) as exc:
+    import pdb
+    pdb.set_trace()
+    print(exc)
