@@ -81,9 +81,9 @@ class Model(object):
 
     @classmethod
     def get_table_name(cls):
-        if not cls._Meta:
-            return cls.__name__
-        return cls._Meta.tablename
+        if cls._Meta and getattr(cls._Meta, 'tablename'):
+            return cls._Meta.tablename
+        return cls.__name__
 
     @classmethod
     def fields(cls):
