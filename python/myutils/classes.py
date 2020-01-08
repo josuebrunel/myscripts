@@ -37,6 +37,24 @@ class Dict2ObjectLower(Dict2Object):
         super(Dict2ObjectLower, self).__init__(**kwargs)
 
 
+class JSerializer(object):
+
+    def __init__(self, *attrs):
+        self.attrs = attrs
+
+    def serialize(self, obj):
+        data = {}
+        attrs = self.attrs if self.attrs else obj.__dict__
+        for attr in attrs:
+            if isinstance(attr, (tuple,)):
+                attr, key = attr
+            else:
+                key = attr
+            data[key] = getattr(obj, attr)
+
+        return data
+
+
 # Python-Requests
 try:
     import requests
