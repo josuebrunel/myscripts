@@ -2,6 +2,7 @@
 #
 
 from collections import defaultdict
+import datetime
 import itertools
 import logging
 import operator
@@ -39,8 +40,9 @@ class Dict2ObjectLower(Dict2Object):
 
 class JSerializer(object):
 
-    def __init__(self, *attrs):
+    def __init__(self, *attrs, deep=False):
         self.attrs = attrs
+        self.deep = deep
 
     def serialize(self, obj):
         data = {}
@@ -50,7 +52,14 @@ class JSerializer(object):
                 attr, key = attr
             else:
                 key = attr
-            data[key] = getattr(obj, attr)
+            subobj = getattr(obj, attr)
+            if isinstance(subobj, (datetime.date,)):
+                subobj = subobj.strftime('%Y-%m-%d %H:%M')
+            elif self.deep and not isinstance(subobj, (str,)):
+                subobj = JSerializer(deep=self.deep).serialize(subobj)
+            else:
+                pass
+            data[key] = subobj
 
         return data
 
