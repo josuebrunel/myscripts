@@ -31,6 +31,6 @@ alias wifi_reconnect='nmcli device disconnect wlp3s0; nmcli device connect wlp3s
 
 # Restart nginx
 alias nginx_restart='sudo service nginx restart'
-alias update-system='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt dist-upgrade'
+alias update-system='sudo apt update; sudo apt upgrade -y; sudo apt autoremove; sudo apt dist-upgrade'
 alias workon_publik='source ~/.virtualenvs/publik/bin/activate'
 alias psgetpid='ps aux | grep'
