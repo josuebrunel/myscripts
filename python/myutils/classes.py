@@ -40,9 +40,9 @@ class Dict2ObjectLower(Dict2Object):
 
 class JSerializer(object):
 
-    def __init__(self, *attrs, deep=False):
+    def __init__(self, *attrs, **kwargs):
         self.attrs = attrs
-        self.deep = deep
+        self.deep = kwargs.get('deep', False)
 
     def serialize(self, obj):
         data = {}
