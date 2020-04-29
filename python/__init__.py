@@ -49,6 +49,8 @@ dictConfig(LOGGING)
 
 logger = logging.getLogger('default_logger')
 
+# disable parso from ipython
+logging.getLogger('parso.python.diff').disabled = True
 
 # AUTO COMPLETION
 logger.info("SETTING UP AUTOCOMPLETION")
