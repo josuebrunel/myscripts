@@ -26,7 +26,7 @@ alias pyhttpserver='python -m SimpleHTTPServer 8100'
 alias list-ca='awk -v cmd="openssl x509 -noout -subject" "/BEGIN/{close(cmd)};{print | cmd}" < /etc/ssl/certs/ca-certificates.crt'
 # Thinkpad fix wifi
 # alias wifi_reload_kernel_module='sudo service network-manager stop; sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee; sudo service network-manager start'
-alias wifi_reload_kernel_module='sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee; sudo service network-manager stop; sudo service network-manager start'
+alias kernel_reload_wifi_module='sudo modprobe -r rtl8192ee; sudo modprobe rtl8192ee; sudo service network-manager stop; sudo service network-manager start'
 alias wifi_reconnect='nmcli device disconnect wlp3s0; nmcli device connect wlp3s0'
 
 # Restart nginx
@@ -34,3 +34,4 @@ alias nginx_restart='sudo service nginx restart'
 alias update-system='sudo apt update; sudo apt upgrade -y; sudo apt autoremove; sudo apt dist-upgrade'
 alias workon_publik='source ~/.virtualenvs/publik/bin/activate'
 alias psgetpid='ps aux | grep'
+alias kernel_reload_mouse_module='sudo modprobe -r psmouse; sudo modprobe psmouse'
