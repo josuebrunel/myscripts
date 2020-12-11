@@ -9,6 +9,7 @@
     src: "{{ user_local_bin }}nvim.appimage"
     dest: "{{ user_local_bin }}xvim"
     state: link
+    force: yes
 
 - name: Install dependancies
   apt:
@@ -77,4 +78,4 @@
     state: link
 
 - name: Install Neovim plugins with plug-vim
-  command: xvim -c "PlugInstall|quitall"
+  command: "{{ user_local_bin }}xvim -c \"PlugInstall|quitall\""
