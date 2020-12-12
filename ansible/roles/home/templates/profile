@@ -28,10 +28,12 @@ export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
 #GOPATH
 export GOPATH=$HOME/workspace/go
-export PATH=$PATH:/usr/local/go/bin
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
 
 # LOCAL BINARY PATH
-export PATH=$PATH:$HOME/.local/bin
+export LOCAL_BIN=$HOME/.local/bin
+export PATH=$LOCAL_BIN:$PATH
 
 ## LOADS SCRIPTS
 # source $HOME_SCRIPTS/osx
