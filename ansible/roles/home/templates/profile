@@ -28,6 +28,7 @@ export PYTHONSTARTUP=$HOME_SCRIPTS/python/__init__.py
 
 #GOPATH
 export GOPATH=$HOME/workspace/go
+export GO111MODULE=on
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
