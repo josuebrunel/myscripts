@@ -22,9 +22,12 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
+" Using nvim lspconfig pluggin
+Plug 'neovim/nvim-lspconfig'
+
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+" Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 
@@ -57,6 +60,9 @@ Plug 'ncm2/ncm2-jedi'
 
 " Formater
 Plug 'Chiel92/vim-autoformat'
+
+" reStructuredText
+Plug 'Rykka/riv.vim'
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
@@ -172,10 +178,12 @@ let airline#extensions#ale#warning_symbol = 'W:'
 let g:flake8_max_line_length = 100
 
 " Autocomplete doctring
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#jedi#show_docstring = 1
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+au filetype go inoremap <buffer> . .<C-x><C-o>
+let g:go_def_mode = 'gopls'
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources#jedi#show_docstring = 1
+" let g:deoplete#sources#go#gocode_binary = $GOPATH.'bin/gocode'
+" let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " Remenber last postion
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
