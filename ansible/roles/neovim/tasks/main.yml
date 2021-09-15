@@ -16,8 +16,10 @@
       name: "{{ packages }}"
   vars:
       packages:
-          - python-pip
           - python3-pip
+          - python3-virtualenv
+          - python3-virtualenvwrapper
+
   when: is_admin
   become: yes
 
@@ -25,7 +27,7 @@
   command: "which pip3"
   register: pip3_binary_path
 
-- name: Install Neovim pip dependancies  
+- name: Install Neovim pip dependancies
   pip:
     name: "{{ item }}"
     executable: "{{ pip3_binary_path.stdout }}"

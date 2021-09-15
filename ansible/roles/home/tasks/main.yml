@@ -3,11 +3,10 @@
     repo: https://github.com/josuebrunel/myscripts.git
     dest: "{{ homedir }}/{{ home_script }}/"
 
-- name: Get Python 2 user site
+- name: Get Python user site
   command: "python{{ item }} -m site --user-site"
   register: python_user_sites
   with_items:
-    - 2
     - 3
 
 
