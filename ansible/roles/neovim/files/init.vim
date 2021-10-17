@@ -71,6 +71,7 @@ Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 Plug 'rakr/vim-one'
 Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
 
 " Initialize plugin system
 call plug#end()
