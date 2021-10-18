@@ -1,0 +1,21 @@
+- name: Install common packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+      packages:
+        - vim
+        - vim-nox
+        - git
+        - python-apt
+        - python3-pip
+        - ipython3
+        - tree
+        - htop
+        - ntp
+        - virtualenvwrapper
+        - sqlite3
+        - python-sqlite
+        - ffmpeg
+        - imagemagick
+        - fortune
+        - youtube-dl
