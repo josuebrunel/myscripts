@@ -19,3 +19,4 @@
         - imagemagick
         - fortune
         - youtube-dl
+        - translate-shell
