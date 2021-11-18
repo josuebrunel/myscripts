@@ -1,3 +1,13 @@
+- name: Install dependancies
+  apt:
+      name: "{{ packages }}"
+  vars:
+      packages:
+          - python3-pip
+          - python3-virtualenv
+          - python3-virtualenvwrapper
+          - xclip
+
 - name: Download neovim app image
   get_url:
     url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
@@ -11,14 +21,6 @@
     state: link
     force: yes
 
-- name: Install dependancies
-  apt:
-      name: "{{ packages }}"
-  vars:
-      packages:
-          - python3-pip
-          - python3-virtualenv
-          - python3-virtualenvwrapper
 
   when: is_admin
   become: yes
