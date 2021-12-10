@@ -36,6 +36,10 @@
   with_items:
     - neovim
     - jedi
+    - black
+    - yapf
+    - pynvim
+    - pylint
 
 - name: Make neovim virtualens
   pip:
@@ -45,6 +49,11 @@
   with_items:
     - neovim
     - jedi
+    - black
+    - yapf
+    - pynvim
+    - pylint
+
 
 - name: Create neovim config dir
   file:

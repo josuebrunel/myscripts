@@ -48,6 +48,7 @@ Plug 'Yggdroot/indentLine'
 
 " syntax check
 Plug 'w0rp/ale'
+Plug 'neomake/neomake'
 
 " Autocomplete
 Plug 'ncm2/ncm2'
@@ -55,11 +56,14 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
-"Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'luochen1990/rainbow'
 
 " Formater
 Plug 'Chiel92/vim-autoformat'
+Plug 'sbdchd/neoformat'
 
 " reStructuredText
 Plug 'Rykka/riv.vim'
@@ -77,7 +81,6 @@ Plug 'chriskempson/base16-vim'
 call plug#end()
 
 
-
 set nu
 set cursorline
 filetype plugin indent on
@@ -90,8 +93,19 @@ set backspace=2 " Fixes backspace issues
 set autoindent "always set autoindenting on
 set copyindent "copy the previous indentation on autoindenting
 
+" syntax checks
+let g:neomake_python_enabled_makers = ['pylint']
+call neomake#configure#automake('nrwi', 500)
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+" Enable tab to space conversion
+let g:neoformat_basic_format_retab = 1
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
 " Python binary paths
-let g:python_host_prog = $HOME . '/.virtualenvs/neovim2/bin/python'
+let g:python_host_prog = $HOME . '/.virtualenvs/neovim3/bin/python'
 let g:python3_host_prog = $HOME . '/.virtualenvs/neovim3/bin/python'
 
 " Configurations Part
@@ -181,10 +195,16 @@ let g:flake8_max_line_length = 100
 " Autocomplete doctring
 au filetype go inoremap <buffer> . .<C-x><C-o>
 let g:go_def_mode = 'gopls'
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
 " let g:deoplete#sources#go#gocode_binary = $GOPATH.'bin/gocode'
 " let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " Remenber last postion
 au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Run Neoformat on save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
