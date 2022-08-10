@@ -6,7 +6,7 @@
         - vim
         - vim-nox
         - git
-        - python-apt
+        - python3-apt
         - python3-pip
         - ipython3
         - tree
@@ -14,9 +14,10 @@
         - ntp
         - virtualenvwrapper
         - sqlite3
-        - python-sqlite
         - ffmpeg
         - imagemagick
         - fortune
         - youtube-dl
         - translate-shell
+        - htop
+        - gnome-shell-extentions
