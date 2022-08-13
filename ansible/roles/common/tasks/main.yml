@@ -24,3 +24,4 @@
         - nginx
         - postgresql
         - postgresql-client
+        - ffmpegthumbnailer
