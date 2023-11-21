@@ -71,11 +71,15 @@ Plug 'Rykka/riv.vim'
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 Plug 'rakr/vim-one'
 Plug 'mhartington/oceanic-next'
 Plug 'chriskempson/base16-vim'
+
+" Terraform
+Plug 'hashivim/vim-terraform'
 
 " Initialize plugin system
 call plug#end()
@@ -123,10 +127,10 @@ if has("termguicolors")
     set termguicolors
 endif
 if has("gui_running")
-  set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:blocks
+    set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:blocks
 endif
 set number
-set relativenumber
+" set relativenumber
 set hidden
 set mouse=a
 set noshowmode
@@ -152,26 +156,34 @@ noremap <F3> :Autoformat<CR>
 
 " NCM2
 augroup NCM2
-  autocmd!
-  " enable ncm2 for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  " :help Ncm2PopupOpen for more information
-  set completeopt=noinsert,menuone,noselect
-  " When the <Enter> key is pressed while the popup menu is visible, it only
-  " hides the menu. Use this mapping to close the menu and also start a new line.
-  "inoremap <expr> <CR> (pumvisible() ? \"\<c-y>\<cr>" : \"\<CR>")
-  inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-  " uncomment this block if you use vimtex for LaTex
-  " autocmd Filetype tex call ncm2#register_source({
-  "           \ 'name': 'vimtex',
-  "           \ 'priority': 8,
-  "           \ 'scope': ['tex'],
-  "           \ 'mark': 'tex',
-  "           \ 'word_pattern': '\w+',
-  "           \ 'complete_pattern': g:vimtex#re#ncm2,
-  "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-  "           \ })
+    autocmd!
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    " :help Ncm2PopupOpen for more information
+    set completeopt=noinsert,menuone,noselect
+    " When the <Enter> key is pressed while the popup menu is visible, it only
+    " hides the menu. Use this mapping to close the menu and also start a new line.
+    "inoremap <expr> <CR> (pumvisible() ? \"\<c-y>\<cr>" : \"\<CR>")
+    inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+    " uncomment this block if you use vimtex for LaTex
+    " autocmd Filetype tex call ncm2#register_source({
+    "           \ 'name': 'vimtex',
+    "           \ 'priority': 8,
+    "           \ 'scope': ['tex'],
+    "           \ 'mark': 'tex',
+    "           \ 'word_pattern': '\w+',
+    "           \ 'complete_pattern': g:vimtex#re#ncm2,
+    "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    "           \ })
 augroup END
+
+"Go highlights everything
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
 
 " Ale
 let g:ale_lint_on_enter = 0
@@ -195,8 +207,8 @@ let g:flake8_max_line_length = 100
 " Autocomplete doctring
 au filetype go inoremap <buffer> . .<C-x><C-o>
 let g:go_def_mode = 'gopls'
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#jedi#show_docstring = 1
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources#jedi#show_docstring = 1
 " let g:deoplete#sources#go#gocode_binary = $GOPATH.'bin/gocode'
 " let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
@@ -205,6 +217,6 @@ au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! 
 
 " Run Neoformat on save
 augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
 augroup END
