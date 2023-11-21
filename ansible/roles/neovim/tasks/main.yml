@@ -25,21 +25,21 @@
   when: is_admin
   become: yes
 
-- name: Get pip3 binary location
-  command: "which pip3"
-  register: pip3_binary_path
-
-- name: Install Neovim pip dependancies
-  pip:
-    name: "{{ item }}"
-    executable: "{{ pip3_binary_path.stdout }}"
-  with_items:
-    - neovim
-    - jedi
-    - black
-    - yapf
-    - pynvim
-    - pylint
+    # - name: Get pip3 binary location
+    #   command: "which pip3"
+    #   register: pip3_binary_path
+    # 
+    # - name: Install Neovim pip dependancies
+    #   pip:
+    #     name: "{{ item }}"
+    #     executable: "{{ pip3_binary_path.stdout }}"
+    #   with_items:
+    #     - neovim
+    #     - jedi
+    #     - black
+    #     - yapf
+    #     - pynvim
+    #     - pylint
 
 - name: Make neovim virtualens
   pip:
