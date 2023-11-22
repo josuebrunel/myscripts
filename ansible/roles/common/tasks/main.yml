@@ -20,8 +20,8 @@
         - youtube-dl
         - translate-shell
         - htop
-        - gnome-shell-extentions
         - nginx
         - postgresql
         - postgresql-client
         - ffmpegthumbnailer
+        - rsync
